@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Request a Quote — The Lazy Lion Mobile Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sand:  #C5AE91;
+    --brown: #4F473B;
+    --green: #2E4B36;
+    --black: #111009;
+    --cream: #EDE6DA;
+    --gold:  #B89A6A;
+    --dark:  #1E1C15;
+    --form-bg: #E8E3D8;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lora', serif; background: var(--cream); color: var(--brown); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(245,238,228,.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(197,174,145,.35);
+  }
+  .nav-logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-img { width: 44px; height: 44px; object-fit: contain; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; letter-spacing: .02em; color: var(--brown); line-height: 1.2; }
+  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta { background: var(--green); color: var(--cream); padding: 12px 26px; font-size: .68rem; letter-spacing: .14em; text-decoration: none; cursor: pointer; transition: all .25s; border-radius: 100px; border: 2px solid var(--green); box-shadow: 0 4px 20px rgba(46,75,54,.35); font-family: 'Lora', serif; font-weight: 600; white-space: nowrap; }
+  .nav-cta:hover { background: transparent; color: var(--green); }
+  .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 200; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: all .3s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-drawer { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--cream); z-index: 150; transition: right .35s ease; display: flex; flex-direction: column; padding: 100px 40px 48px; box-shadow: -8px 0 40px rgba(0,0,0,.25); border-left: 1px solid rgba(197,174,145,.3); }
+  .nav-drawer.open { right: 0; }
+  .nav-drawer-links { list-style: none; display: flex; flex-direction: column; }
+  .nav-drawer-links li { border-bottom: 1px solid rgba(79,71,59,.1); }
+  .nav-drawer-links a { display: block; padding: 20px 0; font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--black); text-decoration: none; transition: color .2s; }
+  .nav-drawer-links a:hover { color: var(--green); }
+  .nav-drawer-cta { margin-top: 40px; display: block; background: var(--green); color: var(--cream); padding: 16px 32px; text-align: center; font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 100px; font-weight: 600; }
+  .nav-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 140; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .nav-drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--cream);
+    padding: 160px 80px 80px;
+    max-width: 900px;
+  }
+  .hero-label-row { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .hero-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .7; }
+  .hero-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    color: var(--black); font-weight: 400; line-height: 1.05;
+    margin-bottom: 28px;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); display: block; }
+  .hero-sub {
+    font-family: 'Lora', serif;
+    font-size: 1rem; color: var(--brown); line-height: 1.85;
+    max-width: 620px; opacity: .8;
+  }
+  .hero-sub strong { color: var(--gold); font-weight: 600; font-style: normal; }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    background: var(--cream);
+    padding: 0 80px 100px;
+  }
+  .form-card {
+    background: var(--form-bg);
+    max-width: 860px;
+    padding: 64px 80px;
+  }
+  .form-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: .72rem; font-style: italic;
+    color: var(--gold); letter-spacing: .1em;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .form-num::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); opacity: .6; }
+  .form-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--black); font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .form-heading em { font-style: italic; color: var(--gold); }
+  .form-sub {
+    font-size: .9rem; color: var(--brown); opacity: .65;
+    line-height: 1.75; margin-bottom: 48px; max-width: 560px;
+  }
+
+  /* Form fields */
+  .form-field { margin-bottom: 40px; }
+  .form-label {
+    display: block;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--black);
+    margin-bottom: 12px; font-weight: 400;
+  }
+  .form-label span { color: var(--gold); font-size: .85rem; }
+  .form-hint {
+    font-family: 'DM Serif Display', serif;
+    font-size: .85rem; color: var(--brown); opacity: .55;
+    margin-bottom: 16px; font-style: italic; line-height: 1.5;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(79,71,59,.25);
+    padding: 10px 0;
+    font-family: 'Lora', serif;
+    font-size: .95rem; color: var(--brown);
+    outline: none; transition: border-color .2s;
+    appearance: none; -webkit-appearance: none;
+  }
+  .form-input::placeholder, .form-select::placeholder { color: rgba(79,71,59,.35); }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-bottom-color: var(--gold); }
+  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234F473B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; }
+  .form-textarea { border: 1.5px solid rgba(79,71,59,.2); padding: 16px; resize: vertical; min-height: 140px; font-size: .9rem; border-radius: 2px; margin-top: 8px; }
+  .form-textarea:focus { border-color: var(--gold); }
+  .form-textarea::placeholder { color: rgba(79,71,59,.35); }
+  .form-divider { height: 1px; background: rgba(79,71,59,.1); margin: 48px 0; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  /* Submit */
+  .form-submit-row { display: flex; justify-content: flex-end; margin-top: 48px; }
+  .form-submit {
+    background: var(--dark); color: var(--cream);
+    border: none; cursor: pointer;
+    padding: 18px 48px; font-family: 'Lora', serif;
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    font-weight: 600; transition: background .25s;
+  }
+  .form-submit:hover { background: var(--brown); }
+
+  /* Success message */
+  .form-success {
+    display: none; text-align: center; padding: 48px 0;
+  }
+  .form-success h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--black); margin-bottom: 12px;
+  }
+  .form-success h3 em { font-style: italic; color: var(--gold); }
+  .form-success p { font-size: .95rem; color: var(--brown); opacity: .7; line-height: 1.8; }
+
+  /* ── WHAT HAPPENS NEXT ── */
+  .next-section { background: var(--cream); padding: 80px 80px 100px; border-top: 1px solid rgba(79,71,59,.1); }
+  .next-header { text-align: center; margin-bottom: 64px; }
+  .next-label-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
+  .next-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .6; }
+  .next-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .next-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 4.5vw, 4rem); color: var(--black); font-weight: 400; }
+  .next-title em { font-style: italic; color: var(--gold); }
+  .next-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-left: 1px solid rgba(79,71,59,.1); }
+  .next-step { padding: 0 40px 0 32px; border-right: 1px solid rgba(79,71,59,.1); }
+  .next-step-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; font-style: italic; color: var(--gold); opacity: .7; margin-bottom: 20px; line-height: 1; }
+  .next-step-name { font-family: 'Lora', serif; font-size: .85rem; font-weight: 700; color: var(--black); margin-bottom: 12px; }
+  .next-step-desc { font-size: .85rem; color: var(--brown); opacity: .7; line-height: 1.75; }
+
+  /* ── QUICK ANSWERS ── */
+  .quick-section { background: var(--cream); padding: 80px 80px 100px; border-top: 1px solid rgba(79,71,59,.1); }
+  .quick-header { text-align: center; margin-bottom: 48px; }
+  .quick-label-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
+  .quick-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .6; }
+  .quick-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .quick-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--black); font-weight: 400; }
+  .quick-title em { font-style: italic; color: var(--gold); }
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 1000px; margin: 0 auto 32px; }
+  .quick-item { background: rgba(255,255,255,.5); border: 1px solid rgba(79,71,59,.1); border-radius: 2px; overflow: hidden; }
+  .quick-question { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 24px 28px; text-align: left; gap: 16px; }
+  .quick-question-text { font-family: 'Lora', serif; font-size: .9rem; font-weight: 600; color: var(--black); }
+  .quick-plus { color: var(--gold); font-size: 1.2rem; font-weight: 300; flex-shrink: 0; transition: transform .25s; font-family: sans-serif; }
+  .quick-item.open .quick-plus { transform: rotate(45deg); }
+  .quick-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s; }
+  .quick-item.open .quick-answer { max-height: 200px; }
+  .quick-answer-inner { padding: 0 28px 24px; font-size: .85rem; color: var(--brown); opacity: .75; line-height: 1.8; }
+  .quick-more { text-align: center; font-size: .9rem; color: var(--brown); opacity: .65; }
+  .quick-more a { color: var(--gold); font-weight: 600; text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer { background: #1A1810; padding: 64px 64px 0; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1.4fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(197,174,145,.1); }
+  .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .footer-logo-img { width: 72px; height: 72px; object-fit: contain; filter: invert(1) brightness(.7); }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--sand); display: block; }
+  .footer-est { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .18em; color: var(--gold); opacity: .9; display: block; margin-top: 4px; text-transform: uppercase; }
+  .footer-desc { font-family: 'Lora', serif; font-size: 1rem; color: rgba(197,174,145,.65); line-height: 1.8; max-width: 300px; }
+  .footer-col-title { font-size: .72rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .9; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .footer-links a { font-size: .72rem; letter-spacing: .1em; color: rgba(197,174,145,.55); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; }
+  .footer-links a:hover { color: var(--sand); }
+  .footer-contact-item { margin-bottom: 12px; }
+  .footer-contact-val { font-size: .72rem; letter-spacing: .1em; color: rgba(197,174,145,.55); font-family: 'Lora', serif; line-height: 1.6; text-transform: uppercase; }
+  .footer-social { display: flex; gap: 16px; margin-top: 16px; }
+  .footer-social-link { font-size: .72rem; letter-spacing: .2em; color: var(--gold); opacity: .7; text-decoration: none; transition: opacity .2s; font-family: 'Lora', serif; }
+  .footer-social-link:hover { opacity: 1; }
+  .footer-bottom { padding: 22px 0; display: flex; justify-content: space-between; align-items: center; }
+  .footer-copy { font-size: .65rem; letter-spacing: .1em; color: rgba(197,174,145,.5); }
+  .footer-area { font-size: .65rem; letter-spacing: .1em; color: rgba(197,174,145,.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .hero { padding: 120px 24px 60px; }
+    .form-section { padding: 0 24px 80px; }
+    .form-card { padding: 40px 28px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .next-section { padding: 60px 24px; }
+    .next-steps { grid-template-columns: 1fr 1fr; border-left: none; gap: 40px; }
+    .next-step { border-right: none; padding: 0; }
+    .quick-section { padding: 60px 24px; }
+    .quick-grid { grid-template-columns: 1fr; }
+    footer { padding: 48px 24px 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-brand { grid-column: 1/-1; }
+  }
+
+  /* ══════════════════════════════
+     COMPREHENSIVE MOBILE & TABLET
+  ══════════════════════════════ */
+
+  /* Tablet (768px - 1024px) */
+  @media (max-width: 1024px) and (min-width: 769px) {
+    nav { padding: 16px 32px; }
+    .nav-links a { font-size: .62rem; gap: 20px; }
+    section { padding: 60px 40px; }
+
+    /* Hero split */
+    .hero { grid-template-columns: 1fr 1fr; }
+    .hero-content { padding: 120px 40px 60px; }
+    .hero h1, .hero-title { font-size: clamp(2.4rem, 4vw, 3.8rem); }
+
+    /* Packages */
+    .pkg-grid { grid-template-columns: repeat(3,1fr); }
+    .pkg-card.featured { margin-top: -12px; margin-bottom: -12px; }
+
+    /* Bar formats */
+    .bar-formats-grid { grid-template-columns: repeat(3,1fr); }
+    .bar-formats-title { font-size: clamp(2rem, 3.5vw, 3.5rem); }
+
+    /* How it works steps */
+    .steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
+
+    /* Reviews */
+    .reviews-grid { grid-template-columns: repeat(3,1fr); }
+
+    /* Stats bar */
+    .stats-bar { grid-template-columns: repeat(4,1fr); }
+
+    /* Contact CTA */
+    .contact-cta { padding: 60px 40px; gap: 40px; }
+
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-brand { grid-column: 1/-1; }
+
+    /* FAQ */
+    .faq-inner { grid-template-columns: 220px 1fr; gap: 48px; }
+  }
+
+  /* Mobile (max 768px) */
+  @media (max-width: 768px) {
+    /* Nav */
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .nav-logo { font-size: 1rem; }
+    .nav-logo-img { width: 34px; height: 34px; }
+
+    /* General sections */
+    section { padding: 48px 20px; }
+
+    /* Hero */
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-content { padding: 100px 20px 48px; }
+    .hero h1, .hero-title { font-size: clamp(2.2rem, 8vw, 3rem); }
+    .hero-sub { font-size: .9rem; max-width: 100%; }
+    .hero-actions { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-outline, .btn-gold, .btn-outline-light { width: 100%; text-align: center; padding: 16px 24px; }
+    .hero-visual { min-height: 55vw; }
+    .hero-image-banner { height: 55vw; }
+
+    /* Stats bar */
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stats-item { padding: 28px 16px; border-right: none; border-bottom: 1px solid rgba(197,174,145,.18); }
+    .stats-item:nth-child(odd) { border-right: 1px solid rgba(197,174,145,.18); }
+    .stats-item:last-child { border-bottom: none; }
+    .stats-value { font-size: 1.1rem; }
+
+    /* Experience section */
+    .experience { grid-template-columns: 1fr; }
+    .exp-right { min-height: 280px; }
+
+    /* Meet owner */
+    .meet-owner { padding: 60px 20px; }
+    .meet-owner-card { margin: 0; }
+    .meet-owner-card-body { padding: 28px 20px 36px; }
+    .meet-owner-name { font-size: 2.2rem; }
+
+    /* How it works */
+    .how { padding: 48px 20px; }
+    .steps { grid-template-columns: 1fr; gap: 32px; }
+    .step-top { margin-bottom: 12px; }
+    .step-arrow { display: none; }
+
+    /* Packages */
+    .packages { padding: 0 20px 60px; }
+    .pkg-grid { grid-template-columns: 1fr; gap: 16px; }
+    .pkg-card { padding: 32px 24px; }
+    .pkg-card.featured { margin: 0; padding: 32px 24px; }
+    .pkg-features.two-col { grid-template-columns: 1fr; }
+    .includes-bar { padding: 16px 20px; flex-direction: column; gap: 12px; }
+    .includes-items { gap: 6px 16px; }
+
+    /* Bar formats */
+    .bar-formats { padding: 48px 20px; }
+    .bar-formats-header { flex-direction: column; gap: 16px; }
+    .bar-formats-right { display: none; }
+    .bar-formats-grid { grid-template-columns: 1fr; gap: 24px; }
+    .bar-format-img { aspect-ratio: 16/9; }
+    .bar-formats-title { font-size: clamp(2rem, 7vw, 2.8rem); }
+
+    /* Calculator banner */
+    .calc-banner { padding: 0; }
+    .calc-banner-inner { grid-template-columns: 1fr; padding: 32px 20px; gap: 16px; }
+    .calc-banner-inner > svg { display: none; }
+    .calc-banner-btn { width: 100%; text-align: center; padding: 16px; }
+    .calc-banner-title { font-size: 1.5rem; }
+
+    /* Crafted section */
+    .crafted { padding: 48px 20px; }
+    .crafted-icons { grid-template-columns: repeat(3,1fr); }
+    .crafted-icon-item { padding: 20px 10px; }
+    .crafted-icon-name { font-size: .7rem; }
+
+    /* Gallery */
+    .gallery-strip { padding: 0 20px 48px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+
+    /* Reviews */
+    .reviews { padding: 48px 20px; }
+    .reviews-grid { grid-template-columns: 1fr; border-left: none; }
+    .review-card { border-right: none; border-bottom: 1px solid rgba(79,71,59,.1); padding: 28px 0; }
+    .reviews-title { font-size: 2.2rem; }
+
+    /* Contact CTA */
+    .contact-cta { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+    .contact-cta-divider { width: 100%; height: 1px; }
+    .contact-cta-right { padding-left: 0; }
+    .contact-cta-btn { display: block; text-align: center; width: 100%; }
+    .contact-cta-title { font-size: 2.2rem; }
+    .contact-cta-stat { font-size: 3rem; }
+
+    /* Footer */
+    footer { padding: 40px 20px 0; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-brand { grid-column: 1; }
+    .footer-logo { font-size: 1.1rem; }
+    .footer-desc { font-size: .85rem; max-width: 100%; }
+    .footer-links a { font-size: .75rem; }
+    .footer-contact-val { font-size: .75rem; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    .footer-copy, .footer-area { font-size: .6rem; }
+
+    /* FAQ page */
+    .faq-section { padding: 48px 20px; }
+    .faq-inner { grid-template-columns: 1fr; gap: 32px; }
+    .faq-sidebar { position: relative; top: 0; }
+    .faq-cats { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+    .faq-cat-btn { border-left: none; border-bottom: 2px solid transparent; padding: 8px 14px; font-size: .7rem; }
+    .faq-cat-btn.active { border-left: none; border-bottom-color: var(--gold); }
+    .faq-question-text { font-size: .92rem; }
+
+    /* About page specific */
+    .story { padding: 48px 20px; }
+    .story-inner { grid-template-columns: 1fr; gap: 32px; }
+    .how-work { padding: 48px 20px; }
+    .how-work-body { grid-template-columns: 1fr; gap: 32px; }
+    .how-work-photo { position: relative; top: 0; aspect-ratio: 16/9; }
+    .based { padding: 48px 20px; }
+    .based-inner { grid-template-columns: 1fr; gap: 32px; }
+    .based-row { grid-template-columns: 80px 1fr; padding: 14px 16px; }
+    .founder-grid { grid-template-columns: 1fr; }
+    .founder-card { display: flex; flex-direction: column; }
+    .founder-photo { aspect-ratio: 4/3; }
+    .founder-body { padding: 28px 20px; border-left: none; border-top: 1px solid rgba(79,71,59,.1); }
+
+    /* Quote page specific */
+    .hero.quote-hero { padding: 100px 20px 48px; }
+    .form-section { padding: 0 20px 60px; }
+    .form-card { padding: 32px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .next-section { padding: 48px 20px; }
+    .next-steps { grid-template-columns: 1fr 1fr; border-left: none; gap: 32px; }
+    .next-step { border-right: none; padding: 0; }
+    .quick-section { padding: 48px 20px; }
+    .quick-grid { grid-template-columns: 1fr; }
+
+    /* Packages page hero */
+    .pkg-page-hero { padding: 100px 20px 48px; }
+    .addons-grid { grid-template-columns: 1fr; }
+    .addons { padding: 48px 20px; }
+  }
+
+
+  /* Add-on checkboxes */
+  .addon-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
+  .addon-check-group { display: flex; flex-direction: column; gap: 0; }
+  .addon-check-group-title { font-family: 'Lora', serif; font-size: .9rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 700; }
+  .addon-check-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(79,71,59,.08); cursor: pointer; }
+  .addon-check-item:last-child { border-bottom: none; }
+  .addon-check-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--green); cursor: pointer; }
+  .addon-check-item span { font-family: 'Lora', serif; font-size: .82rem; color: var(--brown); opacity: .8; line-height: 1.4; }
+  .addon-check-item:hover span { opacity: 1; }
+  @media (max-width: 768px) { .addon-checks { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo-wrap">
+    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
+    <div class="nav-logo">
+      The Lazy Lion
+      <span>Mobile Bar · Est. 2018</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="packages.html">Packages</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="store.html">Store</a></li>
+  </ul>
+  <a href="#form" class="nav-cta">Request a Quote</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+<div class="nav-drawer" id="drawer">
+  <ul class="nav-drawer-links">
+    <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+    <li><a href="packages.html" onclick="toggleMenu()">Packages</a></li>
+    <li><a href="about.html" onclick="toggleMenu()">About Us</a></li>
+    <li><a href="faq.html" onclick="toggleMenu()">FAQ</a></li>
+    <li><a href="store.html" onclick="toggleMenu()">Store</a></li>
+  </ul>
+  <a href="#form" class="nav-drawer-cta" onclick="toggleMenu()">Request a Quote</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label-row">
+    <span class="hero-label-line"></span>
+    <span class="hero-label">Start the Conversation</span>
+  </div>
+  <h1 class="hero-title">Tell us about <em>your event.</em></h1>
+  <p class="hero-sub">A few details get us started — date, venue, guest count, and what you're picturing for the bar. Vince reads every inquiry personally and replies within <strong>48 hours</strong> with availability and a tailored proposal.</p>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+  <div class="form-card">
+        <h2 class="form-heading">Send an <em>inquiry.</em></h2>
+    <p class="form-sub">Takes about two minutes. The more you can share now, the more specific our reply. We'll be in touch within 48 hours.</p>
+
+    <form id="inquiry-form" onsubmit="handleSubmit(event)">
+
+      <!-- Full Name -->
+      <div class="form-field">
+        <label class="form-label" for="name">Full name <span>*</span></label>
+        <input class="form-input" type="text" id="name" name="name" placeholder="Your name here" required/>
+      </div>
+
+      <div class="form-hint">If you are completing this form on behalf of a client, please share the host's name.</div>
+      <div class="form-field">
+        <label class="form-label" for="client-name">Client's Name</label>
+        <input class="form-input" type="text" id="client-name" name="client_name" placeholder="Host's name (if different)"/>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Email & Phone -->
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="email">Email <span>*</span></label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="E.g. myemail@email.com" required/>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="phone">Phone number <span>*</span></label>
+          <input class="form-input" type="tel" id="phone" name="phone" placeholder="E.g. (267) 683-0654" required/>
+        </div>
+      </div>
+
+      <!-- How did you hear — moved below phone -->
+      <div class="form-field" style="margin-top:32px;">
+        <label class="form-label" for="referral">How did you hear about us?</label>
+        <select class="form-select" id="referral" name="referral">
+          <option value="" disabled selected>Select an option</option>
+          <option>Instagram</option>
+          <option>Facebook</option>
+          <option>Google Search</option>
+          <option>Word of Mouth / Referral</option>
+          <option>A past event</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Event Date & Location -->
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="date">Event date <span>*</span></label>
+          <input class="form-input" type="date" id="date" name="event_date" required/>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="location">Event Location / Venue</label>
+          <input class="form-input" type="text" id="location" name="location" placeholder="E.g. 742 Evergreen Ave, Philadelphia"/>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Event Type & Guest Count -->
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="event-type">What type of event? <span>*</span></label>
+          <select class="form-select" id="event-type" name="event_type" required>
+            <option value="" disabled selected>Select an option</option>
+            <option>Wedding</option>
+            <option>Engagement Party</option>
+            <option>Birthday Celebration</option>
+            <option>Bridal / Baby Shower</option>
+            <option>Corporate Event</option>
+            <option>Private Party</option>
+            <option>Graduation</option>
+            <option>Holiday Party</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="guests">Estimated guest count <span>*</span></label>
+          <input class="form-input" type="number" id="guests" name="guests" placeholder="E.g. 75" min="1" required/>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Hours & Package -->
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label" for="hours">Hours of service needed <span>*</span></label>
+          <select class="form-select" id="hours" name="hours" required>
+            <option value="" disabled selected>Select an option</option>
+            <option>2 hours</option>
+            <option>3 hours</option>
+            <option>4 hours</option>
+            <option>5 hours</option>
+            <option>6+ hours</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="package">Package interest</label>
+          <select class="form-select" id="package" name="package">
+            <option value="" disabled selected>Select an option</option>
+            <option>Standard ($750)</option>
+            <option>Signature Social ($1,500)</option>
+            <option>The Premium ($2,500)</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Add-Ons -->
+      <div class="form-field" style="margin-top:36px;">
+        <label class="form-label">Add-Ons <span style="font-size:.9rem;font-weight:500;opacity:.75;">(select all that interest you)</span></label>
+        <div class="addon-checks">
+          <div class="addon-check-group">
+            <p class="addon-check-group-title">Per Person</p>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Juice Package ($2/pp)"/><span>Juice Package — $2/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Soft Drink Package ($2/pp)"/><span>Soft Drink Package — $2/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Bagged Ice ($2/pp)"/><span>Bagged Ice — $2/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Mixer Package ($3/pp)"/><span>Premium Mixer Package — $3/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Garnish Package ($3/pp)"/><span>Premium Garnish Package — $3/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mocktail Package ($4/pp)"/><span>Mocktail Package — $4/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Coffee &amp; Tea Package ($4/pp)"/><span>Coffee &amp; Tea Package — $4/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Soft Drink Package ($4/pp)"/><span>Premium Soft Drink Package — $4/pp</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Signature Drink Package ($4/pp)"/><span>Signature Drink Package — $4/pp</span></label>
+          </div>
+          <div class="addon-check-group">
+            <p class="addon-check-group-title">Flat Rate</p>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mixology Bar 1 ($200)"/><span>Mixology Bar 1 — $200</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mixology Bar 2 ($200)"/><span>Mixology Bar 2 — $200</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mimosa Bar ($400)"/><span>Mimosa Bar — $400</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Trailer Bar ($1,500)"/><span>Trailer Bar — $1,500</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Additional Service Hours ($100/hr)"/><span>Additional Service Hours — $100/hr</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Additional Bartending ($75/hr)"/><span>Additional Bartending — $75/hr</span></label>
+            <label class="addon-check-item"><input type="checkbox" name="addon" value="Bar Backs ($50/hr)"/><span>Bar Backs — $50/hr</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+
+      <!-- Vision -->
+      <div class="form-field">
+        <label class="form-label" for="vision">Tell us more about your vision</label>
+        <textarea class="form-textarea" id="vision" name="vision" placeholder="What do we need to know about the celebration you're planning? Any themes, cocktail ideas, or special requests?"></textarea>
+      </div>
+
+      <div class="form-submit-row">
+        <button type="submit" class="form-submit">Request a Quote →</button>
+      </div>
+
+    </form>
+
+    <!-- Success Message -->
+    <div class="form-success" id="form-success">
+      <h3>Thank you for <em>reaching out.</em></h3>
+      <p>We've received your inquiry and will be in touch within 48 hours with availability and a tailored proposal. We can't wait to be part of your celebration.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT -->
+<section class="next-section">
+  <div class="next-header">
+    <div class="next-label-row">
+      <span class="next-label-line"></span>
+      <span class="next-label">What Happens Next</span>
+      <span class="next-label-line"></span>
+    </div>
+    <h2 class="next-title">From inquiry <em>to event day.</em></h2>
+  </div>
+  <div class="next-steps">
+    <div class="next-step">
+      <div class="next-step-num">01</div>
+      <div class="next-step-name">You inquire</div>
+      <p class="next-step-desc">Send us your event details. The more you share, the more specific our reply.</p>
+    </div>
+    <div class="next-step">
+      <div class="next-step-num">02</div>
+      <div class="next-step-name">We reply within 48 hours</div>
+      <p class="next-step-desc">Vince reads every inquiry personally. You'll get availability, package recommendations, and a rough investment.</p>
+    </div>
+    <div class="next-step">
+      <div class="next-step-num">03</div>
+      <div class="next-step-name">We refine together</div>
+      <p class="next-step-desc">Call or email — your preference — to walk through the cocktail menu, logistics, and any venue specifics. Then a final proposal.</p>
+    </div>
+    <div class="next-step">
+      <div class="next-step-num">04</div>
+      <div class="next-step-name">Book &amp; plan</div>
+      <p class="next-step-desc">Sign &amp; deposit secures your date. We handle the alcohol guide, mixers, setup, and everything else from there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ANSWERS -->
+<section class="quick-section">
+  <div class="quick-header">
+    <div class="quick-label-row">
+      <span class="quick-label-line"></span>
+      <span class="quick-label">Before You Ask</span>
+      <span class="quick-label-line"></span>
+    </div>
+    <h2 class="quick-title">A few <em>quick answers.</em></h2>
+  </div>
+  <div class="quick-grid">
+    <div class="quick-item">
+      <button class="quick-question" onclick="toggleQuick(this)">
+        <span class="quick-question-text">How far in advance should I inquire?</span>
+        <span class="quick-plus">+</span>
+      </button>
+      <div class="quick-answer"><div class="quick-answer-inner">We recommend 4–6 weeks for smaller events and 3–6 months for weddings. Peak season (spring &amp; fall) books quickly — the sooner the better.</div></div>
+    </div>
+    <div class="quick-item">
+      <button class="quick-question" onclick="toggleQuick(this)">
+        <span class="quick-question-text">What does it cost?</span>
+        <span class="quick-plus">+</span>
+      </button>
+      <div class="quick-answer"><div class="quick-answer-inner">Packages start at $750 for the Standard, $1,500 for Signature Social, and $2,500 for The Premium. All based on 50 guests. Custom quotes are available for larger events.</div></div>
+    </div>
+    <div class="quick-item">
+      <button class="quick-question" onclick="toggleQuick(this)">
+        <span class="quick-question-text">Do you provide the alcohol?</span>
+        <span class="quick-plus">+</span>
+      </button>
+      <div class="quick-answer"><div class="quick-answer-inner">In Pennsylvania, clients purchase their own alcohol. We provide a detailed shopping list tailored to your guest count and drink menu so you know exactly what to buy.</div></div>
+    </div>
+    <div class="quick-item">
+      <button class="quick-question" onclick="toggleQuick(this)">
+        <span class="quick-question-text">Are you licensed and insured?</span>
+        <span class="quick-plus">+</span>
+      </button>
+      <div class="quick-answer"><div class="quick-answer-inner">Yes. Lazy Lion carries both General Liability and Liquor Liability Insurance, included with every package and available for venue review upon request.</div></div>
+    </div>
+  </div>
+  <p class="quick-more">More questions? <a href="faq.html">See the full FAQ</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-lockup">
+        <img src="logo.png" alt="Lazy Lion Logo" class="footer-logo-img"/>
+        <div>
+          <div class="footer-logo">Lazy Lion Mobile Bar</div>
+          <div class="footer-est">Est. 2018</div>
+        </div>
+      </div>
+      <p class="footer-desc">Premium mobile bartending, crafted cocktails, and unforgettable experiences — anywhere you celebrate.</p>
+    </div>
+    <div>
+      <span class="footer-col-title">Services</span>
+      <ul class="footer-links">
+        <li><a href="packages.html">Packages</a></li>
+        <li><a href="#">Mixology 1</a></li>
+        <li><a href="#">Mixology 2</a></li>
+        <li><a href="#">Trailer Bar</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Company</span>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="quote.html">Request a Quote</a></li>
+      </ul>
+    </div>
+    <div>
+      <span class="footer-col-title">Contact Us</span>
+      <div class="footer-contact-item"><div class="footer-contact-val">lazylionmobilebar@gmail.com</div></div>
+      <div class="footer-contact-item"><div class="footer-contact-val">(267) 683-0654</div></div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/lazylion_mobilebar" target="_blank" class="footer-social-link">IG</a>
+        <a href="https://www.facebook.com/Lazylion_Mobilebar" target="_blank" class="footer-social-link">FB</a>
+        <a href="https://www.x.com/lazylion_mobilebar" target="_blank" class="footer-social-link">X</a>
+        <a href="https://www.youtube.com/@lazylion_mobilebar" target="_blank" class="footer-social-link">YT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2011 Lazy Lion Mobile Bar · All Rights Reserved</span>
+    <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
+  </div>
+</footer>
+
+<script>
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('inquiry-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('form').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  // Quick answers accordion
+  function toggleQuick(btn) {
+    const item = btn.closest('.quick-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.quick-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>

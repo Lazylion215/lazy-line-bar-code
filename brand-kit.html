@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brand Kit — The Lazy Lion Mobile Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #EDE6DA; --brown: #4F473B; --green: #2E4B36;
+    --black: #111009; --gold: #B89A6A; --sand: #C5AE91; --dark: #1E1C15;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lora', serif; background: var(--cream); color: var(--brown); }
+
+  /* ── HEADER ── */
+  .kit-header {
+    background: var(--dark); padding: 80px 64px 64px;
+    border-bottom: 1px solid rgba(197,174,145,.1);
+  }
+  .kit-header-label { font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+  .kit-header-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); opacity: .6; }
+  .kit-header-title { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 6vw, 5rem); color: var(--cream); font-weight: 400; line-height: 1.05; margin-bottom: 16px; }
+  .kit-header-title em { font-style: italic; color: var(--gold); }
+  .kit-header-sub { font-size: .9rem; color: rgba(197,174,145,.6); line-height: 1.8; max-width: 560px; }
+
+  /* ── SECTIONS ── */
+  .kit-section { padding: 72px 64px; border-bottom: 1px solid rgba(79,71,59,.1); }
+  .kit-section:last-child { border-bottom: none; }
+  .kit-section-num { font-size: .6rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+  .kit-section-title { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--black); margin-bottom: 40px; font-weight: 400; }
+  .kit-section-title em { font-style: italic; color: var(--gold); }
+
+  /* ── LOGO GRID ── */
+  .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .logo-card { background: white; padding: 48px 32px; display: flex; flex-direction: column; align-items: center; gap: 24px; border: 1px solid rgba(79,71,59,.1); }
+  .logo-card.dark { background: var(--dark); }
+  .logo-card.sand { background: var(--sand); }
+  .logo-card img { width: 80%; max-width: 240px; height: 240px; object-fit: contain; }
+  .logo-card.dark img { filter: invert(1) brightness(.8); }
+  .logo-card-label { font-size: .55rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brown); opacity: .6; text-align: center; }
+  .logo-card.dark .logo-card-label { color: var(--sand); opacity: .5; }
+  .logo-card.sand .logo-card-label { color: var(--brown); opacity: .7; }
+  .logo-card-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--black); text-align: center; }
+  .logo-card.dark .logo-card-name { color: var(--cream); }
+  .logo-card.sand .logo-card-name { color: var(--black); }
+  .logo-card-use { font-size: .6rem; color: var(--brown); opacity: .55; line-height: 1.7; text-align: center; max-width: 200px; }
+  .logo-card.dark .logo-card-use { color: rgba(197,174,145,.5); }
+
+  /* ── COLOR PALETTE ── */
+  .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .color-card { padding: 0; }
+  .color-swatch { height: 140px; }
+  .color-info { padding: 20px; background: white; border: 1px solid rgba(79,71,59,.08); border-top: none; }
+  .color-name { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--black); margin-bottom: 4px; }
+  .color-hex { font-size: .65rem; letter-spacing: .14em; color: var(--brown); opacity: .5; margin-bottom: 8px; font-family: monospace; }
+  .color-use { font-size: .6rem; color: var(--brown); opacity: .6; line-height: 1.6; }
+  .color-ratio { display: flex; gap: 0; height: 12px; margin-top: 32px; border-radius: 2px; overflow: hidden; }
+  .color-ratio-seg { }
+
+  /* ── FONTS ── */
+  .font-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .font-card { background: white; padding: 40px; border: 1px solid rgba(79,71,59,.08); }
+  .font-role { font-size: .55rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; display: block; }
+  .font-name { font-size: .72rem; letter-spacing: .1em; color: var(--brown); opacity: .6; margin-bottom: 20px; text-transform: uppercase; }
+  .font-sample-dm { font-family: 'DM Serif Display', serif; font-size: 2.8rem; color: var(--black); line-height: 1; }
+  .font-sample-dm-i { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 2.8rem; color: var(--gold); line-height: 1; }
+  .font-sample-lora { font-family: 'Lora', serif; font-size: 1.2rem; color: var(--brown); line-height: 1.6; }
+  .font-sample-lora-b { font-family: 'Lora', serif; font-weight: 600; font-size: 1.2rem; color: var(--brown); line-height: 1.6; }
+  .font-desc { font-size: .65rem; color: var(--brown); opacity: .5; line-height: 1.7; margin-top: 16px; }
+
+  /* ── VOICE ── */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .voice-card { background: white; padding: 36px; border: 1px solid rgba(79,71,59,.08); }
+  .voice-card.dark { background: var(--dark); }
+  .voice-card-title { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; display: block; }
+  .voice-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .voice-list li { font-size: .82rem; color: var(--brown); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+  .voice-list li::before { content: '✓'; color: var(--green); flex-shrink: 0; font-size: .75rem; margin-top: 2px; }
+  .voice-card.dark .voice-list li { color: rgba(197,174,145,.7); }
+  .voice-card.dark .voice-list li::before { color: var(--gold); }
+  .avoid-list li::before { content: '✗' !important; color: #c0392b !important; }
+  .brand-lines { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+  .brand-line { font-family: 'DM Serif Display', serif; font-size: .95rem; color: var(--cream); font-style: italic; line-height: 1.4; padding-bottom: 16px; border-bottom: 1px solid rgba(197,174,145,.08); }
+  .brand-line:last-child { border-bottom: none; }
+
+  /* ── CTA LANGUAGE ── */
+  .cta-grid { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cta-pill { background: var(--green); color: var(--cream); padding: 12px 24px; border-radius: 100px; font-size: .65rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+  .cta-pill.outline { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+
+  /* ── BACK LINK ── */
+  .kit-back { padding: 40px 64px; background: var(--dark); }
+  .kit-back a { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(197,174,145,.4); text-decoration: none; }
+  .kit-back a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .kit-header { padding: 60px 24px 40px; }
+    .kit-section { padding: 48px 24px; }
+    .logo-grid { grid-template-columns: 1fr; }
+    .color-grid { grid-template-columns: 1fr 1fr; }
+    .font-grid { grid-template-columns: 1fr; }
+    .voice-grid { grid-template-columns: 1fr; }
+    .kit-back { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="kit-header">
+  <div class="kit-header-label">Official Brand Kit · Lazy Lion Mobile Bar</div>
+  <h1 class="kit-header-title">Brand Identity <em>&amp; Style Guide</em></h1>
+  <p class="kit-header-sub">The official logos, colors, fonts, and voice guidelines for all Lazy Lion Mobile Bar marketing, website, social media, and print materials. Est. 2018 · Philadelphia, PA.</p>
+</div>
+
+<!-- LOGOS -->
+<div class="kit-section">
+  <span class="kit-section-num">01 · Logo System</span>
+  <h2 class="kit-section-title">Official <em>Logo Variations</em></h2>
+
+  <!-- Row 1: Light backgrounds -->
+  <div class="logo-grid" style="margin-bottom:2px;">
+    <div class="logo-card">
+      <img src="logo1.png" alt="Lazy Lion Secondary Logo — Bar Tool Emblem"/>
+      <div>
+        <div class="kit-section-num" style="margin-bottom:4px;">Logo 01 — Secondary Mark</div>
+        <div class="logo-card-name">Bar Tool Emblem</div>
+        <p class="logo-card-use">Social media profile images, watermarks, stickers, favicon, small placements, merch</p>
+      </div>
+    </div>
+    <div class="logo-card">
+      <img src="logo3.png" alt="Lazy Lion Established Logo"/>
+      <div>
+        <div class="kit-section-num" style="margin-bottom:4px;">Logo 02 — Established Mark</div>
+        <div class="logo-card-name">Est. 2018 Full Logo</div>
+        <p class="logo-card-use">Premium collateral, vintage-style materials, merch, proposals, packaging, credibility-building</p>
+      </div>
+    </div>
+    <div class="logo-card">
+      <img src="logo4.png" alt="Lazy Lion Primary Logo — Full Wordmark"/>
+      <div>
+        <div class="kit-section-num" style="margin-bottom:4px;">Logo 03 — Primary Logo</div>
+        <div class="logo-card-name">Full Wordmark Logo</div>
+        <p class="logo-card-use">Main branding, proposals, website headers, invoices, flyers, brochures, large-format designs</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Dark backgrounds -->
+  <div class="logo-grid">
+    <div class="logo-card dark">
+      <img src="logo1.png" alt="Lazy Lion Logo on Dark"/>
+      <div>
+        <div class="logo-card-label">On Dark Background</div>
+        <div class="logo-card-name">Use inverted version</div>
+      </div>
+    </div>
+    <div class="logo-card dark">
+      <img src="logo3.png" alt="Lazy Lion Established Logo on Dark"/>
+      <div>
+        <div class="logo-card-label">On Dark Background</div>
+        <div class="logo-card-name">Use inverted version</div>
+      </div>
+    </div>
+    <div class="logo-card dark">
+      <img src="logo4.png" alt="Lazy Lion Full Logo on Dark"/>
+      <div>
+        <div class="logo-card-label">On Dark Background</div>
+        <div class="logo-card-name">Use inverted version</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COLORS -->
+<div class="kit-section" style="background:#f7f4ef;">
+  <span class="kit-section-num">02 · Color Palette</span>
+  <h2 class="kit-section-title">Official <em>Color System</em></h2>
+  <div class="color-grid">
+    <div class="color-card">
+      <div class="color-swatch" style="background:#000000;"></div>
+      <div class="color-info">
+        <div class="color-name">Black</div>
+        <div class="color-hex">#000000</div>
+        <div class="color-use">Premium contrast, headers, type, formal accents. Used for strong visual impact.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#C5AE91;"></div>
+      <div class="color-info">
+        <div class="color-name">Warm Sand / Tan</div>
+        <div class="color-hex">#C5AE91</div>
+        <div class="color-use">Primary background color. Should carry most of the design — 60% of usage.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#4F473B;"></div>
+      <div class="color-info">
+        <div class="color-name">Rich Brown</div>
+        <div class="color-hex">#4F473B</div>
+        <div class="color-use">Secondary grounding color. Borders, section contrast, body text. 30% usage.</div>
+      </div>
+    </div>
+    <div class="color-card">
+      <div class="color-swatch" style="background:#2E4B36;"></div>
+      <div class="color-info">
+        <div class="color-name">Forest Green</div>
+        <div class="color-hex">#2E4B36</div>
+        <div class="color-use">Accent color. Buttons, section headers, highlights, CTAs. 10% usage only.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Color ratio bar -->
+  <div style="margin-top:40px;">
+    <div class="kit-section-num" style="margin-bottom:16px;">Preferred Color Ratio · 60 / 30 / 10 Rule</div>
+    <div class="color-ratio">
+      <div class="color-ratio-seg" style="background:#C5AE91;flex:6;"></div>
+      <div class="color-ratio-seg" style="background:#4F473B;flex:2.5;"></div>
+      <div class="color-ratio-seg" style="background:#000000;flex:.5;"></div>
+      <div class="color-ratio-seg" style="background:#2E4B36;flex:1;"></div>
+    </div>
+    <div style="display:flex;gap:24px;margin-top:12px;">
+      <span style="font-size:.55rem;letter-spacing:.12em;color:var(--brown);opacity:.5;">60% WARM SAND</span>
+      <span style="font-size:.55rem;letter-spacing:.12em;color:var(--brown);opacity:.5;">30% BROWN / BLACK</span>
+      <span style="font-size:.55rem;letter-spacing:.12em;color:var(--brown);opacity:.5;">10% FOREST GREEN</span>
+    </div>
+  </div>
+</div>
+
+<!-- FONTS -->
+<div class="kit-section">
+  <span class="kit-section-num">03 · Typography</span>
+  <h2 class="kit-section-title">Font <em>Hierarchy</em></h2>
+  <div class="font-grid">
+    <div class="font-card">
+      <span class="font-role">Title / Quote Font</span>
+      <span class="font-name">DM Serif Display</span>
+      <div class="font-sample-dm">Lazy Lion</div>
+      <div class="font-sample-dm-i">Mobile Bar.</div>
+      <p class="font-desc">Used for all major headlines, section titles, large display text, and pull quotes. The primary editorial voice of the brand.</p>
+    </div>
+    <div class="font-card">
+      <span class="font-role">Body / Label Font</span>
+      <span class="font-name">Lora</span>
+      <div class="font-sample-lora">Premium mobile bartending for elevated celebrations.</div>
+      <div class="font-sample-lora-b">Professional. Polished. Present.</div>
+      <p class="font-desc">Used for all body copy, eyebrow labels, nav links, buttons, captions, and supporting text throughout the site and marketing materials.</p>
+    </div>
+    <div class="font-card" style="background:#f7f4ef;">
+      <span class="font-role">Branding Kit Fonts</span>
+      <span class="font-name">Zumme Rough Bold · Bebas Neue · League Gothic</span>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:.65rem;color:var(--brown);opacity:.6;margin-bottom:4px;">Header (LION)</div>
+        <div style="font-size:1.4rem;font-weight:900;letter-spacing:.02em;color:var(--black);font-family:serif;">ZUMME ROUGH BOLD</div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="font-size:.65rem;color:var(--brown);opacity:.6;margin-bottom:4px;">Subtitle (LAZY)</div>
+        <div style="font-size:1.4rem;font-weight:300;letter-spacing:.08em;color:var(--brown);font-family:sans-serif;">BEBAS NEUE LIGHT</div>
+      </div>
+      <div>
+        <div style="font-size:.65rem;color:var(--brown);opacity:.6;margin-bottom:4px;">Body (BAR SERVICE)</div>
+        <div style="font-size:1.4rem;letter-spacing:.06em;color:var(--brown);font-family:sans-serif;">LEAGUE GOTHIC</div>
+      </div>
+      <p class="font-desc" style="margin-top:16px;">Official branding kit fonts per the Lazy Lion Brand Identity Guide. Used on logos, merchandise, printed materials, and social graphics.</p>
+    </div>
+    <div class="font-card" style="background:var(--dark);">
+      <span class="font-role" style="color:rgba(184,154,106,.7);">Font Do's & Don'ts</span>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:var(--green);font-size:.8rem;">✓</span><span style="font-size:.75rem;color:rgba(197,174,145,.75);">Use DM Serif Display for all large headlines</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:var(--green);font-size:.8rem;">✓</span><span style="font-size:.75rem;color:rgba(197,174,145,.75);">Use Lora for body copy, labels, buttons</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:var(--green);font-size:.8rem;">✓</span><span style="font-size:.75rem;color:rgba(197,174,145,.75);">Use italic DM Serif for emphasis & brand voice</span></div>
+        <div style="height:1px;background:rgba(197,174,145,.1);margin:4px 0;"></div>
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:#c0392b;font-size:.8rem;">✗</span><span style="font-size:.75rem;color:rgba(197,174,145,.5);">Don't mix too many font sizes</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:#c0392b;font-size:.8rem;">✗</span><span style="font-size:.75rem;color:rgba(197,174,174,.5);">Don't use Arial, Roboto, or system fonts</span></div>
+        <div style="display:flex;gap:10px;align-items:center;"><span style="color:#c0392b;font-size:.8rem;">✗</span><span style="font-size:.75rem;color:rgba(197,174,174,.5);">Don't bold DM Serif Display — weight 400 is correct</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND VOICE -->
+<div class="kit-section" style="background:#f7f4ef;">
+  <span class="kit-section-num">04 · Brand Voice</span>
+  <h2 class="kit-section-title">Voice, Tone <em>&amp; Messaging</em></h2>
+  <div class="voice-grid">
+    <div class="voice-card">
+      <span class="voice-card-title">Use These Words & Phrases</span>
+      <ul class="voice-list">
+        <li>Elevated experience</li>
+        <li>Crafted cocktails</li>
+        <li>Thoughtfully designed</li>
+        <li>Professional service</li>
+        <li>Host with confidence</li>
+        <li>Seamless event experience</li>
+        <li>Curated cocktail menu</li>
+        <li>Premium presentation</li>
+        <li>From setup to last call</li>
+        <li>We handle the bar</li>
+      </ul>
+    </div>
+    <div class="voice-card">
+      <span class="voice-card-title">Avoid These Words & Phrases</span>
+      <ul class="voice-list avoid-list">
+        <li>Cheap</li>
+        <li>Budget</li>
+        <li>Affordable</li>
+        <li>Lowest prices</li>
+        <li>Party bar</li>
+        <li>"We just pour drinks"</li>
+        <li>Generic mobile bartending language</li>
+        <li>Heavy black layouts that feel harsh</li>
+        <li>Clutter or busy design</li>
+        <li>Discount service tone</li>
+      </ul>
+    </div>
+    <div class="voice-card dark">
+      <span class="voice-card-title">Core Brand Lines</span>
+      <div class="brand-lines">
+        <div class="brand-line">"We do more than pour drinks — we help create the atmosphere."</div>
+        <div class="brand-line">"A bar experience that lets you enjoy your own event."</div>
+        <div class="brand-line">"Your guests enjoy the cocktails. You enjoy the moment."</div>
+        <div class="brand-line">"From setup to last call, we handle the bar so you can host with ease."</div>
+        <div class="brand-line">"A bar should look as good as the drinks it serves."</div>
+      </div>
+    </div>
+    <div class="voice-card">
+      <span class="voice-card-title">CTA Language</span>
+      <div class="cta-grid" style="margin-bottom:20px;">
+        <div class="cta-pill">Request a Quote</div>
+        <div class="cta-pill">Book Your Bar Experience</div>
+        <div class="cta-pill outline">Let's Elevate Your Event</div>
+        <div class="cta-pill outline">Start Planning Your Event</div>
+        <div class="cta-pill">View Packages</div>
+        <div class="cta-pill outline">Check Availability</div>
+      </div>
+      <p style="font-size:.65rem;color:var(--brown);opacity:.55;line-height:1.7;">Always lead with the experience. Focus on host freedom and atmosphere rather than price or features.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND PERSONALITY -->
+<div class="kit-section">
+  <span class="kit-section-num">05 · Brand Personality</span>
+  <h2 class="kit-section-title">Who We <em>Are</em></h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+    <div style="background:#f7f4ef;padding:36px;border:1px solid rgba(79,71,59,.08);">
+      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--black);margin-bottom:8px;">Luxury<br/><em style="color:var(--gold);">without pretension</em></div>
+      <p style="font-size:.72rem;color:var(--brown);opacity:.65;line-height:1.7;">Premium quality and presentation, but always warm and welcoming. Never cold or unapproachable.</p>
+    </div>
+    <div style="background:#f7f4ef;padding:36px;border:1px solid rgba(79,71,59,.08);">
+      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--black);margin-bottom:8px;">Professional<br/><em style="color:var(--gold);">without stiffness</em></div>
+      <p style="font-size:.72rem;color:var(--brown);opacity:.65;line-height:1.7;">Polished and dependable, but personable and easy to work with. The best of both worlds.</p>
+    </div>
+    <div style="background:#f7f4ef;padding:36px;border:1px solid rgba(79,71,59,.08);">
+      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--black);margin-bottom:8px;">Confident<br/><em style="color:var(--gold);">without arrogance</em></div>
+      <p style="font-size:.72rem;color:var(--brown);opacity:.65;line-height:1.7;">We know our craft. We lead with competence and let the experience speak for itself.</p>
+    </div>
+  </div>
+</div>
+
+<div class="kit-back">
+  <a href="index.html">← Back to Lazy Lion Mobile Bar</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Store — The Lazy Lion Mobile Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #EDE6DA; --brown: #4F473B; --green: #2E4B36;
+    --black: #111009; --gold: #B89A6A; --sand: #C5AE91;
+    --dark: #1E1C15;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Lora', serif; background: var(--dark); color: var(--cream); overflow-x: hidden; min-height: 100vh; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(30,28,21,.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(197,174,145,.15);
+  }
+  .nav-logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .nav-logo-img { width: 44px; height: 44px; object-fit: contain; filter: invert(1) brightness(.7); }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--sand); line-height: 1.2; }
+  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: .72rem; letter-spacing: .12em; color: rgba(197,174,145,.6); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-cta { background: var(--green); color: var(--cream); padding: 12px 26px; font-size: .68rem; letter-spacing: .14em; text-decoration: none; transition: all .25s; border-radius: 100px; border: 2px solid var(--green); box-shadow: 0 4px 20px rgba(46,75,54,.35); font-family: 'Lora', serif; font-weight: 600; white-space: nowrap; }
+  .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--sand); border-radius: 2px; transition: all .3s; }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-drawer { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background: var(--dark); z-index: 150; transition: right .35s ease; display: flex; flex-direction: column; padding: 100px 40px 48px; box-shadow: -8px 0 40px rgba(0,0,0,.4); border-left: 1px solid rgba(197,174,145,.1); }
+  .nav-drawer.open { right: 0; }
+  .nav-drawer-links { list-style: none; display: flex; flex-direction: column; }
+  .nav-drawer-links li { border-bottom: 1px solid rgba(197,174,145,.08); }
+  .nav-drawer-links a { display: block; padding: 20px 0; font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--cream); text-decoration: none; transition: color .2s; }
+  .nav-drawer-links a:hover { color: var(--gold); }
+  .nav-drawer-cta { margin-top: 40px; display: block; background: var(--green); color: var(--cream); padding: 16px 32px; text-align: center; font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; border-radius: 100px; font-weight: 600; }
+  .nav-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 140; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .nav-drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+  /* ── MAIN ── */
+  .coming-soon {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 40px 80px;
+    position: relative; overflow: hidden;
+  }
+
+  /* Background radial glow */
+  .coming-soon::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(184,154,106,.1) 0%, transparent 70%),
+      radial-gradient(ellipse 100% 80% at 50% 100%, rgba(46,75,54,.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Decorative lines */
+  .coming-soon::after {
+    content: '';
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(184,154,106,.4));
+    pointer-events: none;
+  }
+
+  .store-eyebrow {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 40px; opacity: 0;
+    animation: fadeUp .8s ease .2s forwards;
+  }
+  .store-eyebrow-line { width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+  .store-eyebrow-text { font-size: .72rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+  .store-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    color: var(--cream); font-weight: 400; line-height: 1.0;
+    margin-bottom: 24px; opacity: 0;
+    animation: fadeUp .8s ease .4s forwards;
+  }
+  .store-title em { font-style: italic; color: var(--gold); display: block; }
+
+  .store-divider {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 32px; opacity: 0;
+    animation: fadeUp .8s ease .55s forwards;
+  }
+  .store-divider-line { width: 64px; height: 1px; background: rgba(197,174,145,.25); }
+  .store-divider-dot { color: var(--gold); font-size: .9rem; }
+
+  .store-sub {
+    font-size: 1.1rem; color: rgba(197,174,145,.7);
+    line-height: 1.8; max-width: 520px;
+    margin-bottom: 56px; opacity: 0;
+    animation: fadeUp .8s ease .7s forwards;
+  }
+
+  .store-notify {
+    display: flex; gap: 0; max-width: 440px; width: 100%;
+    margin-bottom: 64px; opacity: 0;
+    animation: fadeUp .8s ease .85s forwards;
+  }
+  .store-notify-input {
+    flex: 1; background: rgba(197,174,145,.08);
+    border: 1px solid rgba(197,174,145,.2); border-right: none;
+    padding: 16px 20px; font-family: 'Lora', serif; font-size: .85rem;
+    color: var(--cream); outline: none;
+    transition: border-color .2s; border-radius: 100px 0 0 100px;
+  }
+  .store-notify-input::placeholder { color: rgba(197,174,145,.35); }
+  .store-notify-input:focus { border-color: rgba(184,154,106,.5); }
+  .store-notify-btn {
+    background: var(--gold); color: var(--black); border: none;
+    padding: 16px 28px; font-family: 'Lora', serif; font-size: .72rem;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+    cursor: pointer; transition: background .2s; border-radius: 0 100px 100px 0;
+    white-space: nowrap;
+  }
+  .store-notify-btn:hover { background: var(--sand); }
+
+  /* Product preview cards */
+  .store-preview {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; max-width: 800px; width: 100%;
+    border: 1px solid rgba(197,174,145,.1); opacity: 0;
+    animation: fadeUp .8s ease 1s forwards;
+  }
+  .preview-card {
+    background: rgba(197,174,145,.04);
+    padding: 36px 28px; text-align: left;
+    border-right: 1px solid rgba(197,174,145,.1);
+    transition: background .3s;
+  }
+  .preview-card:last-child { border-right: none; }
+  .preview-card:hover { background: rgba(197,174,145,.08); }
+  .preview-card-icon { font-size: 1.6rem; margin-bottom: 16px; display: block; }
+  .preview-card-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 8px; }
+  .preview-card-desc { font-size: .75rem; color: rgba(197,174,145,.5); line-height: 1.6; }
+  .preview-card-badge { display: inline-block; margin-top: 16px; font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,154,106,.3); padding: 4px 10px; border-radius: 100px; }
+
+  /* Back home link */
+  .store-back {
+    margin-top: 56px; opacity: 0;
+    animation: fadeUp .8s ease 1.2s forwards;
+  }
+  .store-back a {
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    color: rgba(197,174,145,.45); text-decoration: none;
+    transition: color .2s; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .store-back a:hover { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .nav-cta { display: none; }
+    .store-preview { grid-template-columns: 1fr; }
+    .preview-card { border-right: none; border-bottom: 1px solid rgba(197,174,145,.1); }
+    .preview-card:last-child { border-bottom: none; }
+    .store-notify { flex-direction: column; gap: 12px; }
+    .store-notify-input { border-right: 1px solid rgba(197,174,145,.2); border-radius: 100px; }
+    .store-notify-btn { border-radius: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo-wrap">
+    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
+    <div class="nav-logo">The Lazy Lion<span>Mobile Bar · Est. 2018</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="packages.html">Packages</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="store.html" class="active">Store</a></li>
+  </ul>
+  <a href="quote.html" class="nav-cta">Request a Quote</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+<div class="nav-drawer" id="drawer">
+  <ul class="nav-drawer-links">
+    <li><a href="index.html" onclick="toggleMenu()">Home</a></li>
+    <li><a href="packages.html" onclick="toggleMenu()">Packages</a></li>
+    <li><a href="about.html" onclick="toggleMenu()">About Us</a></li>
+    <li><a href="faq.html" onclick="toggleMenu()">FAQ</a></li>
+    <li><a href="store.html" onclick="toggleMenu()">Store</a></li>
+  </ul>
+  <a href="quote.html" class="nav-drawer-cta" onclick="toggleMenu()">Request a Quote</a>
+</div>
+
+<!-- COMING SOON -->
+<div class="coming-soon">
+  <div class="store-eyebrow">
+    <span class="store-eyebrow-line"></span>
+    <span class="store-eyebrow-text">The Lazy Lion Store</span>
+    <span class="store-eyebrow-line"></span>
+  </div>
+
+  <h1 class="store-title">Coming<br/><em>Soon.</em></h1>
+
+  <div class="store-divider">
+    <span class="store-divider-line"></span>
+    <span class="store-divider-dot">✦</span>
+    <span class="store-divider-line"></span>
+  </div>
+
+  <p class="store-sub">We're crafting something special — premium bar tools, homemade syrups, cocktail kits, and Lazy Lion merch. Be the first to know when we launch.</p>
+
+  <div class="store-notify">
+    <input class="store-notify-input" type="email" placeholder="Your email address"/>
+    <button class="store-notify-btn">Notify Me</button>
+  </div>
+
+  <div class="store-preview">
+    <div class="preview-card">
+      <span class="preview-card-icon">🍯</span>
+      <div class="preview-card-name">Homemade Syrups</div>
+      <p class="preview-card-desc">Strawberry basil, lavender honey, spiced brown sugar — and more signature flavors.</p>
+      <span class="preview-card-badge">Coming Soon</span>
+    </div>
+    <div class="preview-card">
+      <span class="preview-card-icon">🍹</span>
+      <div class="preview-card-name">Cocktail Kits</div>
+      <p class="preview-card-desc">Everything you need to recreate our signature cocktails at home. Just add your spirit.</p>
+      <span class="preview-card-badge">Coming Soon</span>
+    </div>
+    <div class="preview-card">
+      <span class="preview-card-icon">🦁</span>
+      <div class="preview-card-name">Lazy Lion Merch</div>
+      <p class="preview-card-desc">Branded bar tools, aprons, glassware, and apparel for the cocktail enthusiast.</p>
+      <span class="preview-card-badge">Coming Soon</span>
+    </div>
+  </div>
+
+  <div class="store-back">
+    <a href="index.html">← Back to Home</a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+</script>
+</body>
+</html>
