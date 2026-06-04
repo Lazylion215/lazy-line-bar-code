@@ -31,10 +31,10 @@
   }
   .nav-logo {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem; font-weight: 400;
+    font-size: 1.9rem; font-weight: 400;
     letter-spacing: .02em; color: var(--brown); line-height: 1.2;
   }
-  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-logo span { display: block; font-size: .68rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .nav-links a:hover { color: var(--green); }
@@ -77,7 +77,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1.1rem; }
+    .nav-logo { font-size: 1.6rem; }
   }
 
   /* ── HERO ── */
@@ -192,7 +192,7 @@
   footer { background: #1A1810; padding: 64px 64px 0; }
   .footer-top { display: grid; grid-template-columns: 2fr 1fr 1.4fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(197,174,145,.1); }
   .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .footer-logo { font-family: 'DM Serif Display', serif; font-size: .95rem; color: var(--sand); display: block; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--sand); display: block; line-height: 1.15; letter-spacing: .02em; }
   .footer-est { font-size: .5rem; letter-spacing: .22em; color: var(--gold); opacity: .85; display: block; margin-top: 2px; }
   .footer-desc { font-size: .75rem; color: rgba(197,174,145,.4); line-height: 1.8; max-width: 240px; }
   .footer-col-title { font-size: .7rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .8; }
@@ -279,8 +279,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1rem; }
-    .nav-logo-img { width: 34px; height: 34px; }
+    .nav-logo { font-size: 1.4rem; }
 
     /* General sections */
     section { padding: 48px 20px; }
@@ -370,7 +369,7 @@
     footer { padding: 40px 20px 0; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-brand { grid-column: 1; }
-    .footer-logo { font-size: 1.1rem; }
+    .footer-logo { font-size: 1.6rem; }
     .footer-desc { font-size: .85rem; max-width: 100%; }
     .footer-links a { font-size: .75rem; }
     .footer-contact-val { font-size: .75rem; }
@@ -424,7 +423,6 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
     <div class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -700,19 +698,6 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="footer-logo-lockup">
-        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="30" stroke="#C5AE91" stroke-width="1" opacity=".4"/>
-          <circle cx="32" cy="32" r="24" stroke="#C5AE91" stroke-width=".5" opacity=".25"/>
-          <ellipse cx="32" cy="31" rx="14" ry="15" fill="#4F473B"/>
-          <ellipse cx="32" cy="33" rx="10" ry="11" fill="#C5AE91" opacity=".9"/>
-          <ellipse cx="28" cy="31" rx="2" ry="2.2" fill="#2E4B36"/>
-          <ellipse cx="36" cy="31" rx="2" ry="2.2" fill="#2E4B36"/>
-          <ellipse cx="32" cy="35" rx="2" ry="1.4" fill="#4F473B"/>
-          <path d="M32 36.4 Q29.5 39 28 38.5" stroke="#4F473B" stroke-width=".8" stroke-linecap="round" fill="none"/>
-          <path d="M32 36.4 Q34.5 39 36 38.5" stroke="#4F473B" stroke-width=".8" stroke-linecap="round" fill="none"/>
-          <ellipse cx="22" cy="24" rx="4" ry="5" fill="#4F473B"/>
-          <ellipse cx="42" cy="24" rx="4" ry="5" fill="#4F473B"/>
-        </svg>
         <div>
           <div class="footer-logo">Lazy Lion Mobile Bar</div>
           <div class="footer-est">Est. 2018</div>
@@ -751,7 +736,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2011 Lazy Lion Mobile Bar · All Rights Reserved</span>
+    <span class="footer-copy">© 2018 Lazy Lion Mobile Bar · All Rights Reserved</span>
     <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
   </div>
 </footer>
@@ -762,6 +747,17 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 80);
   });
+
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
 
   // FAQ accordion
   function toggle(btn) {

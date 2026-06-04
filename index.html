@@ -39,10 +39,10 @@
   }
   .nav-logo {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem; font-weight: 400;
+    font-size: 1.9rem; font-weight: 400;
     letter-spacing: .02em; color: var(--brown); line-height: 1.2;
   }
-  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-logo span { display: block; font-size: .68rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .nav-links a:hover { color: var(--green); }
@@ -85,7 +85,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1.1rem; }
+    .nav-logo { font-size: 1.6rem; }
   }
 
   /* ── HERO ── */
@@ -189,17 +189,20 @@
 
   /* ── HERO IMAGE BANNER ── */
   .hero-image-banner {
-    width: 100%; height: 70vh;
+    width: 100%;
+    background: #1a1410;
     overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
   }
   .hero-image-banner img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center 40%;
+    width: 100%; height: auto;
+    max-height: 80vh;
+    object-fit: contain;
     display: block;
   }
   @media (max-width: 768px) {
     .hero-content { padding: 120px 28px 60px; }
-    .hero-image-banner { height: 50vw; }
+    .hero-image-banner img { max-height: 60vh; }
   }
 
   /* ── STATS BAR ── */
@@ -300,11 +303,12 @@
   }
   .meet-owner-photo {
     width: 100%; aspect-ratio: 4/3; overflow: hidden;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
   }
   .meet-owner-photo img {
-    width: 100%; height: 100%; object-fit: cover;
-    object-position: center 20%; display: block;
-    transition: transform .5s;
+    width: 100%; height: 100%; object-fit: contain;
+    display: block; transition: transform .5s;
   }
   .meet-owner-card:hover .meet-owner-photo img { transform: scale(1.03); }
   .meet-owner-card-body { padding: 48px 64px 64px; }
@@ -345,9 +349,10 @@
   }
   .exp-visual {
     background: var(--brown);
-    aspect-ratio: 4/5; position: relative;
+    aspect-ratio: 4/3; position: relative;
     overflow: hidden; display: flex; align-items: center; justify-content: center;
   }
+  .exp-visual > img { width: 100% !important; height: 100% !important; object-fit: contain !important; background: var(--brown); }
   .exp-visual-inner {
     text-align: center; padding: 40px;
   }
@@ -567,14 +572,15 @@
     text-transform: uppercase;
   }
   .bar-format-img {
-    aspect-ratio: 3/4; overflow: hidden;
+    aspect-ratio: 4/3; overflow: hidden;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
   }
   .bar-format-img img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; height: 100%; object-fit: contain; display: block;
     transition: transform .5s;
-    filter: brightness(.88);
   }
-  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); filter: brightness(.95); }
+  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); }
   .bar-format-body {
     padding: 28px 32px 36px;
     background: var(--cream);
@@ -940,7 +946,7 @@
     border-bottom: 1px solid rgba(197,174,145,.1);
   }
   .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--sand); letter-spacing: .02em; display: block; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--sand); letter-spacing: .02em; display: block; line-height: 1.15; }
   .footer-est { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .18em; color: var(--gold); opacity: .9; display: block; margin-top: 4px; text-transform: uppercase; }
   .footer-desc { font-family: 'Lora', serif; font-size: 1rem; color: rgba(197,174,145,.65); line-height: 1.8; max-width: 300px; }
   .footer-col-title { font-size: .72rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .9; }
@@ -1073,8 +1079,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1rem; }
-    .nav-logo-img { width: 34px; height: 34px; }
+    .nav-logo { font-size: 1.4rem; }
 
     /* General sections */
     section { padding: 48px 20px; }
@@ -1164,7 +1169,7 @@
     footer { padding: 40px 20px 0; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-brand { grid-column: 1; }
-    .footer-logo { font-size: 1.1rem; }
+    .footer-logo { font-size: 1.6rem; }
     .footer-desc { font-size: .85rem; max-width: 100%; }
     .footer-links a { font-size: .75rem; }
     .footer-contact-val { font-size: .75rem; }
@@ -1218,7 +1223,6 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
     <div class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -1655,7 +1659,6 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="footer-logo-lockup">
-        <img src="logo.png" alt="Lazy Lion Mobile Bar Logo" style="width:72px;height:72px;object-fit:contain;filter:invert(1) brightness(.7);"/>
         <div>
           <div class="footer-logo">Lazy Lion Mobile Bar</div>
           <div class="footer-est">Est. 2018</div>
@@ -1701,10 +1704,23 @@
   </div>
 
   <div class="footer-bottom">
-    <span class="footer-copy">© 2011 Lazy Lion Mobile Bar · All Rights Reserved</span>
+    <span class="footer-copy">© 2018 Lazy Lion Mobile Bar · All Rights Reserved</span>
     <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
   </div>
 </footer>
+
+<script>
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+</script>
 
 </body>
 </html>

@@ -30,10 +30,10 @@
   }
   .nav-logo {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem; font-weight: 400;
+    font-size: 1.9rem; font-weight: 400;
     letter-spacing: .02em; color: var(--brown); line-height: 1.2;
   }
-  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-logo span { display: block; font-size: .68rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .nav-links a:hover { color: var(--green); }
@@ -76,7 +76,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1.1rem; }
+    .nav-logo { font-size: 1.6rem; }
   }
 
   /* ── HERO ── */
@@ -93,10 +93,12 @@
   }
   .hero-visual {
     position: relative; overflow: hidden;
+    background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
   }
   .hero-visual img {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: center center;
+    object-fit: contain;
     display: block;
   }
   @media (max-width: 768px) {
@@ -224,11 +226,11 @@
 
   .founder-photo {
     aspect-ratio: 3/4; overflow: hidden; background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
   }
   .founder-photo img {
-    width: 100%; height: 100%; object-fit: cover;
-    object-position: center 15%; display: block;
-    transition: transform .5s;
+    width: 100%; height: 100%; object-fit: contain;
+    display: block; transition: transform .5s;
   }
   .founder-photo:hover img { transform: scale(1.03); }
 
@@ -306,13 +308,13 @@
   /* Photo — sticky so it stays in view as you scroll the list */
   .how-work-photo {
     position: sticky; top: 100px;
-    aspect-ratio: 3/4; overflow: hidden; border-radius: 2px;
+    aspect-ratio: 4/3; overflow: hidden; border-radius: 2px;
     background: var(--brown);
+    display: flex; align-items: center; justify-content: center;
   }
   .how-work-photo img {
-    width: 100%; height: 100%; object-fit: cover;
-    object-position: center 20%; display: block;
-    filter: brightness(.92);
+    width: 100%; height: 100%; object-fit: contain;
+    display: block;
   }
 
   /* Numbered list */
@@ -401,9 +403,9 @@
   .bar-formats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .bar-format-card { position: relative; overflow: hidden; background: var(--brown); }
   .bar-format-num { position: absolute; top: 20px; left: 20px; z-index: 2; background: rgba(30,27,22,.65); backdrop-filter: blur(6px); color: var(--cream); font-size: .74rem; letter-spacing: .14em; font-family: 'Lora', serif; font-weight: 600; padding: 8px 16px; border-radius: 100px; text-transform: uppercase; }
-  .bar-format-img { aspect-ratio: 3/4; overflow: hidden; }
-  .bar-format-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; filter: brightness(.88); }
-  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); filter: brightness(.95); }
+  .bar-format-img { aspect-ratio: 4/3; overflow: hidden; background: var(--brown); display: flex; align-items: center; justify-content: center; }
+  .bar-format-img img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform .5s; }
+  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); }
   .bar-format-body { padding: 28px 32px 36px; background: var(--cream); border: 1px solid rgba(79,71,59,.1); border-top: none; }
   .bar-format-tag { font-size: .72rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; opacity: .85; }
   .bar-format-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--black); font-weight: 400; margin-bottom: 12px; line-height: 1.2; }
@@ -429,7 +431,7 @@
   footer { background: #1E1B16; padding: 64px 64px 0; }
   .footer-top { display: grid; grid-template-columns: 2fr 1fr 1.4fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(197,174,145,.1); }
   .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .footer-logo { font-family: 'DM Serif Display', serif; font-size: .95rem; font-weight: 400; color: var(--sand); letter-spacing: .04em; display: block; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--sand); letter-spacing: .02em; display: block; line-height: 1.15; }
   .footer-est { font-size: .5rem; letter-spacing: .22em; color: var(--gold); opacity: .85; display: block; margin-top: 2px; }
   .footer-desc { font-size: .75rem; color: rgba(197,174,145,.4); line-height: 1.8; max-width: 240px; }
   .footer-col-title { font-size: .7rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .8; }
@@ -511,8 +513,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1rem; }
-    .nav-logo-img { width: 34px; height: 34px; }
+    .nav-logo { font-size: 1.4rem; }
 
     /* General sections */
     section { padding: 48px 20px; }
@@ -602,7 +603,7 @@
     footer { padding: 40px 20px 0; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-brand { grid-column: 1; }
-    .footer-logo { font-size: 1.1rem; }
+    .footer-logo { font-size: 1.6rem; }
     .footer-desc { font-size: .85rem; max-width: 100%; }
     .footer-links a { font-size: .75rem; }
     .footer-contact-val { font-size: .75rem; }
@@ -656,7 +657,6 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
     <div class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -935,19 +935,6 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="footer-logo-lockup">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="30" stroke="#C5AE91" stroke-width="1" opacity=".4"/>
-          <circle cx="32" cy="32" r="24" stroke="#C5AE91" stroke-width=".5" opacity=".25"/>
-          <ellipse cx="32" cy="31" rx="14" ry="15" fill="#4F473B"/>
-          <ellipse cx="32" cy="33" rx="10" ry="11" fill="#C5AE91" opacity=".9"/>
-          <ellipse cx="28" cy="31" rx="2" ry="2.2" fill="#2E4B36"/>
-          <ellipse cx="36" cy="31" rx="2" ry="2.2" fill="#2E4B36"/>
-          <ellipse cx="32" cy="35" rx="2" ry="1.4" fill="#4F473B"/>
-          <path d="M32 36.4 Q29.5 39 28 38.5" stroke="#4F473B" stroke-width=".8" stroke-linecap="round" fill="none"/>
-          <path d="M32 36.4 Q34.5 39 36 38.5" stroke="#4F473B" stroke-width=".8" stroke-linecap="round" fill="none"/>
-          <ellipse cx="22" cy="24" rx="4" ry="5" fill="#4F473B"/>
-          <ellipse cx="42" cy="24" rx="4" ry="5" fill="#4F473B"/>
-        </svg>
         <div>
           <div class="footer-logo">Lazy Lion Mobile Bar</div>
           <div class="footer-est">Est. 2018</div>
@@ -986,7 +973,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2011 Lazy Lion Mobile Bar · All Rights Reserved</span>
+    <span class="footer-copy">© 2018 Lazy Lion Mobile Bar · All Rights Reserved</span>
     <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
   </div>
 </footer>
@@ -997,6 +984,17 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   });
+
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
 </script>
 
 </body>
