@@ -1163,6 +1163,7 @@
   }
   function ecPrint(){const name=document.getElementById('ec-printName').value.trim();const email=document.getElementById('ec-printEmail').value.trim();if(!name||!email){alert('Please enter your name and email.');return;}window.print();}
   ecCalc();
+</script>
 
 <!-- BOTTOM CTA -->
 <section class="pkg-bottom-cta" id="contact">
@@ -1226,6 +1227,19 @@
     <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
   </div>
 </footer>
+
+<script>
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+</script>
 
 </body>
 </html>
