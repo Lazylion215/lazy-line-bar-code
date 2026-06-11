@@ -748,13 +748,46 @@
     .ll-who-tagline { font-size: 2.8rem; letter-spacing: -0.02em; }
   }
 
+
+  /* ── PACKAGES EXTRA MOBILE ── */
+  @media (max-width: 768px) {
+    .pkg-page-hero { padding: 100px 20px 48px; }
+    .pkg-page-title { font-size: clamp(2rem, 8vw, 3rem); }
+    .includes-bar { padding: 16px 20px; flex-direction: column; gap: 12px; }
+    .includes-bar-items { grid-template-columns: repeat(2, 1fr); gap: 8px 16px; }
+    .pkg-card { padding: 28px 20px; }
+    .pkg-card.featured { margin: 0; padding: 28px 20px; }
+    .addons-col { padding: 28px 20px; }
+    .addon-name { font-size: .82rem; }
+    .addon-price { font-size: .82rem; white-space: nowrap; }
+    .ll-who-btn { width: 100%; justify-content: center; }
+    .ll-dry-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .ll-dry-btn-primary { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 480px) {
+    .pkg-card { padding: 22px 16px; }
+    .pkg-name { font-size: 1.4rem; }
+    .pkg-price { font-size: 1.6rem; }
+    .addons-col { padding: 22px 16px; }
+    .ll-who-headline { font-size: 1.5rem; }
+    .ll-who-tagline { font-size: 2.4rem; }
+    .ec-title { font-size: 1.6rem; }
+  }
+
 </style>
 </head>
 <body>
+<!-- Hidden Netlify form for alcohol calculator -->
+<form name="alcohol-calculator" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name"/>
+  <input type="email" name="email"/>
+  <textarea name="shopping-list"></textarea>
+</form>
 
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
+    <img src="logo-icon.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
     <a href="index.html" class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -1116,8 +1149,16 @@
       <div class="ec-print-section">
         <div class="ec-print-title">Save your shopping list</div>
         <div class="ec-print-desc">Enter your details and we'll send a clean copy.</div>
-        <div class="ec-print-inputs"><input class="ec-print-input" type="text" id="ec-printName" placeholder="Your name"/><input class="ec-print-input" type="email" id="ec-printEmail" placeholder="your@email.com"/></div>
-        <button class="ec-print-btn" onclick="ecPrint()">Get My Shopping List 🖨</button>
+        <div id="ec-form-wrap">
+          <div class="ec-print-inputs">
+            <input class="ec-print-input" type="text" id="ec-printName" placeholder="Your name"/>
+            <input class="ec-print-input" type="email" id="ec-printEmail" placeholder="your@email.com"/>
+          </div>
+          <button class="ec-print-btn" id="ec-submitBtn" onclick="ecSubmit()">Get My Shopping List 🖨</button>
+        </div>
+        <div id="ec-success" style="display:none; padding: 16px 0; font-family:'Lora',serif; font-size:.85rem; font-style:italic; color:rgba(237,230,218,.7); line-height:1.6;">
+          ✦ &nbsp; Your list has been sent! Check your inbox — we'll be in touch shortly.
+        </div>
       </div>
     </div>
   </div>
@@ -1161,7 +1202,54 @@
     if(toastOn){document.getElementById('ec-champQty').textContent=champB+(champB===1?' bottle':' bottles');document.getElementById('ec-champPrice').innerHTML=`$${champB*20} <small>at $20/bottle</small>`;}
     document.getElementById('ec-totalPrice').textContent='$'+cost.toLocaleString();
   }
-  function ecPrint(){const name=document.getElementById('ec-printName').value.trim();const email=document.getElementById('ec-printEmail').value.trim();if(!name||!email){alert('Please enter your name and email.');return;}window.print();}
+  function ecSubmit() {
+    const name  = document.getElementById('ec-printName').value.trim();
+    const email = document.getElementById('ec-printEmail').value.trim();
+    if (!name || !email) { alert('Please enter your name and email to save your list.'); return; }
+
+    const guests   = document.getElementById('ec-rGuests').textContent;
+    const hours    = document.getElementById('ec-rHours').textContent;
+    const total    = document.getElementById('ec-rTotal').textContent;
+    const beerQty  = document.getElementById('ec-beerQty').textContent;
+    const wineQty  = document.getElementById('ec-wineQty').textContent;
+    const liqQty   = document.getElementById('ec-liquorQty').textContent;
+    const champRow = document.getElementById('ec-champItem');
+    const champQty = champRow.style.display !== 'none' ? document.getElementById('ec-champQty').textContent : 'None';
+    const totalCost = document.getElementById('ec-totalPrice').textContent;
+
+    const summary = `Name: ${name}
+Email: ${email}
+Guests: ${guests} | Bar Hours: ${hours}
+Estimated Total Drinks: ${total}
+---
+Beer: ${beerQty}
+Wine: ${wineQty}
+Liquor: ${liqQty}
+Champagne Toast: ${champQty}
+---
+Estimated Alcohol Cost: ${totalCost}`;
+
+    const btn = document.getElementById('ec-submitBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('form-name', 'alcohol-calculator');
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('shopping-list', summary);
+
+    fetch('/', { method: 'POST', body: formData })
+      .then(() => {
+        document.getElementById('ec-form-wrap').style.display = 'none';
+        document.getElementById('ec-success').style.display = 'block';
+      })
+      .catch(() => {
+        btn.textContent = 'Get My Shopping List 🖨';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly.');
+      });
+  }
   ecCalc();
 </script>
 
@@ -1189,9 +1277,8 @@
       <span class="footer-col-title">Services</span>
       <ul class="footer-links">
         <li><a href="#packages">Packages</a></li>
-        <li><a href="#mixology1">Mixology 1</a></li>
-        <li><a href="#mixology2">Mixology 2</a></li>
-        <li><a href="#trailer">Trailer Bar</a></li>
+        <li><a href="#formats">Custom Bars</a></li>
+        <li><a href="store.html">Store</a></li>
       </ul>
     </div>
 
@@ -1199,8 +1286,8 @@
       <span class="footer-col-title">Company</span>
       <ul class="footer-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
         <li><a href="quote.html">Request a Quote</a></li>
       </ul>
     </div>

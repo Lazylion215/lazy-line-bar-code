@@ -59,6 +59,7 @@
     background: var(--dark);
   }
   .store-ad img {
+    max-width: 100%;
     width: 100%;
     display: block;
   }
@@ -214,6 +215,15 @@
     .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     .float-cta { bottom: 20px; right: 20px; padding: 12px 18px; font-size: .62rem; }
   }
+
+  @media (max-width: 360px) {
+    .store-notify { padding: 36px 16px; }
+    .notify-title { font-size: 1.7rem; }
+    .notify-body { font-size: .88rem; }
+    footer { padding: 32px 16px 0; }
+    .footer-brand-name { font-size: 1.4rem; }
+  }
+
 </style>
 </head>
 <body>
@@ -221,7 +231,7 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <img src="logo.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
+    <img src="logo-icon.png" alt="Lazy Lion Logo" class="nav-logo-img" style="filter:invert(1);"/>
     <a href="index.html" class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -253,7 +263,7 @@
 
 <!-- IMAGE 1 — Coming Soon ad poster -->
 <div class="store-ad">
-  <img src="BD68398D-CB3A-4173-92D4-D6B2BB15C3B5.jpg"
+  <img src="BD68398D-CB3A-4173-92D4-D6B2BB15C3B5.png"
        alt="Lazy Lion Social Club — Coming Soon. Premium apparel, bar tools, aprons and cocktail mixers."/>
 </div>
 
@@ -283,14 +293,14 @@
       <span class="footer-col-title">Services</span>
       <ul class="footer-links">
         <li><a href="packages.html">Packages</a></li>
-        <li><a href="alcohol-calculator.html">Alcohol Calculator</a></li>
-        <li><a href="index.html#trailer">Trailer Bar</a></li>
+        <li><a href="index.html#custom-bars">Custom Bars</a></li>
         <li><a href="store.html">Store</a></li>
       </ul>
     </div>
     <div>
       <span class="footer-col-title">Company</span>
       <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="quote.html">Request a Quote</a></li>

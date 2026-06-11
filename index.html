@@ -558,8 +558,8 @@
   .gallery-strip-label { font-size: .72rem; letter-spacing: .16em; color: var(--gold); opacity: 1; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .gallery-strip-link { font-size: .6rem; letter-spacing: .18em; color: var(--green); text-decoration: none; text-transform: uppercase; }
   .gallery-strip-link:hover { opacity: .7; }
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  .gallery-img { aspect-ratio: 1; overflow: hidden; background: var(--brown); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; align-items: stretch; }
+  .gallery-img { aspect-ratio: 1 / 1; overflow: hidden; background: var(--brown); width: 100%; }
   .gallery-img img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; transition: transform .4s; }
   .gallery-img:hover img { transform: scale(1.05); }
 
@@ -580,6 +580,30 @@
   .review-quote { font-family: 'DM Serif Display', serif; font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--black); line-height: 1.65; font-weight: 400; flex: 1; }
   .review-author { font-family: 'Lora', serif; font-size: .72rem; color: var(--brown); opacity: .8; display: flex; align-items: center; gap: 10px; }
   .review-stars { color: var(--gold); letter-spacing: 2px; font-size: .75rem; opacity: 1; }
+
+  /* ── GOOGLE REVIEWS SECTION ── */
+  .gr-section { background: var(--cream); padding: 80px 64px 100px; }
+  .gr-inner { max-width: 1060px; margin: 0 auto; }
+  .gr-header { text-align: center; margin-bottom: 56px; }
+  .gr-eyebrow { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Lora', serif; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--brown); opacity: .7; margin-bottom: 16px; }
+  .gr-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 4vw, 3.8rem); color: var(--black); line-height: 1.1; font-weight: 400; margin-bottom: 16px; }
+  .gr-title em { font-style: italic; color: var(--gold); }
+  .gr-stars-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .gr-stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+  .gr-rating { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--black); }
+  .gr-count { font-family: 'Lora', serif; font-size: .75rem; color: var(--brown); opacity: .6; }
+  .gr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 48px; }
+  .gr-card { background: #F5EEE4; border: 1px solid rgba(79,71,59,.1); padding: 32px 28px; }
+  .gr-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .gr-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--green); color: var(--cream); font-family: 'DM Serif Display', serif; font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .gr-reviewer { flex: 1; }
+  .gr-name { font-family: 'Lora', serif; font-size: .8rem; font-weight: 600; color: var(--black); }
+  .gr-card-stars { color: var(--gold); font-size: .65rem; letter-spacing: 2px; }
+  .gr-tag { font-family: 'Lora', serif; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brown); opacity: .6; margin-bottom: 10px; }
+  .gr-quote { font-family: 'Lora', serif; font-size: .88rem; color: var(--brown); line-height: 1.75; opacity: .85; }
+  .gr-footer { text-align: center; padding-top: 16px; }
+  .gr-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--brown); text-decoration: none; border: 1.5px solid rgba(79,71,59,.25); padding: 14px 28px; border-radius: 100px; transition: all .25s; }
+  .gr-link:hover { border-color: var(--green); color: var(--green); }
 
   /* ── CONTACT CTA ── */
   .contact-cta { background: #1E1C15; padding: 80px 64px; display: grid; grid-template-columns: 1fr 1px 1fr; gap: 80px; align-items: center; }
@@ -692,7 +716,7 @@
 
     /* Meet owner */
     .meet-owner { padding: 60px 20px; }
-    .meet-owner-intro { padding: 0 20px; margin-bottom: 40px; }
+    .meet-owner-intro { padding: 0 16px; margin-bottom: 40px; }
     .meet-owner-title { font-size: 2.2rem; }
     .meet-owner-card-body { padding: 28px 20px 36px; }
     .meet-owner-name { font-size: 2rem; }
@@ -773,7 +797,7 @@
 
   /* ── SMALL MOBILE ≤480px ── */
   @media (max-width: 480px) {
-    .hero h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+    .hero h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); word-break: break-word; }
     .ll-review-eyebrow { font-size: 0.6rem; letter-spacing: 0.14em; }
     .ll-star-divider { display: none; }
     .ll-review-badge { width: 100%; display: block; margin-top: 4px; }
@@ -794,7 +818,8 @@
     .contact-cta-title { font-size: 1.8rem; }
     .crafted-icons { grid-template-columns: repeat(2,1fr); }
     .gallery-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
-    .pkg-card { padding: 28px 20px; }
+    .pkg-card { padding: 24px 16px; }
+    .pkg-card.featured { padding: 24px 16px; }
   }
 
   /* ── VERY SMALL ≤360px ── */
@@ -810,9 +835,16 @@
 </style>
 </head>
 <body>
+<!-- Hidden Netlify form for alcohol calculator -->
+<form name="alcohol-calculator" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name"/>
+  <input type="email" name="email"/>
+  <textarea name="shopping-list"></textarea>
+</form>
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
+    <img src="logo-icon.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
     <a href="index.html" class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
@@ -885,7 +917,7 @@
     <span class="ll-author-name">Mia D.</span>
     <div class="ll-author-rule"></div>
   </div>
-  <a class="ll-review-cta" href="https://g.page/r/YOUR-GOOGLE-REVIEW-LINK" target="_blank" rel="noopener">
+  <a class="ll-review-cta" href="https://search.google.com/local/writereview?placeid=ChIJB9Ni5kzHxokRxKBUDnP176c" target="_blank" rel="noopener">
     <svg class="ll-google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
       <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -1102,13 +1134,17 @@
       <div class="pkg-guests">Starting / Up to 50 guests</div>
       <div class="pkg-divider"></div>
       <ul class="pkg-features">
-        <li>Professional bartending service</li>
-        <li>Full bar setup &amp; breakdown</li>
-        <li>Alcohol purchasing guidance</li>
-        <li>Juice Package</li>
-        <li>Soft Drink Package</li>
-        <li>Bagged Ice</li>
-        <li>2 Signature Cocktails</li>
+        <li>1 Bartender (4hr.)</li>
+        <li>Alcohol Shopping List</li>
+        <li>Alcohol Calculator</li>
+        <li>Event Consultation</li>
+        <li>Beer, Wine &amp; Cocktail Service</li>
+        <li>Napkins, Straws, Disposable Cups &amp; Garnishes</li>
+        <li>6ft Table Bar Set Up w/ Bar Tools</li>
+        <li>Ice and Ice Cooler</li>
+        <li>Travel</li>
+        <li>2hr Set Up and Breakdown</li>
+        <li>General Liability &amp; Liquor Insurance</li>
       </ul>
       <a href="quote.html" class="pkg-cta">Request a Quote</a>
     </div>
@@ -1125,8 +1161,8 @@
         <li>Everything in The Lazy Lion Signature, plus:</li>
         <li>Juice Package</li>
         <li>Soft Drink Package</li>
-        <li>Bagged Ice</li>
         <li>2 Signature Cocktails</li>
+        <li>Customized Drink Menu</li>
       </ul>
       <a href="quote.html" class="pkg-cta">Request a Quote</a>
     </div>
@@ -1142,7 +1178,7 @@
         <li>Everything in The Lazy Lion Premier, plus:</li>
         <li>Premium Mixer Package</li>
         <li>Premium Garnish Package</li>
-        <li>Mocktail Package</li>
+        <li>Mocktail Option</li>
         <li>Custom Bar Experience</li>
         <li>Hydration Station</li>
         <li>Elevated Bar Décor</li>
@@ -1155,7 +1191,7 @@
 </section>
 
 <!-- BAR FORMATS -->
-<section class="bar-formats">
+<section class="bar-formats" id="custom-bars">
   <div class="bar-formats-header">
     <div class="bar-formats-left">
       <h2 class="bar-formats-title">Custom Bar Choices That Fit <em>Your Event</em><br/>— Not the Other Way Around.</h2>
@@ -1547,11 +1583,16 @@
       <div class="ec-print-section">
         <div class="ec-print-title">Save your shopping list</div>
         <div class="ec-print-desc">Enter your details and we'll send a clean copy — and reach out with a quote if you'd like Lazy Lion to handle the bar.</div>
-        <div class="ec-print-inputs">
-          <input class="ec-print-input" type="text" id="ec-printName" placeholder="Your name" />
-          <input class="ec-print-input" type="email" id="ec-printEmail" placeholder="your@email.com" />
+        <div id="ec-form-wrap">
+          <div class="ec-print-inputs">
+            <input class="ec-print-input" type="text" id="ec-printName" placeholder="Your name" />
+            <input class="ec-print-input" type="email" id="ec-printEmail" placeholder="your@email.com" />
+          </div>
+          <button class="ec-print-btn" id="ec-submitBtn" onclick="ecSubmit()">Get My Shopping List 🖨</button>
         </div>
-        <button class="ec-print-btn" onclick="ecPrint()">Get My Shopping List 🖨</button>
+        <div id="ec-success" style="display:none; padding: 16px 0; font-family:'Lora',serif; font-size:.85rem; font-style:italic; color:rgba(237,230,218,.7); line-height:1.6;">
+          ✦ &nbsp; Your list has been sent! Check your inbox — we'll be in touch shortly.
+        </div>
       </div>
     </div>
   </div>
@@ -1622,11 +1663,54 @@
     }
     document.getElementById('ec-totalPrice').textContent = '$' + cost.toLocaleString();
   }
-  function ecPrint() {
+  function ecSubmit() {
     const name  = document.getElementById('ec-printName').value.trim();
     const email = document.getElementById('ec-printEmail').value.trim();
     if (!name || !email) { alert('Please enter your name and email to save your list.'); return; }
-    window.print();
+
+    // Build the shopping list summary
+    const guests   = document.getElementById('ec-rGuests').textContent;
+    const hours    = document.getElementById('ec-rHours').textContent;
+    const total    = document.getElementById('ec-rTotal').textContent;
+    const beerQty  = document.getElementById('ec-beerQty').textContent;
+    const wineQty  = document.getElementById('ec-wineQty').textContent;
+    const liqQty   = document.getElementById('ec-liquorQty').textContent;
+    const champRow = document.getElementById('ec-champItem');
+    const champQty = champRow.style.display !== 'none' ? document.getElementById('ec-champQty').textContent : 'None';
+    const totalCost = document.getElementById('ec-totalPrice').textContent;
+
+    const summary = `Name: ${name}
+Email: ${email}
+Guests: ${guests} | Bar Hours: ${hours}
+Estimated Total Drinks: ${total}
+---
+Beer: ${beerQty}
+Wine: ${wineQty}
+Liquor: ${liqQty}
+Champagne Toast: ${champQty}
+---
+Estimated Alcohol Cost: ${totalCost}`;
+
+    const btn = document.getElementById('ec-submitBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('form-name', 'alcohol-calculator');
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('shopping-list', summary);
+
+    fetch('/', { method: 'POST', body: formData })
+      .then(() => {
+        document.getElementById('ec-form-wrap').style.display = 'none';
+        document.getElementById('ec-success').style.display = 'block';
+      })
+      .catch(() => {
+        btn.textContent = 'Get My Shopping List 🖨';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly.');
+      });
   }
   ecCalc();
 </script>
@@ -1638,38 +1722,100 @@
     <a href="quote.html" class="gallery-strip-link">Request a Quote →</a>
   </div>
   <div class="gallery-grid">
-    <div class="gallery-img"><img src="cocktail1.png" alt="Blueberry Smash Signature Cocktail" style="object-position: center center;"/></div>
-    <div class="gallery-img"><img src="cocktail2.png" alt="Raspberry Lemon Dry Martini Signature Cocktail" style="object-position: center center;"/></div>
-    <div class="gallery-img"><img src="cocktail3.png" alt="Passion Fruit Mai Tai Signature Cocktail" style="object-position: center center;"/></div>
-    <div class="gallery-img"><img src="cocktail4.png" alt="Strawberry Margarita Signature Cocktail" style="object-position: center center;"/></div>
+    <div class="gallery-img"><img src="cocktail1.png" alt="Blueberry Smash Signature Cocktail"/></div>
+    <div class="gallery-img"><img src="cocktail2.png" alt="Raspberry Lemon Dry Martini Signature Cocktail"/></div>
+    <div class="gallery-img"><img src="cocktail3.png" alt="Passion Fruit Mai Tai Signature Cocktail"/></div>
+    <div class="gallery-img"><img src="cocktail4.png" alt="Strawberry Margarita Signature Cocktail"/></div>
   </div>
 </div>
 
-<!-- TESTIMONIALS -->
-<section class="reviews" id="reviews">
-  <div class="reviews-header">
-    <div class="reviews-label-row">
-      <span class="reviews-label-line"></span>
-      <span class="reviews-label">What People Are Saying</span>
-      <span class="reviews-label-line"></span>
+<!-- GOOGLE REVIEWS -->
+<section class="gr-section">
+  <div class="gr-inner">
+    <div class="gr-header">
+      <div class="gr-eyebrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Verified Google Reviews
+      </div>
+      <h2 class="gr-title">What our clients are <em>saying.</em></h2>
+      <div class="gr-stars-row">
+        <span class="gr-stars">★★★★★</span>
+        <span class="gr-rating">5.0</span>
+        <span class="gr-count">· Philadelphia's Premier Mobile Bar</span>
+      </div>
     </div>
-    <h2 class="reviews-title">Real People,<br/><em>Real Experiences.</em></h2>
-  </div>
-  <div class="reviews-grid">
-    <div class="review-card">
-      <div class="review-card-top"><div class="review-tag">— Wedding · Private Party</div><div class="review-num">·01·</div></div>
-      <p class="review-quote"><span class="review-open">"</span> Lazy Lion made our wedding reception feel like a five-star experience. The bar was stunning, the cocktails were incredible, and our guests are still talking about it.</p>
-      <div class="review-author">— Kelsey M. <span class="review-stars">★★★★★</span></div>
+
+    <div class="gr-grid">
+      <div class="gr-card">
+        <div class="gr-card-top">
+          <div class="gr-avatar">K</div>
+          <div class="gr-reviewer">
+            <div class="gr-name">Kelsey M.</div>
+            <div class="gr-card-stars">★★★★★</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;flex-shrink:0;opacity:.6">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="gr-tag">Wedding · Private Party</div>
+        <p class="gr-quote">Lazy Lion made our wedding reception feel like a five-star experience. The bar was stunning, the cocktails were incredible, and our guests are still talking about it. They handled everything seamlessly from setup to last call.</p>
+      </div>
+
+      <div class="gr-card">
+        <div class="gr-card-top">
+          <div class="gr-avatar">M</div>
+          <div class="gr-reviewer">
+            <div class="gr-name">Marcus T.</div>
+            <div class="gr-card-stars">★★★★★</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;flex-shrink:0;opacity:.6">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="gr-tag">Birthday · Private Event</div>
+        <p class="gr-quote">I hired Lazy Lion for my 40th birthday and it was the best decision I made for the party. The signature cocktail they created was a total hit. Professional, on time, and the setup looked absolutely beautiful. Worth every penny.</p>
+      </div>
+
+      <div class="gr-card">
+        <div class="gr-card-top">
+          <div class="gr-avatar">D</div>
+          <div class="gr-reviewer">
+            <div class="gr-name">Dana R.</div>
+            <div class="gr-card-stars">★★★★★</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;flex-shrink:0;opacity:.6">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <div class="gr-tag">Corporate · Company Event</div>
+        <p class="gr-quote">We used Lazy Lion for our company holiday party and the feedback was overwhelmingly positive. They guided us through the alcohol purchase, showed up fully prepared, and kept the bar running smoothly all night. Will absolutely book again.</p>
+      </div>
     </div>
-    <div class="review-card">
-      <div class="review-card-top"><div class="review-tag">— Birthday · Private Event</div><div class="review-num">·02·</div></div>
-      <p class="review-quote"><span class="review-open">"</span> I hired Lazy Lion for my 40th birthday and it was the best decision I made for the party. Professional, on time, and the setup looked absolutely beautiful.</p>
-      <div class="review-author">— Marcus T. <span class="review-stars">★★★★★</span></div>
-    </div>
-    <div class="review-card">
-      <div class="review-card-top"><div class="review-tag">— Corporate · Company Event</div><div class="review-num">·03·</div></div>
-      <p class="review-quote"><span class="review-open">"</span> We used Lazy Lion for our company holiday party and the feedback from our team was overwhelmingly positive. Will absolutely book again.</p>
-      <div class="review-author">— Dana R. <span class="review-stars">★★★★★</span></div>
+
+    <div class="gr-footer">
+      <a href="https://search.google.com/local/writereview?placeid=ChIJB9Ni5kzHxokRxKBUDnP176c" target="_blank" rel="noopener" class="gr-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Read More Google Reviews →
+      </a>
     </div>
   </div>
 </section>
@@ -1800,16 +1946,15 @@
       <span class="footer-col-title">Services</span>
       <ul class="footer-links">
         <li><a href="#packages">Packages</a></li>
-        <li><a href="#mixology1">Mixology 1</a></li>
-        <li><a href="#mixology2">Mixology 2</a></li>
-        <li><a href="#trailer">Trailer Bar</a></li>
+        <li><a href="#custom-bars">Custom Bars</a></li>
+        <li><a href="store.html">Store</a></li>
       </ul>
     </div>
     <div>
       <span class="footer-col-title">Company</span>
       <ul class="footer-links">
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="faq.html">FAQ</a></li>
         <li><a href="quote.html">Request a Quote</a></li>
       </ul>
     </div>
