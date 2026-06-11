@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Packages — The Lazy Lion Mobile Bar</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --sand:  #C5AE91;
@@ -30,10 +30,10 @@
   }
   .nav-logo {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.9rem; font-weight: 400;
+    font-size: 1.7rem; font-weight: 400;
     letter-spacing: .02em; color: var(--brown); line-height: 1.2;
   }
-  .nav-logo span { display: block; font-size: .68rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .nav-links a:hover { color: var(--green); }
@@ -76,7 +76,7 @@
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1.6rem; }
+    .nav-logo { font-size: 1.1rem; }
   }
 
   /* ── PAGE HERO ── */
@@ -284,9 +284,9 @@
   .bar-formats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
   .bar-format-card { position: relative; overflow: hidden; background: var(--brown); }
   .bar-format-num { position: absolute; top: 20px; left: 20px; z-index: 2; background: rgba(30,27,22,.65); backdrop-filter: blur(6px); color: var(--cream); font-size: .74rem; letter-spacing: .14em; font-family: 'Lora', serif; font-weight: 600; padding: 8px 16px; border-radius: 100px; text-transform: uppercase; }
-  .bar-format-img { aspect-ratio: 4/3; overflow: hidden; background: var(--brown); display: flex; align-items: center; justify-content: center; }
-  .bar-format-img img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform .5s; }
-  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); }
+  .bar-format-img { aspect-ratio: 3/4; overflow: hidden; }
+  .bar-format-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; filter: brightness(.88); }
+  .bar-format-card:hover .bar-format-img img { transform: scale(1.04); filter: brightness(.95); }
   .bar-format-body { padding: 28px 32px 36px; background: var(--cream); border: 1px solid rgba(79,71,59,.1); border-top: none; }
   .bar-format-tag { font-size: .72rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; opacity: .85; }
   .bar-format-name { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--black); font-weight: 400; margin-bottom: 12px; line-height: 1.2; }
@@ -331,7 +331,7 @@
   footer { background: #1E1B16; padding: 64px 64px 0; }
   .footer-top { display: grid; grid-template-columns: 2fr 1fr 1.4fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(197,174,145,.1); }
   .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--sand); letter-spacing: .02em; display: block; line-height: 1.15; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: .95rem; font-weight: 700; color: var(--sand); letter-spacing: .04em; display: block; }
   .footer-est { font-size: .5rem; letter-spacing: .22em; color: var(--gold); opacity: .85; display: block; margin-top: 2px; }
   .footer-desc { font-family: 'Lora', serif; font-size: .75rem; color: rgba(197,174,145,.4); line-height: 1.8; max-width: 240px; }
   .footer-col-title { font-size: .7rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .8; }
@@ -515,7 +515,7 @@
     footer { padding: 40px 20px 0; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
     .footer-brand { grid-column: 1; }
-    .footer-logo { font-size: 1.6rem; }
+    .footer-logo { font-size: 1.1rem; }
     .footer-desc { font-size: .85rem; max-width: 100%; }
     .footer-links a { font-size: .75rem; }
     .footer-contact-val { font-size: .75rem; }
@@ -562,6 +562,192 @@
     .addons { padding: 48px 20px; }
   }
 
+
+  /* ── WHO WE'RE HERE FOR ── */
+  .ll-who-section { background: #4F473B; width: 100%; padding: 80px 48px; position: relative; overflow: hidden; }
+  .ll-who-section::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 700px; height: 400px; background: radial-gradient(ellipse, rgba(184,154,106,0.07) 0%, transparent 70%); pointer-events: none; }
+  .ll-who-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+  .ll-who-eyebrow { font-family: 'Lora', serif; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: #B89A6A; text-align: center; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 14px; }
+  .ll-who-eyebrow::before, .ll-who-eyebrow::after { content: ''; width: 28px; height: 1px; background: #B89A6A; opacity: 0.4; }
+  .ll-who-headline { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400; color: #EDE6DA; text-align: center; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 18px; }
+  .ll-who-headline em { font-style: italic; color: #B89A6A; }
+  .ll-who-intro { font-family: 'Lora', serif; font-size: 1rem; color: rgba(237,230,218,0.6); text-align: center; max-width: 560px; margin: 0 auto 48px; line-height: 1.8; }
+  .ll-who-rule { height: 1px; background: linear-gradient(to right, transparent, rgba(184,154,106,0.3) 30%, rgba(184,154,106,0.3) 70%, transparent); margin-bottom: 48px; }
+  .ll-who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-bottom: 48px; }
+  .ll-who-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,154,106,0.12); padding: 28px 20px; text-align: center; transition: background 0.25s, border-color 0.25s; }
+  .ll-who-card:hover { background: rgba(184,154,106,0.08); border-color: rgba(184,154,106,0.28); }
+  .ll-who-card:first-child { border-radius: 8px 0 0 8px; }
+  .ll-who-card:last-child { border-radius: 0 8px 8px 0; }
+  .ll-card-icon { font-size: 1.5rem; margin-bottom: 12px; display: block; line-height: 1; }
+  .ll-card-title { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: #EDE6DA; margin-bottom: 8px; line-height: 1.3; }
+  .ll-card-desc { font-family: 'Lora', serif; font-size: 0.78rem; color: rgba(237,230,218,0.45); line-height: 1.6; font-style: italic; }
+  .ll-who-fit { background: rgba(255,255,255,0.03); border: 1px solid rgba(184,154,106,0.15); border-radius: 10px; padding: 36px 44px; margin-bottom: 48px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .ll-fit-col-label { font-family: 'Lora', serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #B89A6A; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .ll-fit-col-label::after { content: ''; flex: 1; height: 1px; background: rgba(184,154,106,0.2); }
+  .ll-fit-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .ll-fit-list li { font-family: 'Lora', serif; font-size: 0.88rem; color: rgba(237,230,218,0.7); line-height: 1.55; display: flex; align-items: flex-start; gap: 10px; }
+  .ll-fit-list li::before { content: '✦'; color: #B89A6A; font-size: 0.55rem; flex-shrink: 0; margin-top: 4px; }
+  .ll-who-cta { text-align: center; }
+  .ll-who-cta-text { font-family: 'DM Serif Display', serif; font-size: clamp(1rem, 2vw, 1.3rem); font-style: italic; color: rgba(237,230,218,0.5); margin-bottom: 24px; line-height: 1.5; }
+  .ll-who-cta-text strong { color: #EDE6DA; font-style: normal; }
+  .ll-who-btn { display: inline-flex; align-items: center; gap: 8px; background: #B89A6A; color: #111009; text-decoration: none; font-family: 'Lora', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 30px; border-radius: 100px; transition: background 0.2s, transform 0.15s; }
+  .ll-who-btn:hover { background: #C5AE91; transform: translateY(-1px); }
+
+  /* ── DRY HIRE ── */
+  .ll-dry-hire { background: #EDE6DA; width: 100%; padding: 72px 48px; position: relative; }
+  .ll-dry-hire::before { content: ''; display: block; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(184,154,106,0.35) 25%, rgba(184,154,106,0.35) 75%, transparent); }
+  .ll-dry-hire-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
+  .ll-dry-eyebrow { font-family: 'Lora', serif; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: #B89A6A; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .ll-dry-eyebrow::before { content: ''; width: 24px; height: 1px; background: #B89A6A; opacity: 0.5; }
+  .ll-dry-headline { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; color: #111009; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .ll-dry-headline em { font-style: italic; color: #B89A6A; }
+  .ll-dry-tag { display: inline-block; background: #111009; color: #EDE6DA; font-family: 'Lora', serif; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; }
+  .ll-dry-question { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: #111009; margin-bottom: 14px; line-height: 1.3; }
+  .ll-dry-answer { font-family: 'Lora', serif; font-size: 0.95rem; color: #4F473B; line-height: 1.8; margin-bottom: 32px; }
+  .ll-dry-answer strong { color: #111009; }
+  .ll-dry-rule { height: 1px; background: rgba(79,71,59,0.12); margin-bottom: 32px; }
+  .ll-dry-steps { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+  .ll-dry-step { display: flex; gap: 18px; align-items: flex-start; }
+  .ll-step-num { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-style: italic; color: #B89A6A; line-height: 1; flex-shrink: 0; width: 28px; padding-top: 2px; }
+  .ll-step-title { font-family: 'DM Serif Display', serif; font-size: 0.92rem; color: #111009; margin-bottom: 3px; }
+  .ll-step-desc { font-family: 'Lora', serif; font-size: 0.83rem; color: #4F473B; line-height: 1.65; }
+  .ll-step-desc a { color: #B89A6A; text-decoration: underline; text-underline-offset: 3px; transition: opacity 0.2s; }
+  .ll-step-desc a:hover { opacity: 0.7; }
+  .ll-dry-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .ll-dry-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #B89A6A; color: #111009; text-decoration: none; font-family: 'Lora', serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 26px; border-radius: 100px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .ll-dry-btn-primary:hover { background: #C5AE91; transform: translateY(-1px); }
+  .ll-dry-btn-secondary { display: inline-flex; align-items: center; gap: 6px; font-family: 'Lora', serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: #4F473B; text-decoration: none; border-bottom: 1px solid rgba(79,71,59,0.3); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+  .ll-dry-btn-secondary:hover { color: #B89A6A; border-color: #B89A6A; }
+
+  /* ── BRANDED CALCULATOR ── */
+  .ec-wrap { background: #F5EEE4; padding: 80px 48px; border-top: 1px solid rgba(79,71,59,.1); border-bottom: 1px solid rgba(79,71,59,.1); }
+  .ec-header { text-align: center; margin-bottom: 52px; }
+  .ec-eyebrow { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .2em; color: #B89A6A; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+  .ec-eyebrow::before, .ec-eyebrow::after { content: ''; width: 28px; height: 1px; background: #B89A6A; opacity: .5; }
+  .ec-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem,4vw,3rem); font-weight: 400; color: #111009; margin-bottom: 12px; line-height: 1.15; }
+  .ec-title em { font-style: italic; color: #B89A6A; }
+  .ec-subtitle { font-family: 'Lora', serif; font-size: .95rem; color: #4F473B; opacity: .8; line-height: 1.7; max-width: 540px; margin: 0 auto; }
+  .ec-layout { display: grid; grid-template-columns: 1fr 400px; gap: 32px; max-width: 1060px; margin: 0 auto; align-items: start; }
+  .ec-form { display: flex; flex-direction: column; gap: 0; }
+  .ec-form-title { font-family: 'DM Serif Display', serif; font-size: 1.2rem; font-style: italic; color: #B89A6A; margin: 28px 0 18px; }
+  .ec-form-title:first-child { margin-top: 0; }
+  .ec-field { margin-bottom: 22px; }
+  .ec-label { font-family: 'Lora', serif; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #111009; display: block; margin-bottom: 4px; }
+  .ec-hint { font-family: 'Lora', serif; font-size: .78rem; font-style: italic; color: #4F473B; opacity: .75; display: block; margin-bottom: 8px; }
+  .ec-input { width: 100%; background: rgba(255,255,255,.7); border: 1.5px solid rgba(79,71,59,.18); border-radius: 6px; padding: 12px 16px; font-family: 'Lora', serif; font-size: .95rem; color: #111009; outline: none; transition: border-color .2s; }
+  .ec-input:focus { border-color: #B89A6A; background: #fff; }
+  .ec-input::placeholder { color: rgba(79,71,59,.35); }
+  .ec-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ec-slider-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .ec-slider-val { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: #B89A6A; }
+  .ec-range { -webkit-appearance: none; width: 100%; height: 3px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, #B89A6A 85%, rgba(79,71,59,.15) 85%); }
+  .ec-range::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: #B89A6A; border-radius: 50%; cursor: pointer; border: 3px solid #F5EEE4; box-shadow: 0 1px 5px rgba(0,0,0,.18); }
+  .ec-radio-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .ec-radio { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1.5px solid rgba(79,71,59,.15); border-radius: 8px; cursor: pointer; transition: all .2s; background: rgba(255,255,255,.45); }
+  .ec-radio:hover { border-color: #B89A6A; background: rgba(255,255,255,.7); }
+  .ec-radio.selected { border-color: #B89A6A; background: rgba(184,154,106,.07); }
+  .ec-radio input { display: none; }
+  .ec-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(79,71,59,.25); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .ec-radio.selected .ec-dot { border-color: #B89A6A; background: #B89A6A; }
+  .ec-radio.selected .ec-dot::after { content: ''; width: 5px; height: 5px; border-radius: 50%; background: white; }
+  .ec-radio-name { font-family: 'Lora', serif; font-size: .88rem; font-weight: 600; color: #111009; }
+  .ec-radio-badge { font-family: 'Lora', serif; font-size: .68rem; font-style: italic; color: #B89A6A; margin-left: 6px; }
+  .ec-radio-desc { font-family: 'Lora', serif; font-size: .75rem; color: #4F473B; font-style: italic; margin-top: 2px; }
+  .ec-mix-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .ec-mix-item { display: flex; flex-direction: column; gap: 5px; }
+  .ec-mix-label { font-family: 'Lora', serif; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: #4F473B; }
+  .ec-mix-val { font-family: 'DM Serif Display', serif; font-size: .95rem; color: #B89A6A; text-align: right; }
+  .ec-mix-range { -webkit-appearance: none; width: 100%; height: 2px; border-radius: 2px; outline: none; cursor: pointer; background: linear-gradient(to right, #B89A6A var(--pct, 33%), rgba(79,71,59,.12) var(--pct, 33%)); }
+  .ec-mix-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; background: #B89A6A; border-radius: 50%; cursor: pointer; border: 2px solid #F5EEE4; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  .ec-checkbox { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid rgba(79,71,59,.15); border-radius: 8px; cursor: pointer; transition: all .2s; background: rgba(255,255,255,.45); margin-top: 6px; }
+  .ec-checkbox:hover { border-color: #B89A6A; }
+  .ec-checkbox.checked { border-color: #B89A6A; background: rgba(184,154,106,.07); }
+  .ec-checkbox input { display: none; }
+  .ec-check-box { width: 16px; height: 16px; border: 2px solid rgba(79,71,59,.25); border-radius: 3px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .ec-checkbox.checked .ec-check-box { background: #B89A6A; border-color: #B89A6A; }
+  .ec-checkbox.checked .ec-check-box::after { content: '✓'; color: white; font-size: 10px; line-height: 1; }
+  .ec-results { background: #111009; border-radius: 14px; padding: 28px; color: #EDE6DA; position: sticky; top: 88px; }
+  .ec-results-eyebrow { font-family: 'Lora', serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: #B89A6A; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .ec-results-eyebrow::before { content: ''; width: 20px; height: 1px; background: #B89A6A; }
+  .ec-results-for { font-family: 'Lora', serif; font-size: .95rem; color: #EDE6DA; margin-bottom: 4px; }
+  .ec-results-for strong { color: #B89A6A; }
+  .ec-results-total { font-family: 'Lora', serif; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(237,230,218,.45); margin-bottom: 24px; }
+  .ec-results-total strong { color: #B89A6A; }
+  .ec-result-item { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .ec-result-item:last-of-type { border-bottom: 1px solid rgba(184,154,106,.18); }
+  .ec-result-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .ec-result-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: #EDE6DA; }
+  .ec-result-qty { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: #B89A6A; white-space: nowrap; }
+  .ec-result-desc { font-family: 'Lora', serif; font-size: .75rem; color: rgba(237,230,218,.5); margin-top: 3px; line-height: 1.5; }
+  .ec-result-price { font-family: 'Lora', serif; font-size: .85rem; color: #C5AE91; text-align: right; margin-top: 3px; }
+  .ec-result-price small { display: block; font-size: .68rem; font-style: italic; color: rgba(197,174,145,.55); }
+  .ec-total-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0 0; }
+  .ec-total-label { font-family: 'Lora', serif; font-size: .85rem; font-style: italic; color: rgba(237,230,218,.55); }
+  .ec-total-price { font-family: 'DM Serif Display', serif; font-size: 1.9rem; color: #B89A6A; }
+  .ec-results-note { font-family: 'Lora', serif; font-size: .72rem; font-style: italic; color: rgba(237,230,218,.38); margin-top: 14px; line-height: 1.6; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.05); }
+  .ec-results-note strong { color: #B89A6A; font-style: normal; }
+  .ec-print-section { margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.05); }
+  .ec-print-title { font-family: 'DM Serif Display', serif; font-size: 1rem; color: #EDE6DA; margin-bottom: 5px; }
+  .ec-print-desc { font-family: 'Lora', serif; font-size: .75rem; font-style: italic; color: rgba(237,230,218,.45); margin-bottom: 14px; line-height: 1.5; }
+  .ec-print-inputs { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .ec-print-input { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 10px 12px; font-family: 'Lora', serif; font-size: .85rem; color: #EDE6DA; outline: none; width: 100%; }
+  .ec-print-input::placeholder { color: rgba(255,255,255,.28); }
+  .ec-print-input:focus { border-color: #B89A6A; }
+  .ec-print-btn { width: 100%; background: #B89A6A; color: #111009; border: none; padding: 13px; border-radius: 100px; font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background .2s; }
+  .ec-print-btn:hover { background: #C5AE91; }
+
+  /* responsive for new sections */
+  @media (max-width: 900px) {
+    .ll-who-section { padding: 64px 28px; }
+    .ll-who-grid { grid-template-columns: repeat(2,1fr); }
+    .ll-who-card:first-child { border-radius: 8px 0 0 0; }
+    .ll-who-card:last-child { border-radius: 0 0 8px 0; }
+    .ll-who-card:nth-child(2) { border-radius: 0 8px 0 0; }
+    .ll-who-card:nth-child(3) { border-radius: 0 0 0 8px; }
+    .ll-who-fit { padding: 24px 20px; max-width: 100%; }
+    .ll-dry-hire { padding: 56px 28px; }
+    .ll-dry-hire-inner { grid-template-columns: 1fr; gap: 36px; }
+    .ll-dry-tag { display: none; }
+    .ec-wrap { padding: 56px 28px; }
+    .ec-layout { grid-template-columns: 1fr; }
+    .ec-results { position: static; }
+  }
+  @media (max-width: 540px) {
+    .ll-who-section { padding: 48px 20px; }
+    .ll-who-grid { grid-template-columns: repeat(2,1fr); }
+    .ll-dry-hire { padding: 44px 20px; }
+    .ll-dry-cta { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .ec-wrap { padding: 44px 20px; }
+    .ec-row { grid-template-columns: 1fr; }
+    .ec-mix-grid { grid-template-columns: 1fr; }
+  }
+
+
+  /* ── WHO TAGLINE ── */
+  .ll-who-tagline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 8vw, 7rem);
+    font-weight: 700;
+    color: #EDE6DA;
+    text-align: center;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .ll-who-tagline::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #B89A6A, transparent);
+    margin: 20px auto 0;
+    opacity: 0.5;
+  }
+  @media (max-width: 540px) {
+    .ll-who-tagline { font-size: 2.8rem; letter-spacing: -0.02em; }
+  }
+
 </style>
 </head>
 <body>
@@ -569,10 +755,10 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <div class="nav-logo">
+    <a href="index.html" class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
-    </div>
+    </a>
   </div>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -616,7 +802,7 @@
   </div>
   <div class="hero-visual">
     <div class="hero-photo">
-      <img src="packages-hero.png" alt="Lazy Lion wine bar at a wedding reception" style="width:100%;height:100%;object-fit:contain;background:var(--brown);display:block;"/>
+      <img src="packages-hero.png" alt="Lazy Lion wine bar at a wedding reception" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"/>
     </div>
     <div class="scroll-hint">SCROLL</div>
   </div>
@@ -644,61 +830,62 @@
 
   <div class="pkg-grid">
 
-    <!-- 1. Standard -->
+    <!-- THE LAZY LION SIGNATURE -->
     <div class="pkg-card">
       <div class="pkg-tier">The Essentials</div>
-      <div class="pkg-name">Standard Package</div>
+      <div class="pkg-name">The Lazy Lion Signature</div>
       <div class="pkg-price">$750</div>
-      <div class="pkg-guests">Based on 50 guests</div>
+      <div class="pkg-guests">Starting / Up to 50 guests</div>
       <div class="pkg-divider"></div>
-      <ul class="pkg-features two-col">
-        <li>1 Bartender (4hrs)</li>
+      <ul class="pkg-features">
+        <li>1 Bartender (4hr.)</li>
         <li>Alcohol Shopping List</li>
+        <li>Alcohol Calculator</li>
         <li>Event Consultation</li>
         <li>Beer, Wine &amp; Cocktail Service</li>
         <li>Napkins, Straws, Disposable Cups &amp; Garnishes</li>
         <li>6ft Table Bar Set Up w/ Bar Tools</li>
-        <li>Ice Cooler</li>
+        <li>Ice and Ice Cooler</li>
         <li>Travel</li>
-        <li>2hr Set Up &amp; Breakdown</li>
+        <li>2hr Set Up and Breakdown</li>
         <li>General Liability &amp; Liquor Insurance</li>
       </ul>
       <a href="quote.html" class="pkg-cta">Request a Quote</a>
     </div>
 
-    <!-- 2. Signature Social (Featured) -->
+    <!-- THE LAZY LION PREMIER -->
     <div class="pkg-card featured">
       <div class="pkg-badge">Most Popular</div>
-      <div class="pkg-tier">The Experience</div>
-      <div class="pkg-name">Signature Social</div>
+      <div class="pkg-tier">Full Service</div>
+      <div class="pkg-name">The Lazy Lion Premier</div>
       <div class="pkg-price">$1,500</div>
-      <div class="pkg-guests">Based on 50 guests</div>
+      <div class="pkg-guests">Starting / Up to 50 guests</div>
       <div class="pkg-divider"></div>
-      <p class="pkg-includes-note">Includes everything in the Standard Package · plus:</p>
       <ul class="pkg-features">
+        <li>Everything in The Lazy Lion Signature, plus:</li>
         <li>Juice Package</li>
         <li>Soft Drink Package</li>
-        <li>Bagged Ice</li>
-        <li>2 Signature Drinks</li>
+        <li>2 Signature Cocktails</li>
+        <li>Customized Drink Menu</li>
       </ul>
       <a href="quote.html" class="pkg-cta">Request a Quote</a>
     </div>
 
-    <!-- 3. Premium -->
+    <!-- THE LAZY LION RESERVE -->
     <div class="pkg-card">
-      <div class="pkg-tier">Full Service</div>
-      <div class="pkg-name">The Premium Package</div>
+      <div class="pkg-tier">The Experience</div>
+      <div class="pkg-name">The Lazy Lion Reserve</div>
       <div class="pkg-price">$2,500</div>
-      <div class="pkg-guests">Based on 50 guests</div>
+      <div class="pkg-guests">Starting / Up to 50 guests</div>
       <div class="pkg-divider"></div>
-      <p class="pkg-includes-note">Includes everything in the Signature Social, including 2 Signature Drinks · plus:</p>
       <ul class="pkg-features">
+        <li>Everything in The Lazy Lion Premier, plus:</li>
         <li>Premium Mixer Package</li>
         <li>Premium Garnish Package</li>
-        <li>Mocktail Package</li>
-        <li>Mixology Bar 1 or 2</li>
+        <li>Mocktail Option</li>
+        <li>Custom Bar Experience</li>
         <li>Hydration Station</li>
-        <li>Elevated Bar Decor</li>
+        <li>Elevated Bar Décor</li>
         <li>Additional Bartender</li>
       </ul>
       <a href="quote.html" class="pkg-cta">Request a Quote</a>
@@ -741,6 +928,78 @@
       <div class="addon-row"><span class="addon-name">Additional Service Hours</span><span class="addon-dots"></span><span class="addon-price">$100/hr</span></div>
       <div class="addon-row"><span class="addon-name">Additional Bartending</span><span class="addon-dots"></span><span class="addon-price">$75/hr</span></div>
       <div class="addon-row"><span class="addon-name">Bar Backs</span><span class="addon-dots"></span><span class="addon-price">$50/hr</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE'RE HERE FOR -->
+<section class="ll-who-section">
+  <div class="ll-who-inner">
+    <div class="ll-who-eyebrow">Who We're Here For</div>
+    <div class="ll-who-tagline">Host With Confidence<span style="color:#B89A6A;">.</span></div>
+    <h2 class="ll-who-headline">For hosts who care about <em>every detail.</em></h2>
+    <p class="ll-who-intro">Lazy Lion is designed for weddings, private celebrations, corporate events, and upscale gatherings where the bar should feel as thoughtful as the rest of the event.</p>
+    <div class="ll-who-rule"></div>
+    <div class="ll-who-grid">
+      <div class="ll-who-card">
+        <span class="ll-card-icon">💍</span>
+        <div class="ll-card-title">Weddings &amp; Engagements</div>
+        <div class="ll-card-desc">Ceremonies, receptions, and celebrations that deserve a bar as polished as the venue.</div>
+      </div>
+      <div class="ll-who-card">
+        <span class="ll-card-icon">🥂</span>
+        <div class="ll-card-title">Private Celebrations</div>
+        <div class="ll-card-desc">Milestone birthdays, anniversaries, showers, and intimate gatherings done right.</div>
+      </div>
+      <div class="ll-who-card">
+        <span class="ll-card-icon">🏢</span>
+        <div class="ll-card-title">Corporate Events</div>
+        <div class="ll-card-desc">Holiday parties, brand activations, client dinners, and team events that make an impression.</div>
+      </div>
+      <div class="ll-who-card">
+        <span class="ll-card-icon">✨</span>
+        <div class="ll-card-title">Upscale Gatherings</div>
+        <div class="ll-card-desc">Any occasion where presentation, craft, and professionalism aren't optional.</div>
+      </div>
+    </div>
+    <div class="ll-who-fit">
+      <div class="ll-fit-col-label">We're a great fit if you</div>
+      <ul class="ll-fit-list">
+        <li>Want a bar experience that matches the quality of your event</li>
+        <li>Value professionalism, punctuality, and clean execution</li>
+        <li>Appreciate handcrafted cocktails and custom drink menus</li>
+        <li>Want your guests talking about the bar long after the night ends</li>
+        <li>Prefer to enjoy your event instead of managing the details</li>
+      </ul>
+    </div>
+    <div class="ll-who-cta">
+      <p class="ll-who-cta-text">If that sounds like you — <strong>let's build something worth celebrating.</strong></p>
+      <a class="ll-who-btn" href="quote.html">Request a Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DRY HIRE -->
+<section class="ll-dry-hire">
+  <div class="ll-dry-hire-inner">
+    <div class="ll-dry-left">
+      <div class="ll-dry-eyebrow">Good to Know</div>
+      <h2 class="ll-dry-headline">We're a <em>dry hire.</em> Here's what that means.</h2>
+      <span class="ll-dry-tag">Pennsylvania Law</span>
+    </div>
+    <div class="ll-dry-right">
+      <div class="ll-dry-question">Do you provide the alcohol?</div>
+      <p class="ll-dry-answer">Under Pennsylvania law, the host is responsible for purchasing all alcohol — we don't supply it. But you're not on your own. <strong>We work with a trusted third-party company that can pick up and deliver your alcohol directly to your venue.</strong> And we'll make sure you order exactly the right amount — nothing short, nothing wasted.</p>
+      <div class="ll-dry-rule"></div>
+      <div class="ll-dry-steps">
+        <div class="ll-dry-step"><div class="ll-step-num">1</div><div class="ll-step-body"><div class="ll-step-title">Get your starting list</div><div class="ll-step-desc">Use our free <a href="alcohol-calculator.html">Alcohol Calculator</a> to build an estimated shopping list based on your guest count, hours, and drink preferences.</div></div></div>
+        <div class="ll-dry-step"><div class="ll-step-num">2</div><div class="ll-step-body"><div class="ll-step-title">We refine it together</div><div class="ll-step-desc">During planning, we go through the order with you — adjusting for your menu, your crowd, and the brands that make sense for your event.</div></div></div>
+        <div class="ll-dry-step"><div class="ll-step-num">3</div><div class="ll-step-body"><div class="ll-step-title">We handle delivery coordination</div><div class="ll-step-desc">Our third-party partner picks up and delivers everything to your venue. You don't have to lift a thing.</div></div></div>
+      </div>
+      <div class="ll-dry-cta">
+        <a class="ll-dry-btn-primary" href="alcohol-calculator.html">Try the Alcohol Calculator →</a>
+        <a class="ll-dry-btn-secondary" href="quote.html">Or request a quote</a>
+      </div>
     </div>
   </div>
 </section>
@@ -799,121 +1058,111 @@
   </div>
 </section>
 
-<!-- ALCOHOL CALCULATOR -->
-<section class="calculator" id="calculator">
-  <div class="calc-wrap">
-    <div class="calc-header">
-      <div class="calc-label-row">
-        <span class="calc-line"></span>
-        <span class="calc-label">A Free Tool</span>
-        <span class="calc-line"></span>
+<!-- ALCOHOL CALCULATOR — BRANDED -->
+<style>
+</style>
+<section class="ec-wrap" id="calculator">
+  <div class="ec-header">
+    <div class="ec-eyebrow">The Lazy Lion Alcohol Calculator</div>
+    <h2 class="ec-title">How much should <em>we order?</em></h2>
+    <p class="ec-subtitle">Tell us your guest count, how long the bar's open, and who's drinking — we'll tell you exactly what to buy.</p>
+  </div>
+  <div class="ec-layout">
+    <div class="ec-form">
+      <div class="ec-form-title">Event Details</div>
+      <div class="ec-field"><label class="ec-label">Event / Host Name</label><span class="ec-hint">Optional — included on your printed list.</span><input class="ec-input" type="text" id="ec-eventName" placeholder="e.g. Johnson Wedding · June 2025"/></div>
+      <div class="ec-row">
+        <div class="ec-field"><label class="ec-label">Total Guests</label><span class="ec-hint">Include everyone.</span><input class="ec-input" type="number" id="ec-guests" value="75" min="10" max="1000" oninput="ecCalc()"/></div>
+        <div class="ec-field"><label class="ec-label">Bar Hours</label><span class="ec-hint">Most events: 4–6 hrs.</span><input class="ec-input" type="number" id="ec-hours" value="5" min="1" max="12" oninput="ecCalc()"/></div>
       </div>
-      <h2 class="calc-title">Not sure how much alcohol<br/>you need? <em>We do the math.</em></h2>
-      <p class="calc-sub">Tell us your guest count, event length, and crowd type. We'll calculate exactly how much beer, wine, and spirits to buy — no guesswork, no leftover cases.</p>
+      <div class="ec-form-title">Who's Drinking?</div>
+      <div class="ec-field">
+        <div class="ec-slider-row"><div><label class="ec-label" style="margin-bottom:0">% of Guests Who Drink</label><span class="ec-hint" style="margin-bottom:0">Industry standard is 85%.</span></div><div class="ec-slider-val" id="ec-pctLabel">85%</div></div>
+        <input class="ec-range" type="range" id="ec-pct" min="20" max="100" value="85" step="5" oninput="document.getElementById('ec-pctLabel').textContent=this.value+'%'; ecFill(this); ecCalc();"/>
+      </div>
+      <div class="ec-field">
+        <label class="ec-label">Drinking Pace</label><span class="ec-hint">How quickly will guests drink on average?</span>
+        <div class="ec-radio-group">
+          <label class="ec-radio" onclick="ecRadio('ec-pace','light',this)"><input type="radio" name="ec-pace" value="light"/><div class="ec-dot"></div><div><div class="ec-radio-name">Light <span class="ec-radio-badge">· &lt;1 drink/hr</span></div><div class="ec-radio-desc">Brunch, daytime corporate, family events.</div></div></label>
+          <label class="ec-radio selected" onclick="ecRadio('ec-pace','average',this)"><input type="radio" name="ec-pace" value="average" checked/><div class="ec-dot"></div><div><div class="ec-radio-name">Average <span class="ec-radio-badge">· 1 drink/hr</span></div><div class="ec-radio-desc">Most weddings. Most parties. Our default.</div></div></label>
+          <label class="ec-radio" onclick="ecRadio('ec-pace','heavy',this)"><input type="radio" name="ec-pace" value="heavy"/><div class="ec-dot"></div><div><div class="ec-radio-name">Heavy <span class="ec-radio-badge">· 1.5 drinks/hr</span></div><div class="ec-radio-desc">Bachelorette, late-night reception, lively crowd.</div></div></label>
+          <label class="ec-radio" onclick="ecRadio('ec-pace','very_heavy',this)"><input type="radio" name="ec-pace" value="very_heavy"/><div class="ec-dot"></div><div><div class="ec-radio-name">Very Heavy <span class="ec-radio-badge">· 2+ drinks/hr</span></div><div class="ec-radio-desc">NYE, bachelor parties — you know the crowd.</div></div></label>
+        </div>
+      </div>
+      <div class="ec-form-title">Drink Preferences</div>
+      <div class="ec-field">
+        <label class="ec-label">Drink Mix</label><span class="ec-hint">Adjust how your guests split between beer, wine, and spirits.</span>
+        <div class="ec-mix-grid">
+          <div class="ec-mix-item"><label class="ec-mix-label">Beer</label><input class="ec-mix-range" type="range" id="ec-beer" min="0" max="100" value="30" step="5" oninput="ecSyncMix('beer',this.value); ecCalc();" style="--pct:30%"/><div class="ec-mix-val" id="ec-beerLbl">30%</div></div>
+          <div class="ec-mix-item"><label class="ec-mix-label">Wine</label><input class="ec-mix-range" type="range" id="ec-wine" min="0" max="100" value="30" step="5" oninput="ecSyncMix('wine',this.value); ecCalc();" style="--pct:30%"/><div class="ec-mix-val" id="ec-wineLbl">30%</div></div>
+          <div class="ec-mix-item"><label class="ec-mix-label">Spirits</label><input class="ec-mix-range" type="range" id="ec-spirit" min="0" max="100" value="40" step="5" oninput="ecSyncMix('spirit',this.value); ecCalc();" style="--pct:40%"/><div class="ec-mix-val" id="ec-spiritLbl">40%</div></div>
+        </div>
+      </div>
+      <div class="ec-field">
+        <label class="ec-label">Champagne Toast?</label>
+        <label class="ec-checkbox" id="ec-toastBox" onclick="ecToggle(this)"><input type="checkbox" id="ec-toast"/><div class="ec-check-box"></div><div><div class="ec-radio-name" style="font-family:'Lora',serif;font-size:.88rem;font-weight:600;color:#111009;">Include a champagne toast</div><div class="ec-radio-desc">~1 bottle per 10 guests.</div></div></label>
+      </div>
     </div>
-
-    <div class="calc-form">
-      <div class="calc-field">
-        <label class="calc-field-label">Number of Guests</label>
-        <input class="calc-input" type="number" id="guests" min="1" max="500" placeholder="e.g. 75" oninput="runCalc()"/>
+    <div class="ec-results">
+      <div class="ec-results-eyebrow">Your Shopping List</div>
+      <div class="ec-results-for">For <strong id="ec-rGuests">75</strong> guests over <strong id="ec-rHours">5</strong> hours</div>
+      <div class="ec-results-total">Estimated total drinks: <strong id="ec-rTotal">~375</strong></div>
+      <div class="ec-result-item"><div class="ec-result-row"><div class="ec-result-name">Beer</div><div class="ec-result-qty" id="ec-beerQty">4 cases</div></div><div class="ec-result-desc" id="ec-beerDesc">96 cans. Split light lager + local.</div><div class="ec-result-price" id="ec-beerPrice">$160 <small>at $40/case</small></div></div>
+      <div class="ec-result-item"><div class="ec-result-row"><div class="ec-result-name">Wine</div><div class="ec-result-qty" id="ec-wineQty">12 bottles</div></div><div class="ec-result-desc" id="ec-wineDesc">750ml bottles. 6 red + 6 white.</div><div class="ec-result-price" id="ec-winePrice">$180 <small>at $15/bottle</small></div></div>
+      <div class="ec-result-item"><div class="ec-result-row"><div class="ec-result-name">Liquor</div><div class="ec-result-qty" id="ec-liquorQty">6 bottles</div></div><div class="ec-result-desc" id="ec-liquorDesc">1.5L handles. Brand list finalized when you book.</div><div class="ec-result-price" id="ec-liquorPrice">$270 <small>at $45/handle</small></div></div>
+      <div class="ec-result-item" id="ec-champItem" style="display:none"><div class="ec-result-row"><div class="ec-result-name">Champagne</div><div class="ec-result-qty" id="ec-champQty">8 bottles</div></div><div class="ec-result-desc" id="ec-champDesc">750ml for the toast. ~6 pours per bottle.</div><div class="ec-result-price" id="ec-champPrice">$160 <small>at $20/bottle</small></div></div>
+      <div class="ec-total-row"><div class="ec-total-label">Estimated alcohol cost</div><div class="ec-total-price" id="ec-totalPrice">$610</div></div>
+      <div class="ec-results-note">Includes a <strong>20% buffer</strong> so you never run short. Pricing is an estimate.</div>
+      <div class="ec-print-section">
+        <div class="ec-print-title">Save your shopping list</div>
+        <div class="ec-print-desc">Enter your details and we'll send a clean copy.</div>
+        <div class="ec-print-inputs"><input class="ec-print-input" type="text" id="ec-printName" placeholder="Your name"/><input class="ec-print-input" type="email" id="ec-printEmail" placeholder="your@email.com"/></div>
+        <button class="ec-print-btn" onclick="ecPrint()">Get My Shopping List 🖨</button>
       </div>
-      <div class="calc-field">
-        <label class="calc-field-label">Event Length (Hours)</label>
-        <input class="calc-input" type="number" id="hours" min="1" max="12" placeholder="e.g. 4" oninput="runCalc()"/>
-      </div>
-      <div class="calc-field">
-        <label class="calc-field-label">Crowd Type</label>
-        <div class="calc-toggle-group" id="crowd-group">
-          <button class="calc-toggle active" onclick="setCrowd('light', this)">Light<span>Beer &amp; wine sippers</span></button>
-          <button class="calc-toggle" onclick="setCrowd('moderate', this)">Moderate<span>Mixed crowd</span></button>
-          <button class="calc-toggle" onclick="setCrowd('heavy', this)">Heavy<span>Cocktail lovers</span></button>
-        </div>
-      </div>
-      <div class="calc-field">
-        <label class="calc-field-label">Include Mocktail Option?</label>
-        <div class="calc-toggle-group" id="mock-group">
-          <button class="calc-toggle active" onclick="setMocktail(true, this)">Yes</button>
-          <button class="calc-toggle" onclick="setMocktail(false, this)">No</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="calc-results" id="calc-results">
-      <div class="calc-results-label">Your Shopping List</div>
-      <div class="calc-results-grid">
-        <div class="calc-result-item">
-          <div class="calc-result-icon">🍷</div>
-          <div class="calc-result-val" id="res-wine">—</div>
-          <div class="calc-result-name">Bottles of Wine</div>
-        </div>
-        <div class="calc-result-item">
-          <div class="calc-result-icon">🍺</div>
-          <div class="calc-result-val" id="res-beer">—</div>
-          <div class="calc-result-name">Cases of Beer</div>
-        </div>
-        <div class="calc-result-item">
-          <div class="calc-result-icon">🥃</div>
-          <div class="calc-result-val" id="res-spirits">—</div>
-          <div class="calc-result-name">Bottles of Spirits</div>
-        </div>
-        <div class="calc-result-item" id="mock-result">
-          <div class="calc-result-icon">🍹</div>
-          <div class="calc-result-val" id="res-mocktail">—</div>
-          <div class="calc-result-name">Mocktail Servings</div>
-        </div>
-      </div>
-      <p class="calc-results-note">These are estimates based on industry standards. Your Lazy Lion bartender will fine-tune the list with you during planning.</p>
-      <a href="#contact" class="calc-results-cta">Get a Custom Recommendation →</a>
     </div>
   </div>
 </section>
 
 <script>
-  // Nav hamburger
-  function toggleMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('drawer-overlay');
-    hamburger.classList.toggle('open');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  function ecFill(el) { const p=((el.value-el.min)/(el.max-el.min))*100; el.style.background=`linear-gradient(to right,#B89A6A ${p}%,rgba(79,71,59,0.15) ${p}%)`; }
+  document.querySelectorAll('.ec-range,.ec-mix-range').forEach(ecFill);
+  function ecRadio(name,val,label) { document.querySelectorAll(`input[name="${name}"]`).forEach(r=>r.closest('.ec-radio').classList.remove('selected')); label.classList.add('selected'); label.querySelector('input').checked=true; ecCalc(); }
+  function ecToggle(el) { el.classList.toggle('checked'); document.getElementById('ec-champItem').style.display=el.classList.contains('checked')?'block':'none'; ecCalc(); }
+  function ecSyncMix(type,val) { const m={beer:['ec-beer','ec-beerLbl'],wine:['ec-wine','ec-wineLbl'],spirit:['ec-spirit','ec-spiritLbl']}; document.getElementById(m[type][1]).textContent=val+'%'; const el=document.getElementById(m[type][0]); el.style.setProperty('--pct',val+'%'); ecFill(el); }
+  function ecCalc() {
+    const guests=parseInt(document.getElementById('ec-guests').value)||75;
+    const hours=parseFloat(document.getElementById('ec-hours').value)||5;
+    const pct=parseInt(document.getElementById('ec-pct').value)/100;
+    const beerS=parseInt(document.getElementById('ec-beer').value)/100;
+    const wineS=parseInt(document.getElementById('ec-wine').value)/100;
+    const spirS=parseInt(document.getElementById('ec-spirit').value)/100;
+    const total=beerS+wineS+spirS||1;
+    const paceMap={light:.75,average:1.0,heavy:1.5,very_heavy:2.0};
+    const paceEl=document.querySelector('input[name="ec-pace"]:checked');
+    const pace=paceMap[paceEl?paceEl.value:'average'];
+    const drinks=Math.round(guests*pct*hours*pace*1.2);
+    const beerD=drinks*(beerS/total),wineD=drinks*(wineS/total),spirD=drinks*(spirS/total);
+    const beerC=Math.ceil(beerD/24),wineB=Math.ceil(wineD/5),liqB=Math.ceil(spirD/33);
+    const toastOn=document.getElementById('ec-toastBox').classList.contains('checked');
+    const champB=toastOn?Math.ceil(guests/10):0;
+    const cost=(beerC*40)+(wineB*15)+(liqB*45)+(champB*20);
+    document.getElementById('ec-rGuests').textContent=guests;
+    document.getElementById('ec-rHours').textContent=hours;
+    document.getElementById('ec-rTotal').textContent='~'+drinks;
+    document.getElementById('ec-beerQty').textContent=beerC+(beerC===1?' case':' cases');
+    document.getElementById('ec-beerDesc').textContent=`${beerC*24} cans. Split light lager + something local.`;
+    document.getElementById('ec-beerPrice').innerHTML=`$${beerC*40} <small>at $40/case</small>`;
+    document.getElementById('ec-wineQty').textContent=wineB+(wineB===1?' bottle':' bottles');
+    document.getElementById('ec-wineDesc').textContent=`750ml bottles. ${Math.ceil(wineB/2)} red + ${wineB-Math.ceil(wineB/2)} white.`;
+    document.getElementById('ec-winePrice').innerHTML=`$${wineB*15} <small>at $15/bottle</small>`;
+    document.getElementById('ec-liquorQty').textContent=liqB+(liqB===1?' bottle':' bottles');
+    document.getElementById('ec-liquorDesc').textContent=`1.5L handles. For ~${Math.round(spirD)} cocktails.`;
+    document.getElementById('ec-liquorPrice').innerHTML=`$${liqB*45} <small>at $45/handle</small>`;
+    if(toastOn){document.getElementById('ec-champQty').textContent=champB+(champB===1?' bottle':' bottles');document.getElementById('ec-champPrice').innerHTML=`$${champB*20} <small>at $20/bottle</small>`;}
+    document.getElementById('ec-totalPrice').textContent='$'+cost.toLocaleString();
   }
-
-  let crowd = 'light';
-  let mocktail = true;
-
-  function setCrowd(type, el) {
-    crowd = type;
-    document.getElementById('crowd-group').querySelectorAll('.calc-toggle').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    runCalc();
-  }
-
-  function setMocktail(val, el) {
-    mocktail = val;
-    document.getElementById('mock-group').querySelectorAll('.calc-toggle').forEach(b => b.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('mock-result').style.opacity = val ? '1' : '0.3';
-    runCalc();
-  }
-
-  function runCalc() {
-    const guests = parseInt(document.getElementById('guests').value) || 0;
-    const hours  = parseFloat(document.getElementById('hours').value) || 0;
-    if (!guests || !hours) return;
-    const rates = { light: 1.0, moderate: 1.3, heavy: 1.6 };
-    const total = guests * hours * rates[crowd];
-    const wine    = Math.ceil(total * 0.35 / 5);
-    const beer    = Math.ceil(total * 0.40 / 24);
-    const spirits = Math.ceil(total * 0.25 / 16);
-    const mock    = mocktail ? Math.ceil(guests * 0.15 * hours) : 0;
-    document.getElementById('res-wine').textContent    = wine;
-    document.getElementById('res-beer').textContent    = beer;
-    document.getElementById('res-spirits').textContent = spirits;
-    document.getElementById('res-mocktail').textContent = mocktail ? mock : '—';
-    document.getElementById('calc-results').classList.add('visible');
-  }
+  function ecPrint(){const name=document.getElementById('ec-printName').value.trim();const email=document.getElementById('ec-printEmail').value.trim();if(!name||!email){alert('Please enter your name and email.');return;}window.print();}
+  ecCalc();
 </script>
 
 <!-- BOTTOM CTA -->
@@ -929,7 +1178,7 @@
     <div class="footer-brand">
       <div class="footer-logo-lockup">
         <div>
-          <div class="footer-logo">Lazy Lion Mobile Bar</div>
+          <div class="footer-logo" style="font-size:2rem;">Lazy Lion Mobile Bar</div>
           <div class="footer-est">Est. 2018</div>
         </div>
       </div>
@@ -978,6 +1227,19 @@
     <span class="footer-area">Philadelphia &amp; Surrounding Areas</span>
   </div>
 </footer>
+
+<script>
+  // Nav hamburger
+  function toggleMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+</script>
 
 </body>
 </html>
