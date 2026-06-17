@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Request a Quote — The Lazy Lion Mobile Bar</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet"/>
 <style>
   :root {
     --sand:  #C5AE91;
     --brown: #4F473B;
     --green: #2E4B36;
     --black: #111009;
-    --cream: #EDE6DA;
+    --cream: #F5EEE4;
     --gold:  #B89A6A;
-    --dark:  #1E1C15;
-    --form-bg: #E8E3D8;
   }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Lora', serif; background: var(--cream); color: var(--brown); overflow-x: hidden; }
+  body { font-family: 'Lora', serif; font-weight: 400; background: var(--cream); color: var(--brown); overflow-x: hidden; }
 
   /* ── NAV ── */
   nav {
@@ -31,8 +30,8 @@
   }
   .nav-logo-wrap { display: flex; align-items: center; gap: 12px; }
   .nav-logo-img { width: 44px; height: 44px; object-fit: contain; }
-  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.9rem; font-weight: 400; letter-spacing: .02em; color: var(--brown); line-height: 1.2; }
-  .nav-logo span { display: block; font-size: .68rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.7rem; font-weight: 400; letter-spacing: .02em; color: var(--brown); line-height: 1.2; text-decoration: none; }
+  .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
   .nav-links a:hover { color: var(--green); }
@@ -53,399 +52,337 @@
   .nav-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 140; opacity: 0; pointer-events: none; transition: opacity .3s; }
   .nav-drawer-overlay.open { opacity: 1; pointer-events: all; }
 
-  /* ── HERO ── */
-  .hero {
-    background: var(--cream);
-    padding: 160px 80px 80px;
-    max-width: 900px;
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: #EDE6DA;
+    padding: 160px 64px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-label-row { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-  .hero-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .7; }
-  .hero-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-  .hero-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(3.5rem, 7vw, 6.5rem);
-    color: var(--black); font-weight: 400; line-height: 1.05;
-    margin-bottom: 28px;
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 0%, rgba(184,154,106,.12) 0%, transparent 70%);
+    pointer-events: none;
   }
-  .hero-title em { font-style: italic; color: var(--gold); display: block; }
-  .hero-sub {
+  .page-hero-eyebrow {
     font-family: 'Lora', serif;
-    font-size: 1rem; color: var(--brown); line-height: 1.85;
-    max-width: 620px; opacity: .8;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 24px;
   }
-  .hero-sub strong { color: var(--gold); font-weight: 600; font-style: normal; }
+  .page-hero-eyebrow::before,
+  .page-hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: .5;
+  }
+  .page-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--gold); }
+  .page-hero-sub {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--brown);
+    opacity: .8;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
 
   /* ── FORM SECTION ── */
-  .form-section {
+  .quote-section {
     background: var(--cream);
-    padding: 0 80px 100px;
+    padding: 80px 64px 100px;
   }
-  .form-card {
-    background: var(--form-bg);
+  .quote-inner {
     max-width: 860px;
-    padding: 64px 80px;
-  }
-  .form-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: .72rem; font-style: italic;
-    color: var(--gold); letter-spacing: .1em;
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 8px;
-  }
-  .form-num::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); opacity: .6; }
-  .form-heading {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    color: var(--black); font-weight: 400;
-    margin-bottom: 8px;
-  }
-  .form-heading em { font-style: italic; color: var(--gold); }
-  .form-sub {
-    font-size: .9rem; color: var(--brown); opacity: .65;
-    line-height: 1.75; margin-bottom: 48px; max-width: 560px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    align-items: start;
   }
 
-  /* Form fields */
-  .form-field { margin-bottom: 40px; }
-  .form-label {
+  /* ── FORM ── */
+  .qf-form-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin: 32px 0 16px;
+    letter-spacing: .02em;
+  }
+  .qf-form-title:first-child { margin-top: 0; }
+
+  .qf-field { margin-bottom: 20px; }
+  .qf-label {
     display: block;
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem; color: var(--black);
-    margin-bottom: 12px; font-weight: 400;
-  }
-  .form-label span { color: var(--gold); font-size: .85rem; }
-  .form-hint {
-    font-family: 'DM Serif Display', serif;
-    font-size: .85rem; color: var(--brown); opacity: .55;
-    margin-bottom: 16px; font-style: italic; line-height: 1.5;
-  }
-  .form-input, .form-select, .form-textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1.5px solid rgba(79,71,59,.25);
-    padding: 10px 0;
     font-family: 'Lora', serif;
-    font-size: .95rem; color: var(--brown);
-    outline: none; transition: border-color .2s;
-    appearance: none; -webkit-appearance: none;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: 6px;
   }
-  .form-input::placeholder, .form-select::placeholder { color: rgba(79,71,59,.35); }
-  .form-input:focus, .form-select:focus, .form-textarea:focus { border-bottom-color: var(--gold); }
-  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234F473B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 4px center; padding-right: 24px; }
-  .form-textarea { border: 1.5px solid rgba(79,71,59,.2); padding: 16px; resize: vertical; min-height: 140px; font-size: .9rem; border-radius: 2px; margin-top: 8px; }
-  .form-textarea:focus { border-color: var(--gold); }
-  .form-textarea::placeholder { color: rgba(79,71,59,.35); }
-  .form-divider { height: 1px; background: rgba(79,71,59,.1); margin: 48px 0; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .qf-label .req { color: var(--gold); margin-left: 2px; }
+  .qf-input, .qf-select, .qf-textarea {
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid rgba(79,71,59,.18);
+    border-radius: 6px;
+    padding: 13px 16px;
+    font-family: 'Lora', serif;
+    font-size: .92rem;
+    color: var(--black);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .qf-input:focus, .qf-select:focus, .qf-textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,154,106,.1);
+  }
+  .qf-input::placeholder, .qf-textarea::placeholder { color: rgba(79,71,59,.35); }
+  .qf-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234F473B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+  .qf-select option { color: var(--black); }
+  .qf-textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+
+  .qf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* Checkboxes */
+  .qf-check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+  .qf-check-group.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .qf-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(79,71,59,.15);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s;
+    background: rgba(255,255,255,.6);
+    user-select: none;
+  }
+  .qf-check:hover { border-color: var(--gold); background: rgba(255,255,255,.9); }
+  .qf-check input { display: none; }
+  .qf-check-box {
+    width: 16px; height: 16px;
+    border: 1.5px solid rgba(79,71,59,.3);
+    border-radius: 3px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s;
+  }
+  .qf-check.checked { border-color: var(--gold); background: rgba(184,154,106,.06); }
+  .qf-check.checked .qf-check-box { background: var(--gold); border-color: var(--gold); }
+  .qf-check.checked .qf-check-box::after { content: '✓'; color: white; font-size: .65rem; font-weight: 700; }
+  .qf-check-text { font-family: 'Lora', serif; font-size: .8rem; color: var(--brown); line-height: 1.4; }
+  .qf-check-price { font-size: .7rem; color: var(--gold); font-style: italic; display: block; margin-top: 1px; }
+
+  .qf-divider { height: 1px; background: rgba(79,71,59,.1); margin: 32px 0; }
 
   /* Submit */
-  .form-submit-row { display: flex; justify-content: flex-end; margin-top: 48px; }
-  .form-submit {
-    background: var(--dark); color: var(--cream);
-    border: none; cursor: pointer;
-    padding: 18px 48px; font-family: 'Lora', serif;
-    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
-    font-weight: 600; transition: background .25s;
+  .qf-submit {
+    width: 100%;
+    background: var(--green);
+    color: var(--cream);
+    border: 2px solid var(--green);
+    border-radius: 100px;
+    padding: 18px 32px;
+    font-family: 'Lora', serif;
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
   }
-  .form-submit:hover { background: var(--brown); }
+  .qf-submit:hover { background: transparent; color: var(--green); }
+  .qf-submit:disabled { opacity: .6; cursor: not-allowed; }
 
-  /* Success message */
-  .form-success {
-    display: none; text-align: center; padding: 48px 0;
+  /* ── SUCCESS STATE ── */
+  .qf-success {
+    display: none;
+    text-align: center;
+    padding: 60px 40px;
+    background: #fff;
+    border: 1px solid rgba(79,71,59,.1);
+    border-radius: 8px;
   }
-  .form-success h3 {
+  .qf-success-icon { font-size: 2.5rem; margin-bottom: 20px; }
+  .qf-success-title { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--black); margin-bottom: 12px; }
+  .qf-success-title em { font-style: italic; color: var(--gold); }
+  .qf-success-body { font-family: 'Lora', serif; font-size: .95rem; color: var(--brown); opacity: .8; line-height: 1.8; max-width: 380px; margin: 0 auto 28px; }
+  .qf-success-back { display: inline-block; font-family: 'Lora', serif; font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; color: var(--green); text-decoration: none; border-bottom: 1px solid rgba(46,75,54,.3); padding-bottom: 2px; }
+
+  /* ── SIDEBAR ── */
+  .qf-sidebar { position: sticky; top: 100px; }
+  .qf-sidebar-card {
+    background: var(--green);
+    color: var(--cream);
+    padding: 40px 32px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .qf-sidebar-eyebrow { font-family: 'Lora', serif; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(245,238,228,.55); margin-bottom: 16px; display: block; }
+  .qf-sidebar-title { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-weight: 400; color: var(--cream); line-height: 1.2; margin-bottom: 24px; }
+  .qf-sidebar-title em { font-style: italic; color: var(--gold); }
+  .qf-sidebar-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .qf-sidebar-list li { display: flex; align-items: flex-start; gap: 10px; font-family: 'Lora', serif; font-size: .82rem; color: rgba(245,238,228,.8); line-height: 1.5; }
+  .qf-sidebar-list li::before { content: '✦'; color: var(--gold); flex-shrink: 0; font-size: .7rem; margin-top: 2px; }
+  .qf-sidebar-contact { background: #F5EEE4; border: 1px solid rgba(79,71,59,.12); padding: 28px 24px; border-radius: 4px; }
+  .qf-sidebar-contact-label { font-family: 'Lora', serif; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 12px; display: block; }
+  .qf-sidebar-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .qf-sidebar-contact-val { font-family: 'Lora', serif; font-size: .82rem; color: var(--brown); text-decoration: none; transition: color .2s; }
+  .qf-sidebar-contact-val:hover { color: var(--green); }
+
+  /* ── STEPS SECTION ── */
+  .steps-section {
+    background: #EDE6DA;
+    padding: 80px 64px;
+  }
+  .steps-section-eyebrow {
+    font-family: 'Lora', serif;
+    font-size: .72rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .steps-section-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 2rem; color: var(--black); margin-bottom: 12px;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 400;
+    color: var(--black);
+    line-height: 1.15;
+    margin-bottom: 56px;
   }
-  .form-success h3 em { font-style: italic; color: var(--gold); }
-  .form-success p { font-size: .95rem; color: var(--brown); opacity: .7; line-height: 1.8; }
-
-  /* ── WHAT HAPPENS NEXT ── */
-  .next-section { background: var(--cream); padding: 80px 80px 100px; border-top: 1px solid rgba(79,71,59,.1); }
-  .next-header { text-align: center; margin-bottom: 64px; }
-  .next-label-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
-  .next-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .6; }
-  .next-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-  .next-title { font-family: 'DM Serif Display', serif; font-size: clamp(2.4rem, 4.5vw, 4rem); color: var(--black); font-weight: 400; }
-  .next-title em { font-style: italic; color: var(--gold); }
-  .next-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-left: 1px solid rgba(79,71,59,.1); }
-  .next-step { padding: 0 40px 0 32px; border-right: 1px solid rgba(79,71,59,.1); }
-  .next-step-num { font-family: 'DM Serif Display', serif; font-size: 2.8rem; font-style: italic; color: var(--gold); opacity: .7; margin-bottom: 20px; line-height: 1; }
-  .next-step-name { font-family: 'Lora', serif; font-size: .85rem; font-weight: 700; color: var(--black); margin-bottom: 12px; }
-  .next-step-desc { font-size: .85rem; color: var(--brown); opacity: .7; line-height: 1.75; }
-
-  /* ── QUICK ANSWERS ── */
-  .quick-section { background: var(--cream); padding: 80px 80px 100px; border-top: 1px solid rgba(79,71,59,.1); }
-  .quick-header { text-align: center; margin-bottom: 48px; }
-  .quick-label-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 20px; }
-  .quick-label-line { width: 32px; height: 1px; background: var(--gold); opacity: .6; }
-  .quick-label { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
-  .quick-title { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--black); font-weight: 400; }
-  .quick-title em { font-style: italic; color: var(--gold); }
-  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 1000px; margin: 0 auto 32px; }
-  .quick-item { background: rgba(255,255,255,.5); border: 1px solid rgba(79,71,59,.1); border-radius: 2px; overflow: hidden; }
-  .quick-question { width: 100%; background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 24px 28px; text-align: left; gap: 16px; }
-  .quick-question-text { font-family: 'Lora', serif; font-size: .9rem; font-weight: 600; color: var(--black); }
-  .quick-plus { color: var(--gold); font-size: 1.2rem; font-weight: 300; flex-shrink: 0; transition: transform .25s; font-family: sans-serif; }
-  .quick-item.open .quick-plus { transform: rotate(45deg); }
-  .quick-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .3s; }
-  .quick-item.open .quick-answer { max-height: 200px; }
-  .quick-answer-inner { padding: 0 28px 24px; font-size: .85rem; color: var(--brown); opacity: .75; line-height: 1.8; }
-  .quick-more { text-align: center; font-size: .9rem; color: var(--brown); opacity: .65; }
-  .quick-more a { color: var(--gold); font-weight: 600; text-decoration: underline; }
+  .steps-section-title em { font-style: italic; color: var(--gold); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .step-item { padding: 36px 32px 36px 0; border-right: 1px solid rgba(79,71,59,.12); }
+  .step-item:last-child { border-right: none; padding-right: 0; }
+  .step-num { font-family: 'DM Serif Display', serif; font-size: 3rem; color: rgba(184,154,106,.25); font-weight: 400; line-height: 1; margin-bottom: 16px; }
+  .step-name { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--black); font-weight: 400; margin-bottom: 10px; }
+  .step-desc { font-family: 'Lora', serif; font-size: .82rem; color: var(--brown); opacity: .75; line-height: 1.7; }
 
   /* ── FOOTER ── */
-  footer { background: #1A1810; padding: 64px 64px 0; }
+  footer { background: #1E1B16; padding: 64px 64px 0; }
   .footer-top { display: grid; grid-template-columns: 2fr 1fr 1.4fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(197,174,145,.1); }
   .footer-logo-lockup { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-  .footer-logo-img { width: 72px; height: 72px; object-fit: contain; filter: invert(1) brightness(.7); }
-  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--sand); display: block; line-height: 1.15; letter-spacing: .02em; }
+  .footer-logo { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 400; color: var(--sand); letter-spacing: .02em; display: block; }
   .footer-est { font-family: 'Lora', serif; font-size: .72rem; letter-spacing: .18em; color: var(--gold); opacity: .9; display: block; margin-top: 4px; text-transform: uppercase; }
   .footer-desc { font-family: 'Lora', serif; font-size: 1rem; color: rgba(197,174,145,.65); line-height: 1.8; max-width: 300px; }
   .footer-col-title { font-size: .72rem; letter-spacing: .15em; font-family: 'Lora', serif; font-weight: 600; color: var(--gold); margin-bottom: 20px; text-transform: uppercase; display: block; opacity: .9; }
   .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
   .footer-links a { font-size: .72rem; letter-spacing: .1em; color: rgba(197,174,145,.55); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; }
   .footer-links a:hover { color: var(--sand); }
-  .footer-contact-item { margin-bottom: 12px; }
+  .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
   .footer-contact-val { font-size: .72rem; letter-spacing: .1em; color: rgba(197,174,145,.55); font-family: 'Lora', serif; line-height: 1.6; text-transform: uppercase; }
   .footer-social { display: flex; gap: 16px; margin-top: 16px; }
-  .footer-social-link { font-size: .72rem; letter-spacing: .2em; color: var(--gold); opacity: .7; text-decoration: none; transition: opacity .2s; font-family: 'Lora', serif; }
+  .footer-social-link { font-family: 'Lora', serif; font-size: .6rem; letter-spacing: .2em; color: var(--gold); opacity: .7; text-decoration: none; transition: opacity .2s; }
   .footer-social-link:hover { opacity: 1; }
   .footer-bottom { padding: 22px 0; display: flex; justify-content: space-between; align-items: center; }
-  .footer-copy { font-size: .65rem; letter-spacing: .1em; color: rgba(197,174,145,.5); }
-  .footer-area { font-size: .65rem; letter-spacing: .1em; color: rgba(197,174,145,.5); }
+  .footer-copy, .footer-area { font-size: .65rem; letter-spacing: .1em; color: rgba(197,174,145,.5); }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 14px 24px; }
-    .nav-links { display: none; }
-    .nav-hamburger { display: flex; }
-    .nav-cta { display: none; }
-    .hero { padding: 120px 24px 60px; }
-    .form-section { padding: 0 24px 80px; }
-    .form-card { padding: 40px 28px; }
-    .form-row { grid-template-columns: 1fr; gap: 0; }
-    .next-section { padding: 60px 24px; }
-    .next-steps { grid-template-columns: 1fr 1fr; border-left: none; gap: 40px; }
-    .next-step { border-right: none; padding: 0; }
-    .quick-section { padding: 60px 24px; }
-    .quick-grid { grid-template-columns: 1fr; }
-    footer { padding: 48px 24px 0; }
-    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-    .footer-brand { grid-column: 1/-1; }
-  }
-
-  /* ══════════════════════════════
-     COMPREHENSIVE MOBILE & TABLET
-  ══════════════════════════════ */
-
-  /* Tablet (768px - 1024px) */
   @media (max-width: 1024px) and (min-width: 769px) {
     nav { padding: 16px 32px; }
-    .nav-links a { font-size: .62rem; gap: 20px; }
-    section { padding: 60px 40px; }
-
-    /* Hero split */
-    .hero { grid-template-columns: 1fr 1fr; }
-    .hero-content { padding: 120px 40px 60px; }
-    .hero h1, .hero-title { font-size: clamp(2.4rem, 4vw, 3.8rem); }
-
-    /* Packages */
-    .pkg-grid { grid-template-columns: repeat(3,1fr); }
-    .pkg-card.featured { margin-top: -12px; margin-bottom: -12px; }
-
-    /* Bar formats */
-    .bar-formats-grid { grid-template-columns: repeat(3,1fr); }
-    .bar-formats-title { font-size: clamp(2rem, 3.5vw, 3.5rem); }
-
-    /* How it works steps */
-    .steps { grid-template-columns: repeat(2,1fr); gap: 32px; }
-
-    /* Reviews */
-    .reviews-grid { grid-template-columns: repeat(3,1fr); }
-
-    /* Stats bar */
-    .stats-bar { grid-template-columns: repeat(4,1fr); }
-
-    /* Contact CTA */
-    .contact-cta { padding: 60px 40px; gap: 40px; }
-
-    /* Footer */
+    .page-hero { padding: 140px 40px 60px; }
+    .quote-section { padding: 60px 40px 80px; }
+    .quote-inner { grid-template-columns: 1fr 280px; gap: 40px; }
+    .steps-section { padding: 60px 40px; }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+    .step-item:nth-child(2) { border-right: none; }
+    .step-item:nth-child(3) { border-top: 1px solid rgba(79,71,59,.12); }
+    .step-item:nth-child(4) { border-top: 1px solid rgba(79,71,59,.12); border-right: none; }
+    footer { padding: 48px 40px 0; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
     .footer-brand { grid-column: 1/-1; }
-
-    /* FAQ */
-    .faq-inner { grid-template-columns: 220px 1fr; gap: 48px; }
   }
 
-  /* Mobile (max 768px) */
   @media (max-width: 768px) {
-    /* Nav */
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-logo { font-size: 1.4rem; }
-
-    /* General sections */
-    section { padding: 48px 20px; }
-
-    /* Hero */
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-content { padding: 100px 20px 48px; }
-    .hero h1, .hero-title { font-size: clamp(2.2rem, 8vw, 3rem); }
-    .hero-sub { font-size: .9rem; max-width: 100%; }
-    .hero-actions { flex-direction: column; gap: 12px; }
-    .btn-primary, .btn-outline, .btn-gold, .btn-outline-light { width: 100%; text-align: center; padding: 16px 24px; }
-    .hero-visual { min-height: 55vw; }
-    .hero-image-banner { height: 55vw; }
-
-    /* Stats bar */
-    .stats-bar { grid-template-columns: 1fr 1fr; }
-    .stats-item { padding: 28px 16px; border-right: none; border-bottom: 1px solid rgba(197,174,145,.18); }
-    .stats-item:nth-child(odd) { border-right: 1px solid rgba(197,174,145,.18); }
-    .stats-item:last-child { border-bottom: none; }
-    .stats-value { font-size: 1.1rem; }
-
-    /* Experience section */
-    .experience { grid-template-columns: 1fr; }
-    .exp-right { min-height: 280px; }
-
-    /* Meet owner */
-    .meet-owner { padding: 60px 20px; }
-    .meet-owner-card { margin: 0; }
-    .meet-owner-card-body { padding: 28px 20px 36px; }
-    .meet-owner-name { font-size: 2.2rem; }
-
-    /* How it works */
-    .how { padding: 48px 20px; }
-    .steps { grid-template-columns: 1fr; gap: 32px; }
-    .step-top { margin-bottom: 12px; }
-    .step-arrow { display: none; }
-
-    /* Packages */
-    .packages { padding: 0 20px 60px; }
-    .pkg-grid { grid-template-columns: 1fr; gap: 16px; }
-    .pkg-card { padding: 32px 24px; }
-    .pkg-card.featured { margin: 0; padding: 32px 24px; }
-    .pkg-features.two-col { grid-template-columns: 1fr; }
-    .includes-bar { padding: 16px 20px; flex-direction: column; gap: 12px; }
-    .includes-items { gap: 6px 16px; }
-
-    /* Bar formats */
-    .bar-formats { padding: 48px 20px; }
-    .bar-formats-header { flex-direction: column; gap: 16px; }
-    .bar-formats-right { display: none; }
-    .bar-formats-grid { grid-template-columns: 1fr; gap: 24px; }
-    .bar-format-img { aspect-ratio: 16/9; }
-    .bar-formats-title { font-size: clamp(2rem, 7vw, 2.8rem); }
-
-    /* Calculator banner */
-    .calc-banner { padding: 0; }
-    .calc-banner-inner { grid-template-columns: 1fr; padding: 32px 20px; gap: 16px; }
-    .calc-banner-inner > svg { display: none; }
-    .calc-banner-btn { width: 100%; text-align: center; padding: 16px; }
-    .calc-banner-title { font-size: 1.5rem; }
-
-    /* Crafted section */
-    .crafted { padding: 48px 20px; }
-    .crafted-icons { grid-template-columns: repeat(3,1fr); }
-    .crafted-icon-item { padding: 20px 10px; }
-    .crafted-icon-name { font-size: .7rem; }
-
-    /* Gallery */
-    .gallery-strip { padding: 0 20px 48px; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
-
-    /* Reviews */
-    .reviews { padding: 48px 20px; }
-    .reviews-grid { grid-template-columns: 1fr; border-left: none; }
-    .review-card { border-right: none; border-bottom: 1px solid rgba(79,71,59,.1); padding: 28px 0; }
-    .reviews-title { font-size: 2.2rem; }
-
-    /* Contact CTA */
-    .contact-cta { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
-    .contact-cta-divider { width: 100%; height: 1px; }
-    .contact-cta-right { padding-left: 0; }
-    .contact-cta-btn { display: block; text-align: center; width: 100%; }
-    .contact-cta-title { font-size: 2.2rem; }
-    .contact-cta-stat { font-size: 3rem; }
-
-    /* Footer */
+    .page-hero { padding: 110px 20px 52px; }
+    .page-hero h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+    .quote-section { padding: 48px 20px 64px; }
+    .quote-inner { grid-template-columns: 1fr; gap: 40px; }
+    .qf-sidebar { position: static; }
+    .qf-row { grid-template-columns: 1fr; }
+    .qf-check-group.two-col { grid-template-columns: 1fr; }
+    .steps-section { padding: 48px 20px; }
+    .steps-grid { grid-template-columns: 1fr; gap: 0; }
+    .step-item { border-right: none; border-bottom: 1px solid rgba(79,71,59,.12); padding: 28px 0; }
+    .step-item:last-child { border-bottom: none; }
     footer { padding: 40px 20px 0; }
     .footer-top { grid-template-columns: 1fr; gap: 32px; }
-    .footer-brand { grid-column: 1; }
-    .footer-logo { font-size: 1.6rem; }
-    .footer-desc { font-size: .85rem; max-width: 100%; }
-    .footer-links a { font-size: .75rem; }
-    .footer-contact-val { font-size: .75rem; }
     .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-    .footer-copy, .footer-area { font-size: .6rem; }
-
-    /* FAQ page */
-    .faq-section { padding: 48px 20px; }
-    .faq-inner { grid-template-columns: 1fr; gap: 32px; }
-    .faq-sidebar { position: relative; top: 0; }
-    .faq-cats { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-    .faq-cat-btn { border-left: none; border-bottom: 2px solid transparent; padding: 8px 14px; font-size: .7rem; }
-    .faq-cat-btn.active { border-left: none; border-bottom-color: var(--gold); }
-    .faq-question-text { font-size: .92rem; }
-
-    /* About page specific */
-    .story { padding: 48px 20px; }
-    .story-inner { grid-template-columns: 1fr; gap: 32px; }
-    .how-work { padding: 48px 20px; }
-    .how-work-body { grid-template-columns: 1fr; gap: 32px; }
-    .how-work-photo { position: relative; top: 0; aspect-ratio: 16/9; }
-    .based { padding: 48px 20px; }
-    .based-inner { grid-template-columns: 1fr; gap: 32px; }
-    .based-row { grid-template-columns: 80px 1fr; padding: 14px 16px; }
-    .founder-grid { grid-template-columns: 1fr; }
-    .founder-card { display: flex; flex-direction: column; }
-    .founder-photo { aspect-ratio: 4/3; }
-    .founder-body { padding: 28px 20px; border-left: none; border-top: 1px solid rgba(79,71,59,.1); }
-
-    /* Quote page specific */
-    .hero.quote-hero { padding: 100px 20px 48px; }
-    .form-section { padding: 0 20px 60px; }
-    .form-card { padding: 32px 20px; }
-    .form-row { grid-template-columns: 1fr; }
-    .next-section { padding: 48px 20px; }
-    .next-steps { grid-template-columns: 1fr 1fr; border-left: none; gap: 32px; }
-    .next-step { border-right: none; padding: 0; }
-    .quick-section { padding: 48px 20px; }
-    .quick-grid { grid-template-columns: 1fr; }
-
-    /* Packages page hero */
-    .pkg-page-hero { padding: 100px 20px 48px; }
-    .addons-grid { grid-template-columns: 1fr; }
-    .addons { padding: 48px 20px; }
   }
 
-
-  /* Add-on checkboxes */
-  .addon-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 20px; }
-  .addon-check-group { display: flex; flex-direction: column; gap: 0; }
-  .addon-check-group-title { font-family: 'Lora', serif; font-size: .9rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 700; }
-  .addon-check-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(79,71,59,.08); cursor: pointer; }
-  .addon-check-item:last-child { border-bottom: none; }
-  .addon-check-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--green); cursor: pointer; }
-  .addon-check-item span { font-family: 'Lora', serif; font-size: .82rem; color: var(--brown); opacity: .8; line-height: 1.4; }
-  .addon-check-item:hover span { opacity: 1; }
-  @media (max-width: 768px) { .addon-checks { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) {
+    .page-hero h1 { font-size: clamp(1.9rem, 7vw, 2.4rem); }
+    .qf-sidebar-card { padding: 28px 20px; }
+    .qf-sidebar-contact { padding: 20px 16px; }
+  }
 </style>
 </head>
 <body>
 
+<!-- Netlify hidden form for form detection -->
+<form name="quote-form" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name"/>
+  <input type="text" name="client-name"/>
+  <input type="email" name="email"/>
+  <input type="tel" name="phone"/>
+  <input type="text" name="how-heard"/>
+  <input type="text" name="event-date"/>
+  <input type="text" name="venue"/>
+  <input type="text" name="event-type"/>
+  <input type="text" name="guest-count"/>
+  <input type="text" name="hours"/>
+  <input type="text" name="package"/>
+  <input type="text" name="addons"/>
+  <textarea name="vision"></textarea>
+</form>
+
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
-    <div class="nav-logo">
+    <img src="logo-icon.png" alt="Lazy Lion Logo" class="nav-logo-img"/>
+    <a href="index.html" class="nav-logo">
       The Lazy Lion
       <span>Mobile Bar · Est. 2018</span>
-    </div>
+    </a>
   </div>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
@@ -454,7 +391,7 @@
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="store.html">Store</a></li>
   </ul>
-  <a href="#form" class="nav-cta">Request a Quote</a>
+  <a href="quote.html" class="nav-cta">Request a Quote</a>
   <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -468,262 +405,283 @@
     <li><a href="faq.html" onclick="toggleMenu()">FAQ</a></li>
     <li><a href="store.html" onclick="toggleMenu()">Store</a></li>
   </ul>
-  <a href="#form" class="nav-drawer-cta" onclick="toggleMenu()">Request a Quote</a>
+  <a href="quote.html" class="nav-drawer-cta" onclick="toggleMenu()">Request a Quote</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-label-row">
-    <span class="hero-label-line"></span>
-    <span class="hero-label">Start the Conversation</span>
-  </div>
-  <h1 class="hero-title">Tell us about <em>your event.</em></h1>
-  <p class="hero-sub">A few details get us started — date, venue, guest count, and what you're picturing for the bar. Vince reads every inquiry personally and replies within <strong>48 hours</strong> with availability and a tailored proposal.</p>
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-eyebrow">Start the Conversation</div>
+  <h1>Tell us about <em>your event.</em></h1>
+  <p class="page-hero-sub">A few details get us started. Vince reads every inquiry personally and replies within 48 hours with availability and a tailored proposal.</p>
 </section>
 
-<!-- FORM -->
-<section class="form-section" id="form">
-  <div class="form-card">
-        <h2 class="form-heading">Send an <em>inquiry.</em></h2>
-    <p class="form-sub">Takes about two minutes. The more you can share now, the more specific our reply. We'll be in touch within 48 hours.</p>
+<!-- QUOTE FORM -->
+<section class="quote-section" id="form">
+  <div class="quote-inner">
 
-    <form id="inquiry-form" name="quote-form" method="POST" netlify onsubmit="handleSubmit(event)">
-      <input type="hidden" name="form-name" value="quote-form" />
+    <!-- FORM -->
+    <div>
+      <div id="qf-form-wrap">
+        <div class="qf-form-title">Your Information</div>
 
-      <!-- Full Name -->
-      <div class="form-field">
-        <label class="form-label" for="name">Full name <span>*</span></label>
-        <input class="form-input" type="text" id="name" name="name" placeholder="Your name here" required/>
-      </div>
-
-      <div class="form-hint">If you are completing this form on behalf of a client, please share the host's name.</div>
-      <div class="form-field">
-        <label class="form-label" for="client-name">Client's Name</label>
-        <input class="form-input" type="text" id="client-name" name="client_name" placeholder="Host's name (if different)"/>
-      </div>
-
-      <div class="form-divider"></div>
-
-      <!-- Email & Phone -->
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="email">Email <span>*</span></label>
-          <input class="form-input" type="email" id="email" name="email" placeholder="E.g. myemail@email.com" required/>
+        <div class="qf-field">
+          <label class="qf-label">Your Full Name <span class="req">*</span></label>
+          <input class="qf-input" type="text" id="qf-name" placeholder="First and last name" required />
         </div>
-        <div class="form-field">
-          <label class="form-label" for="phone">Phone number <span>*</span></label>
-          <input class="form-input" type="tel" id="phone" name="phone" placeholder="E.g. (267) 683-0654" required/>
+
+        <div class="qf-field">
+          <label class="qf-label">If booking on behalf of a client, host's name</label>
+          <input class="qf-input" type="text" id="qf-clientName" placeholder="Leave blank if you're the host" />
         </div>
-      </div>
 
-      <!-- How did you hear — moved below phone -->
-      <div class="form-field" style="margin-top:32px;">
-        <label class="form-label" for="referral">How did you hear about us?</label>
-        <select class="form-select" id="referral" name="referral">
-          <option value="" disabled selected>Select an option</option>
-          <option>Instagram</option>
-          <option>Facebook</option>
-          <option>Google Search</option>
-          <option>Word of Mouth / Referral</option>
-          <option>A past event</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <div class="form-divider"></div>
-
-      <!-- Event Date & Location -->
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="date">Event date <span>*</span></label>
-          <input class="form-input" type="date" id="date" name="event_date" required/>
+        <div class="qf-row">
+          <div class="qf-field">
+            <label class="qf-label">Email Address <span class="req">*</span></label>
+            <input class="qf-input" type="email" id="qf-email" placeholder="you@email.com" required />
+          </div>
+          <div class="qf-field">
+            <label class="qf-label">Phone Number <span class="req">*</span></label>
+            <input class="qf-input" type="tel" id="qf-phone" placeholder="(215) 555-0100" required />
+          </div>
         </div>
-        <div class="form-field">
-          <label class="form-label" for="location">Event Location / Venue</label>
-          <input class="form-input" type="text" id="location" name="location" placeholder="E.g. 742 Evergreen Ave, Philadelphia"/>
-        </div>
-      </div>
 
-      <div class="form-divider"></div>
-
-      <!-- Event Type & Guest Count -->
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="event-type">What type of event? <span>*</span></label>
-          <select class="form-select" id="event-type" name="event_type" required>
-            <option value="" disabled selected>Select an option</option>
-            <option>Wedding</option>
-            <option>Engagement Party</option>
-            <option>Birthday Celebration</option>
-            <option>Bridal / Baby Shower</option>
-            <option>Corporate Event</option>
-            <option>Private Party</option>
-            <option>Graduation</option>
-            <option>Holiday Party</option>
+        <div class="qf-field">
+          <label class="qf-label">How did you hear about us?</label>
+          <select class="qf-select" id="qf-howHeard">
+            <option value="">Select an option</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>Google Search</option>
+            <option>Word of Mouth / Referral</option>
+            <option>A past event</option>
             <option>Other</option>
           </select>
         </div>
-        <div class="form-field">
-          <label class="form-label" for="guests">Estimated guest count <span>*</span></label>
-          <input class="form-input" type="number" id="guests" name="guests" placeholder="E.g. 75" min="1" required/>
-        </div>
-      </div>
 
-      <div class="form-divider"></div>
+        <div class="qf-divider"></div>
+        <div class="qf-form-title">Event Details</div>
 
-      <!-- Hours & Package -->
-      <div class="form-row">
-        <div class="form-field">
-          <label class="form-label" for="hours">Hours of service needed <span>*</span></label>
-          <select class="form-select" id="hours" name="hours" required>
-            <option value="" disabled selected>Select an option</option>
-            <option>2 hours</option>
-            <option>3 hours</option>
-            <option>4 hours</option>
-            <option>5 hours</option>
-            <option>6+ hours</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label class="form-label" for="package">Package interest</label>
-          <select class="form-select" id="package" name="package">
-            <option value="" disabled selected>Select an option</option>
-            <option>Standard ($750)</option>
-            <option>Signature Social ($1,500)</option>
-            <option>The Premium ($2,500)</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Add-Ons -->
-      <div class="form-field" style="margin-top:36px;">
-        <label class="form-label">Add-Ons <span style="font-size:.9rem;font-weight:500;opacity:.75;">(select all that interest you)</span></label>
-        <div class="addon-checks">
-          <div class="addon-check-group">
-            <p class="addon-check-group-title">Per Person</p>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Juice Package ($2/pp)"/><span>Juice Package — $2/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Soft Drink Package ($2/pp)"/><span>Soft Drink Package — $2/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Bagged Ice ($2/pp)"/><span>Bagged Ice — $2/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Mixer Package ($3/pp)"/><span>Premium Mixer Package — $3/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Garnish Package ($3/pp)"/><span>Premium Garnish Package — $3/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mocktail Package ($4/pp)"/><span>Mocktail Package — $4/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Coffee &amp; Tea Package ($4/pp)"/><span>Coffee &amp; Tea Package — $4/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Premium Soft Drink Package ($4/pp)"/><span>Premium Soft Drink Package — $4/pp</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Signature Drink Package ($4/pp)"/><span>Signature Drink Package — $4/pp</span></label>
+        <div class="qf-row">
+          <div class="qf-field">
+            <label class="qf-label">Event Date <span class="req">*</span></label>
+            <input class="qf-input" type="date" id="qf-date" required />
           </div>
-          <div class="addon-check-group">
-            <p class="addon-check-group-title">Flat Rate</p>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mixology Bar 1 ($200)"/><span>Mixology Bar 1 — $200</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mixology Bar 2 ($200)"/><span>Mixology Bar 2 — $200</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Mimosa Bar ($400)"/><span>Mimosa Bar — $400</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Trailer Bar ($1,500)"/><span>Trailer Bar — $1,500</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Additional Service Hours ($100/hr)"/><span>Additional Service Hours — $100/hr</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Additional Bartending ($75/hr)"/><span>Additional Bartending — $75/hr</span></label>
-            <label class="addon-check-item"><input type="checkbox" name="addon" value="Bar Backs ($50/hr)"/><span>Bar Backs — $50/hr</span></label>
+          <div class="qf-field">
+            <label class="qf-label">Event Location / Venue</label>
+            <input class="qf-input" type="text" id="qf-venue" placeholder="Venue name or address" />
           </div>
         </div>
+
+        <div class="qf-row">
+          <div class="qf-field">
+            <label class="qf-label">Event Type <span class="req">*</span></label>
+            <select class="qf-select" id="qf-eventType" required>
+              <option value="">Select an option</option>
+              <option>Wedding</option>
+              <option>Engagement Party</option>
+              <option>Birthday Celebration</option>
+              <option>Bridal / Baby Shower</option>
+              <option>Corporate Event</option>
+              <option>Private Party</option>
+              <option>Graduation</option>
+              <option>Holiday Party</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="qf-field">
+            <label class="qf-label">Estimated Guest Count <span class="req">*</span></label>
+            <input class="qf-input" type="number" id="qf-guests" placeholder="e.g. 75" min="1" required />
+          </div>
+        </div>
+
+        <div class="qf-row">
+          <div class="qf-field">
+            <label class="qf-label">Hours of Service Needed</label>
+            <select class="qf-select" id="qf-hours">
+              <option value="">Select an option</option>
+              <option>2 hours</option>
+              <option>3 hours</option>
+              <option>4 hours</option>
+              <option>5 hours</option>
+              <option>6+ hours</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="qf-field">
+            <label class="qf-label">Package Interest</label>
+            <select class="qf-select" id="qf-package">
+              <option value="">Select an option</option>
+              <option>The Lazy Lion Signature ($750)</option>
+              <option>The Lazy Lion Premier ($1,500)</option>
+              <option>The Lazy Lion Reserve ($2,500)</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="qf-divider"></div>
+        <div class="qf-form-title">Add-Ons — Select all that interest you</div>
+
+        <div class="qf-field">
+          <label class="qf-label" style="margin-bottom:10px;">Per Person</label>
+          <div class="qf-check-group two-col">
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Juice Package — $2/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Juice Package <span class="qf-check-price">$2/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Soft Drink Package — $2/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Soft Drink Package <span class="qf-check-price">$2/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Bagged Ice — $2/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Bagged Ice <span class="qf-check-price">$2/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Premium Mixer Package — $3/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Premium Mixer Package <span class="qf-check-price">$3/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Premium Garnish Package — $3/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Premium Garnish Package <span class="qf-check-price">$3/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Mocktail Package — $4/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Mocktail Package <span class="qf-check-price">$4/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Coffee & Tea Package — $4/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Coffee &amp; Tea Package <span class="qf-check-price">$4/pp</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Signature Drink Package — $4/pp"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Signature Drink Package <span class="qf-check-price">$4/pp</span></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="qf-field" style="margin-top:16px;">
+          <label class="qf-label" style="margin-bottom:10px;">Flat Rate</label>
+          <div class="qf-check-group two-col">
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Mixology Bar 1 — $200"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Mixology Bar 1 <span class="qf-check-price">$200</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Mixology Bar 2 — $200"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Mixology Bar 2 <span class="qf-check-price">$200</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Mimosa Bar — $400"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Mimosa Bar <span class="qf-check-price">$400</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Trailer Bar — $1,500"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Trailer Bar <span class="qf-check-price">$1,500</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Additional Service Hours — $100/hr"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Additional Hours <span class="qf-check-price">$100/hr</span></span>
+            </label>
+            <label class="qf-check" onclick="toggleCheck(this)">
+              <input type="checkbox" name="addon" value="Additional Bartending — $75/hr"/>
+              <span class="qf-check-box"></span>
+              <span class="qf-check-text">Additional Bartending <span class="qf-check-price">$75/hr</span></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="qf-divider"></div>
+        <div class="qf-form-title">Your Vision</div>
+
+        <div class="qf-field">
+          <label class="qf-label">Tell us more about your event</label>
+          <textarea class="qf-textarea" id="qf-vision" placeholder="Share anything that would help us understand your event — venue vibe, cocktail preferences, special requests, or anything else on your mind."></textarea>
+        </div>
+
+        <button class="qf-submit" id="qf-submitBtn" onclick="submitQuote()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          Send My Inquiry
+        </button>
       </div>
 
-      <div class="form-divider"></div>
-
-      <!-- Vision -->
-      <div class="form-field">
-        <label class="form-label" for="vision">Tell us more about your vision</label>
-        <textarea class="form-textarea" id="vision" name="vision" placeholder="What do we need to know about the celebration you're planning? Any themes, cocktail ideas, or special requests?"></textarea>
+      <!-- SUCCESS -->
+      <div class="qf-success" id="qf-success">
+        <div class="qf-success-icon">✦</div>
+        <h2 class="qf-success-title">Thank you for <em>reaching out.</em></h2>
+        <p class="qf-success-body">We've received your inquiry and will be in touch within 48 hours with availability and a tailored proposal. We can't wait to be part of your celebration.</p>
+        <a href="index.html" class="qf-success-back">← Back to Home</a>
       </div>
-
-      <div class="form-submit-row">
-        <button type="submit" class="form-submit">Request a Quote →</button>
-      </div>
-
-    </form>
-
-    <!-- Success Message -->
-    <div class="form-success" id="form-success">
-      <h3>Thank you for <em>reaching out.</em></h3>
-      <p>We've received your inquiry and will be in touch within 48 hours with availability and a tailored proposal. We can't wait to be part of your celebration.</p>
     </div>
+
+    <!-- SIDEBAR -->
+    <aside class="qf-sidebar">
+      <div class="qf-sidebar-card">
+        <span class="qf-sidebar-eyebrow">What to Expect</span>
+        <h3 class="qf-sidebar-title">We reply within <em>48 hours.</em></h3>
+        <ul class="qf-sidebar-list">
+          <li>Vince reads every inquiry personally</li>
+          <li>You'll receive availability confirmation</li>
+          <li>A tailored package recommendation</li>
+          <li>A rough investment breakdown</li>
+          <li>Next steps to lock in your date</li>
+        </ul>
+      </div>
+      <div class="qf-sidebar-contact">
+        <span class="qf-sidebar-contact-label">Prefer to reach out directly?</span>
+        <div class="qf-sidebar-contact-item">
+          <span>📧</span>
+          <a href="mailto:lazylionmobilebar@gmail.com" class="qf-sidebar-contact-val">lazylionmobilebar@gmail.com</a>
+        </div>
+        <div class="qf-sidebar-contact-item">
+          <span>📞</span>
+          <a href="tel:+12676830654" class="qf-sidebar-contact-val">(267) 683-0654</a>
+        </div>
+      </div>
+    </aside>
 
   </div>
 </section>
 
 <!-- WHAT HAPPENS NEXT -->
-<section class="next-section">
-  <div class="next-header">
-    <div class="next-label-row">
-      <span class="next-label-line"></span>
-      <span class="next-label">What Happens Next</span>
-      <span class="next-label-line"></span>
+<section class="steps-section">
+  <span class="steps-section-eyebrow">From Inquiry to Event Day</span>
+  <h2 class="steps-section-title">Here's what happens <em>next.</em></h2>
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-name">You Inquire</div>
+      <p class="step-desc">Send your event details. The more you share now, the more specific and tailored our reply will be.</p>
     </div>
-    <h2 class="next-title">From inquiry <em>to event day.</em></h2>
-  </div>
-  <div class="next-steps">
-    <div class="next-step">
-      <div class="next-step-num">01</div>
-      <div class="next-step-name">You inquire</div>
-      <p class="next-step-desc">Send us your event details. The more you share, the more specific our reply.</p>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-name">We Reply in 48 Hours</div>
+      <p class="step-desc">Vince responds personally with availability, package recommendations, and a rough investment estimate.</p>
     </div>
-    <div class="next-step">
-      <div class="next-step-num">02</div>
-      <div class="next-step-name">We reply within 48 hours</div>
-      <p class="next-step-desc">Vince reads every inquiry personally. You'll get availability, package recommendations, and a rough investment.</p>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-name">We Refine Together</div>
+      <p class="step-desc">Call or email — your preference — to finalize the cocktail menu, logistics, and any venue specifics. Then a final proposal.</p>
     </div>
-    <div class="next-step">
-      <div class="next-step-num">03</div>
-      <div class="next-step-name">We refine together</div>
-      <p class="next-step-desc">Call or email — your preference — to walk through the cocktail menu, logistics, and any venue specifics. Then a final proposal.</p>
-    </div>
-    <div class="next-step">
-      <div class="next-step-num">04</div>
-      <div class="next-step-name">Book &amp; plan</div>
-      <p class="next-step-desc">Sign &amp; deposit secures your date. We handle the alcohol guide, mixers, setup, and everything else from there.</p>
+    <div class="step-item">
+      <div class="step-num">04</div>
+      <div class="step-name">Book &amp; Plan</div>
+      <p class="step-desc">Sign and deposit secures your date. We handle the alcohol guide, mixers, setup, and every detail from there.</p>
     </div>
   </div>
-</section>
-
-<!-- QUICK ANSWERS -->
-<section class="quick-section">
-  <div class="quick-header">
-    <div class="quick-label-row">
-      <span class="quick-label-line"></span>
-      <span class="quick-label">Before You Ask</span>
-      <span class="quick-label-line"></span>
-    </div>
-    <h2 class="quick-title">A few <em>quick answers.</em></h2>
-  </div>
-  <div class="quick-grid">
-    <div class="quick-item">
-      <button class="quick-question" onclick="toggleQuick(this)">
-        <span class="quick-question-text">How far in advance should I inquire?</span>
-        <span class="quick-plus">+</span>
-      </button>
-      <div class="quick-answer"><div class="quick-answer-inner">We recommend 4–6 weeks for smaller events and 3–6 months for weddings. Peak season (spring &amp; fall) books quickly — the sooner the better.</div></div>
-    </div>
-    <div class="quick-item">
-      <button class="quick-question" onclick="toggleQuick(this)">
-        <span class="quick-question-text">What does it cost?</span>
-        <span class="quick-plus">+</span>
-      </button>
-      <div class="quick-answer"><div class="quick-answer-inner">Packages start at $750 for the Standard, $1,500 for Signature Social, and $2,500 for The Premium. All based on 50 guests. Custom quotes are available for larger events.</div></div>
-    </div>
-    <div class="quick-item">
-      <button class="quick-question" onclick="toggleQuick(this)">
-        <span class="quick-question-text">Do you provide the alcohol?</span>
-        <span class="quick-plus">+</span>
-      </button>
-      <div class="quick-answer"><div class="quick-answer-inner">In Pennsylvania, clients purchase their own alcohol. We provide a detailed shopping list tailored to your guest count and drink menu so you know exactly what to buy.</div></div>
-    </div>
-    <div class="quick-item">
-      <button class="quick-question" onclick="toggleQuick(this)">
-        <span class="quick-question-text">Are you licensed and insured?</span>
-        <span class="quick-plus">+</span>
-      </button>
-      <div class="quick-answer"><div class="quick-answer-inner">Yes. Lazy Lion carries both General Liability and Liquor Liability Insurance, included with every package and available for venue review upon request.</div></div>
-    </div>
-  </div>
-  <p class="quick-more">More questions? <a href="faq.html">See the full FAQ</a></p>
 </section>
 
 <!-- FOOTER -->
@@ -742,15 +700,13 @@
       <span class="footer-col-title">Services</span>
       <ul class="footer-links">
         <li><a href="packages.html">Packages</a></li>
-        <li><a href="#">Mixology 1</a></li>
-        <li><a href="#">Mixology 2</a></li>
-        <li><a href="#">Trailer Bar</a></li>
+        <li><a href="index.html#custom-bars">Custom Bars</a></li>
+        <li><a href="store.html">Store</a></li>
       </ul>
     </div>
     <div>
       <span class="footer-col-title">Company</span>
       <ul class="footer-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="quote.html">Request a Quote</a></li>
@@ -775,45 +731,75 @@
 </footer>
 
 <script>
-  // Nav hamburger
+  /* ── NAV ── */
   function toggleMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('drawer-overlay');
-    hamburger.classList.toggle('open');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('drawer').classList.toggle('open');
+    document.getElementById('drawer-overlay').classList.toggle('open');
   }
 
-  // Form submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = document.getElementById('inquiry-form');
-    const data = new URLSearchParams(new FormData(form)).toString();
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data
-    })
+  /* ── CHECKBOX TOGGLE ── */
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    el.querySelector('input').checked = el.classList.contains('checked');
+  }
+
+  /* ── FORM SUBMIT ── */
+  function submitQuote() {
+    const name    = document.getElementById('qf-name').value.trim();
+    const email   = document.getElementById('qf-email').value.trim();
+    const phone   = document.getElementById('qf-phone').value.trim();
+    const date    = document.getElementById('qf-date').value;
+    const guests  = document.getElementById('qf-guests').value.trim();
+    const type    = document.getElementById('qf-eventType').value;
+
+    if (!name || !email || !phone || !date || !guests || !type) {
+      alert('Please fill in all required fields before submitting.');
+      return;
+    }
+
+    const clientName = document.getElementById('qf-clientName').value.trim();
+    const howHeard   = document.getElementById('qf-howHeard').value;
+    const venue      = document.getElementById('qf-venue').value.trim();
+    const hours      = document.getElementById('qf-hours').value;
+    const pkg        = document.getElementById('qf-package').value;
+    const vision     = document.getElementById('qf-vision').value.trim();
+
+    const checkedAddons = [...document.querySelectorAll('input[name="addon"]:checked')]
+      .map(el => el.value).join(', ') || 'None selected';
+
+    const btn = document.getElementById('qf-submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('form-name', 'quote-form');
+    formData.append('name', name);
+    formData.append('client-name', clientName || 'N/A');
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('how-heard', howHeard || 'Not specified');
+    formData.append('event-date', date);
+    formData.append('venue', venue || 'Not specified');
+    formData.append('event-type', type);
+    formData.append('guest-count', guests);
+    formData.append('hours', hours || 'Not specified');
+    formData.append('package', pkg || 'Not specified');
+    formData.append('addons', checkedAddons);
+    formData.append('vision', vision || 'None provided');
+
+    fetch('/', { method: 'POST', body: formData })
       .then(() => {
-        form.style.display = 'none';
-        document.getElementById('form-success').style.display = 'block';
+        document.getElementById('qf-form-wrap').style.display = 'none';
+        document.getElementById('qf-success').style.display = 'block';
         window.scrollTo({ top: document.getElementById('form').offsetTop - 80, behavior: 'smooth' });
       })
       .catch(() => {
-        alert('Something went wrong submitting the form. Please try again or email us directly.');
+        btn.textContent = 'Send My Inquiry';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at lazylionmobilebar@gmail.com');
       });
   }
-
-  // Quick answers accordion
-  function toggleQuick(btn) {
-    const item = btn.closest('.quick-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.quick-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
 </script>
-
 </body>
 </html>

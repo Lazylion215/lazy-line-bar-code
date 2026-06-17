@@ -34,7 +34,7 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(197,174,145,.35);
   }
-  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.7rem; font-weight: 400; letter-spacing: .02em; color: var(--brown); line-height: 1.2; }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.7rem; font-weight: 400; letter-spacing: .02em; color: var(--brown); line-height: 1.2; text-decoration: none; }
   .nav-logo span { display: block; font-size: .58rem; letter-spacing: .22em; color: var(--gold); font-family: 'Lora', serif; text-transform: uppercase; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: .72rem; letter-spacing: .12em; color: var(--brown); text-decoration: none; transition: color .2s; text-transform: uppercase; font-family: 'Lora', serif; font-weight: 600; }
@@ -742,7 +742,8 @@
     .bar-formats-header { flex-direction: column; gap: 16px; }
     .bar-formats-right { display: none; }
     .bar-formats-grid { grid-template-columns: 1fr; gap: 24px; }
-    .bar-format-img { aspect-ratio: 16/9; }
+    .bar-format-img { aspect-ratio: 4/3; }
+    .bar-format-img img { object-position: center 35%; }
     .bar-formats-title { font-size: clamp(2rem, 7vw, 2.8rem); }
 
     /* Crafted */
@@ -873,22 +874,27 @@
     .ec-collapse-toggle {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
-      background: none;
+      background: #B89A6A;
       border: none;
-      border-top: 1px solid rgba(255,255,255,.12);
-      padding: 20px 0 0;
-      margin-top: 8px;
+      border-radius: 100px;
+      padding: 16px 28px;
+      margin-top: 24px;
       cursor: pointer;
       font-family: 'Lora', serif;
       font-size: .72rem;
+      font-weight: 600;
       letter-spacing: .16em;
       text-transform: uppercase;
-      color: rgba(237,230,218,.65);
+      color: #111009;
+      box-shadow: 0 4px 20px rgba(184,154,106,.35);
+      transition: background .2s;
     }
+    .ec-collapse-toggle:hover { background: #C5AE91; }
     .ec-collapse-toggle .ec-toggle-icon {
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: transform .3s;
       line-height: 1;
     }
@@ -1525,8 +1531,8 @@
 
   <!-- Mobile collapse toggle (hidden on desktop via CSS) -->
   <button class="ec-collapse-toggle" id="ec-toggle" onclick="toggleCalc()" aria-expanded="false">
-    <span>Adjust Your Details</span>
-    <span class="ec-toggle-icon">▾</span>
+    <span>Calculate My Order ▾</span>
+    <span class="ec-toggle-icon"></span>
   </button>
 
   <div class="ec-collapsible" id="ec-collapsible">
