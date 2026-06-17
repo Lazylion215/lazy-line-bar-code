@@ -800,6 +800,13 @@
 </head>
 <body>
 
+<!-- Hidden Netlify form for alcohol calculator (build-time detection) -->
+<form name="alcohol-calculator" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name"/>
+  <input type="email" name="email"/>
+  <textarea name="shopping-list"></textarea>
+</form>
+
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo-wrap">
@@ -1091,13 +1098,18 @@
       <div class="print-section">
         <div class="print-title">Save your shopping list</div>
         <div class="print-desc">Enter your details and we'll generate a clean copy — and reach out with a quote if you'd like the Lazy Lion to handle the bar.</div>
-        <div class="print-inputs">
-          <input type="text" id="printName" placeholder="Your name" />
-          <input type="email" id="printEmail" placeholder="your@email.com" />
+        <div id="printFormWrap">
+          <div class="print-inputs">
+            <input type="text" id="printName" placeholder="Your name" />
+            <input type="email" id="printEmail" placeholder="your@email.com" />
+          </div>
+          <button class="btn-print" id="printSubmitBtn" onclick="submitList()">
+            Get My Shopping List
+          </button>
         </div>
-        <button class="btn-print" onclick="printList()">
-          Get My Shopping List 🖨
-        </button>
+        <div id="printSuccess" style="display:none; padding: 16px 0; font-family:'Lora',serif; font-size:.9rem; font-style:italic; color: #B89A6A; line-height:1.6;">
+          ✦ &nbsp; Your list has been sent! Check your inbox shortly — we'll be in touch.
+        </div>
       </div>
     </div>
   </div>
@@ -1273,19 +1285,58 @@
     document.getElementById('totalPrice').textContent = '$' + totalCost.toLocaleString();
   }
 
-  function printList() {
+  function submitList() {
     const name = document.getElementById('printName').value.trim();
     const email = document.getElementById('printEmail').value.trim();
     if (!name || !email) {
       alert('Please enter your name and email to save your list.');
       return;
     }
-    // Trigger print with a tailored print view
-    window.print();
-    // Show toast
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
+
+    const guests   = document.getElementById('rGuests').textContent;
+    const hours    = document.getElementById('rHours').textContent;
+    const total    = document.getElementById('rTotalDrinks').textContent;
+    const beerQty  = document.getElementById('beerQty').textContent;
+    const wineQty  = document.getElementById('wineQty').textContent;
+    const liqQty   = document.getElementById('liquorQty').textContent;
+    const champRow = document.getElementById('champResult');
+    const champQty = champRow && champRow.style.display !== 'none'
+      ? document.getElementById('champQty').textContent
+      : 'None';
+    const totalCost = document.getElementById('totalPrice').textContent;
+
+    const summary = `Name: ${name}
+Email: ${email}
+Guests: ${guests} | Bar Hours: ${hours}
+Estimated Total Drinks: ${total}
+---
+Beer: ${beerQty}
+Wine: ${wineQty}
+Liquor: ${liqQty}
+Champagne Toast: ${champQty}
+---
+Estimated Alcohol Cost: ${totalCost}`;
+
+    const btn = document.getElementById('printSubmitBtn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const formData = new FormData();
+    formData.append('form-name', 'alcohol-calculator');
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('shopping-list', summary);
+
+    fetch('/', { method: 'POST', body: formData })
+      .then(() => {
+        document.getElementById('printFormWrap').style.display = 'none';
+        document.getElementById('printSuccess').style.display = 'block';
+      })
+      .catch(() => {
+        btn.textContent = 'Get My Shopping List';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again or email us directly at lazylionmobilebar@gmail.com');
+      });
   }
 
   // Initial calculation
