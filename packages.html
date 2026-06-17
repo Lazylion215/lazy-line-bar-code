@@ -1315,18 +1315,5 @@ Estimated Alcohol Cost: ${totalCost}`;
   </div>
 </footer>
 
-<script>
-  // Nav hamburger
-  function toggleMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('drawer');
-    const overlay = document.getElementById('drawer-overlay');
-    hamburger.classList.toggle('open');
-    drawer.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
-  }
-</script>
-
 </body>
 </html>
