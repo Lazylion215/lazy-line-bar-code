@@ -1,36 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/</loc>
+    <loc>https://lazylionmobilebar.com/</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/about.html</loc>
+    <loc>https://lazylionmobilebar.com/packages.html</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/packages.html</loc>
+    <loc>https://lazylionmobilebar.com/about.html</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/quote.html</loc>
+    <loc>https://lazylionmobilebar.com/faq.html</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/faq.html</loc>
+    <loc>https://lazylionmobilebar.com/store.html</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/store.html</loc>
+    <loc>https://lazylionmobilebar.com/quote.html</loc>
   </url>
-
   <url>
-    <loc>https://www.lazylionmobilebar.com/brand-kit.html</loc>
+    <loc>https://lazylionmobilebar.com/alcohol-calculator.html</loc>
   </url>
-
-  <url>
-    <loc>https://www.lazylionmobilebar.com/alcohol-calculator.html</loc>
-  </url>
-
 </urlset>
